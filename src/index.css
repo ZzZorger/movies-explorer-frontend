@@ -1,7 +1,8 @@
 /* Настройки страницы */
 @import url(./vendor/normalize.css);
-/* @import url(./vendor/fonts/inter.css); */
+@import url(./vendor/fonts/inter.css);
 @import url(./components/App/App.css);
 /* О проекте */
 @import url(./components/Main/Main.css);
 @import url(./components/Main/Promo/Promo.css);
+@import url(./components/Main/NavTab/NavTab.css);
