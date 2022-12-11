@@ -7,7 +7,7 @@ import Promo from './Promo/Promo.js';
 
 export default function Main() {
   return (
-    <main>
+    <main className='mainPage'>
       <Promo />
       {/* <NavTab />
       <AboutProject />
