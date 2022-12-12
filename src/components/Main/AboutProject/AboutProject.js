@@ -13,12 +13,12 @@ export default function AboutProject() {
         </div>
       </div>
       <div className="about__timeline">
-        <div className="about__back-time">
+        <div className="about__time">
           <p className="about__num about__num_color_green">1 неделя</p>
-          <p className="about__sign">Back-end</p>
-        </div>
-        <div className="about__front-time">
           <p className="about__num about__num_color_grey">4 недели</p>
+        </div>
+        <div className="about__time">
+          <p className="about__sign">Back-end</p>
           <p className="about__sign">Front-end</p>
         </div>
       </div>
