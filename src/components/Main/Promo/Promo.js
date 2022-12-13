@@ -1,4 +1,4 @@
-import promoImage from '../../../images/promo_image.svg'
+import promoImage from '../../../images/promoImage.svg';
 
 export default function Promo() {
   return(

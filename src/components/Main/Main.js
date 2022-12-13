@@ -1,8 +1,8 @@
 import Promo from './Promo/Promo.js';
 import NavTab from './NavTab/NavTab.js';
 import AboutProject from './AboutProject/AboutProject.js';
-// import Techs from './Techs/Techs.js';
-// import AboutMe from './AboutMe/AboutMe.js';
+import Techs from './Techs/Techs.js';
+import AboutMe from './AboutMe/AboutMe.js';
 // import Portfolio from './Portfolio/Portfolio.js';
 
 export default function Main() {
@@ -11,8 +11,8 @@ export default function Main() {
       <Promo />
       <NavTab />
       <AboutProject />
-      {/* <Techs /> */}
-      {/* <AboutMe /> */}
+      <Techs />
+      <AboutMe />
       {/* <Portfolio /> */}
     </main>
   );
