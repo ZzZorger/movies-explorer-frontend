@@ -14,20 +14,13 @@ export default function AboutMe() {
             С 2015 года работал в компании «СКБ Контур». 
             После того, как прошёл курс по веб-разработке, начал заниматься фриланс-заказами и ушёл с постоянной работы.
           </p>
-          <a className="bio__link" href="#about">Github</a>
+          <a className="bio__link" href="https://github.com/ZzZorger" target="_blank" rel="noreferrer">Github</a>
         </div>
         <img 
           className="bio__photo" 
           alt="фото студента" 
           src={aboutMePhoto}
         />
-      </div>
-      <div className="portfolio">
-        <h3 className="portfolio__title">Портфолио</h3>
-        <div className="portfolio__link">
-          <p className="portfolio__subtitle">Статичный сайт</p>
-          <a className="portfolio__link" href="#about">стрелка</a>
-        </div>
       </div>
     </section>
   )

@@ -48,22 +48,10 @@
   font-weight: 500;
   font-size: 14px;
   text-decoration: none;
+  color: #000000;
 }
 
 .bio__photo {
   width: 270px;
   height: 100%;
-}
-
-.portfolio {
-  padding-top: 100px;
-}
-
-.portfolio__title {
-  margin: 0;
-  font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
-  font-weight: 400;
-  font-size: 18px;
-  line-height: 20px;
-  color: #A0A0A0;
 }
