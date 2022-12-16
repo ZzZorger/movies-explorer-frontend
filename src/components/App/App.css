@@ -3,7 +3,7 @@
   height: 100%;
 }
 .page {
-  /* max-width: 1280px; */
+  max-width: 1280px;
   margin: 0 auto;
   font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
   -webkit-font-smoothing: antialiased;

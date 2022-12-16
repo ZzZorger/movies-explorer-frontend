@@ -1,0 +1,73 @@
+.search {
+  padding-top: 80px;
+  padding-bottom: 83px;
+  margin-left: 70px;
+  margin-right: 70px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border-bottom: 1px solid rgba(170, 170, 170, 0.2);
+}
+
+.search__form {
+  width: 932px;
+  height: 48px;
+  position: relative;
+}
+
+.search__fieldset {
+  padding: 0;
+  margin: 0;
+  border: none;
+}
+
+.search__film {
+
+}
+
+.search__input {
+  display: block;
+  width: 100%;
+  padding: 0;  
+  padding-left: 22px;
+  font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 18px;
+  color: #A0A0A0;
+  height: 48px;
+  border: 1.5px solid rgba(170, 170, 170, 0.2);
+  border-radius: 50px;
+}
+
+.search__submit {
+  position: absolute;
+  font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
+  font-weight: 500;
+  font-size: 11px;
+  line-height: 18px;
+  border-radius: 48px;
+  background-color: #3456F3;
+  border: none;
+  width: 58.65px;
+  height: 34px;
+  color: #FFFFFF;
+  top: 0.636em;
+  right: 0.636em;
+  cursor: pointer;
+}
+
+.search__slider-sign {
+  margin: 0;
+  padding-left: 41px;
+  font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 18px;
+  padding-right: 14px;
+}
+
+.search__slider {
+  width: 36px;
+  height: 20px;
+}
