@@ -1,0 +1,33 @@
+.card-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.card-list__cards {
+  padding-top: 70px;
+  padding-bottom: 30px;
+  display: grid;
+  grid-template-columns: repeat(4,270px);
+  grid-column-gap: 20px;
+  grid-row-gap: 32px;
+}
+
+.card-list__next {
+  padding-top: 50px;
+  padding-bottom: 80px;
+  align-self: center;
+}
+
+.card-list__button {
+  width: 320px;
+  height: 36px;
+  margin: 0;
+  padding: 0;
+  border: 1px solid #E8E8E8;
+  background-color: #FFFFFF;
+  cursor: pointer;
+  border-radius: 10px;
+  font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
+  font-weight: 500;
+  font-size: 12px;
+}
