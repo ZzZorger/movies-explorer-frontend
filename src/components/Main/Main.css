@@ -11,3 +11,11 @@
   letter-spacing: -0.04em;
   border-bottom: 1px solid black;
 }
+
+.transition {
+  transition: .3s;
+}
+
+.transition:hover {
+  opacity: 0.6;
+}

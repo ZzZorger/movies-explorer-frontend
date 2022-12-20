@@ -11,7 +11,7 @@ export default function MoviesCardList() {
         <MoviesCard />
       </div>
       <div className="card-list__next">
-        <button className="card-list__button">Ещё</button>
+        <button className="card-list__button transition">Ещё</button>
       </div>
     </section>
   )

@@ -11,7 +11,7 @@ export default function SearchForm() {
               type="search"
               placeholder="Фильм"
             />
-            <button className="search__submit" type="submit">Найти</button>
+            <button className="search__submit transition" type="submit">Найти</button>
           </div>
         </fieldset>
       </form>

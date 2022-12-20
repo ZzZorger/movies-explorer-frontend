@@ -14,7 +14,7 @@ export default function AboutMe() {
             С 2015 года работал в компании «СКБ Контур». 
             После того, как прошёл курс по веб-разработке, начал заниматься фриланс-заказами и ушёл с постоянной работы.
           </p>
-          <a className="bio__link" href="https://github.com/ZzZorger" target="_blank" rel="noreferrer">Github</a>
+          <a className="bio__link transition" href="https://github.com/ZzZorger" target="_blank" rel="noreferrer">Github</a>
         </div>
         <img 
           className="bio__photo" 
