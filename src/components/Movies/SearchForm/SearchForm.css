@@ -1,6 +1,8 @@
 .search {
   padding-top: 80px;
   padding-bottom: 83px;
+  margin-left: 70px;
+  margin-right: 70px;
   margin-bottom: 10px;
   display: flex;
   flex-direction: row;
