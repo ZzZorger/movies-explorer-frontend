@@ -1,4 +1,4 @@
-import searchFormSlider from '../../../images/searchFormSlider.svg';
+import searchFormSlider from '../../../images/slider/fundSliderOn.svg';
 
 export default function SearchForm() {
   return (
@@ -16,7 +16,7 @@ export default function SearchForm() {
         </fieldset>
       </form>
       <p className="search__slider-sign">Короткометражки</p>
-      <img className="search__slider" alt="флажок" src={searchFormSlider}/>
+      <img className="search__slider" alt="флажок" src={searchFormSlider} />
       {/* <input class="search__slider" type="checkbox" src={searchFormSlider}></input> */}
     </section>
   )

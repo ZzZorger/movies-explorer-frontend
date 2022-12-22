@@ -3,7 +3,7 @@
   flex-direction: column;
   margin-left: 70px;
   margin-right: 70px;
-  padding-top: 110px;
+  padding-top: 112px;
 }
 
 .about__block-section {
@@ -13,7 +13,7 @@
 }
 
 .about__block {
-  padding-right: 40px;
+  padding-right: 55px;
 }
 .about__block:last-child {
   padding-right: 0;
@@ -39,7 +39,7 @@
 .about__timeline {
   display: flex;
   flex-direction: column;
-  padding-top: 110px;
+  padding-top: 112px;
 }
 
 .about__time {

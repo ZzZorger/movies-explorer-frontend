@@ -1,7 +1,7 @@
 .techs {
   padding-left: 70px;
   padding-right: 70px;
-  padding-top: 100px;
+  padding-top: 102px;
   background-color: #F5F5F5;
 }
 
@@ -34,6 +34,7 @@
 }
 
 .techs__items {
+  padding: 0;
   margin: 0;
   display: flex;
   flex-direction: row;
@@ -48,10 +49,12 @@
   padding-top: 21px;
   padding-bottom: 22px;
   width: 90px;
-  /* width: 7.03125vw; */
   font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
   font-weight: 400;
   font-size: 14px;
   letter-spacing: -0.04em;
-  border-radius: 10%;
+  border-radius: 10px;
+}
+.techs__elem:last-child {
+  margin-right: 0px;
 }

@@ -16,4 +16,8 @@
   border-bottom: 1px solid white;
   margin-right: 40px;
 }
+.nav__link:last-child {
+  margin-right: 0;
+}
+
 
