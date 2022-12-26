@@ -19,4 +19,6 @@
 @import url(./components/Movies/MoviesCardList/MoviesCardList.css);
 @import url(./components/Movies/MoviesCard/MoviesCard.css);
 /* Profile */
-@import url(./components/Profile/Profile.css)
+@import url(./components/Profile/Profile.css);
+/* Register */
+@import url(./components/Register/Register.css);
