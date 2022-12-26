@@ -22,3 +22,7 @@
 @import url(./components/Profile/Profile.css);
 /* Register */
 @import url(./components/Register/Register.css);
+/* Login */
+@import url(./components/Login/Login.css);
+/* NotFound */
+@import url(./components/NotFound/NotFound.css);

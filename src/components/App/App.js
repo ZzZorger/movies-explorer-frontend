@@ -4,6 +4,8 @@ import Movies from '../Movies/Movies';
 import SavedMovies from '../SavedMovies/SavedMovies';
 import Profile from '../Profile/Profile.js';
 import Register from '../Register/Register.js';
+import Login from '../Login/Login.js';
+import NotFound from '../NotFound/NotFound.js';
 import './App.css';
 
 function App() {
@@ -24,6 +26,12 @@ function App() {
         </Route>
           <Route path="/signup">
         <Register />
+        </Route>
+        <Route path="/signin">
+          <Login />
+        </Route>
+        <Route path="*">
+          <NotFound />
         </Route>
       </div>
     </div>

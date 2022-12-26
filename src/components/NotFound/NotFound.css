@@ -1,0 +1,31 @@
+.not-found {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 246px;
+  padding-bottom: 60px;
+}
+
+.not-found__title {
+  font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
+  font-weight: 400;
+  font-size: 140px;
+  margin: 0;
+  padding-bottom: 5px;
+}
+
+.not-found__subtitle {
+  font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  margin: 0;
+  padding-bottom: 184px;
+}
+
+.not-found__link {
+  font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  color: #3456F3;
+  text-decoration: none;
+}

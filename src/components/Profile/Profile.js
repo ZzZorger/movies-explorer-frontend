@@ -12,7 +12,6 @@ export default function Profile() {
             <input 
               className="profile__input"
               type="text"
-              placeholder="Виталий"
             />
           </div>
           <div className="profile__input-field">
@@ -20,7 +19,6 @@ export default function Profile() {
             <input 
               className="profile__input"
               type="email"
-              placeholder="pochta@yandex.ru"
             />
           </div>
         </fieldset>
