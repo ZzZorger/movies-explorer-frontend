@@ -29,13 +29,23 @@
   padding-left: 12px;
 }
 
-.card__button {
+.card__toggle {
   margin: 0;
   padding-top: 10px;
   padding-right: 12px;
   grid-row-start: 2;
   grid-row-end: 3;
   grid-column-start: 2;
+  position: relative;
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+}
+
+.card__toggle .slider {
+  opacity: 0;
+  width: 0;
+  height: 0;
 }
 
 .card__checkbox {

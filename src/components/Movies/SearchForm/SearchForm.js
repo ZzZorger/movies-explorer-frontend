@@ -16,9 +16,10 @@ export default function SearchForm() {
         </fieldset>
       </form>
       <p className="search__slider-sign">Короткометражки</p>
-      {/* <img className="search__slider" alt="флажок" src={searchFormSlider} /> */}
-      <input className="search__slider" type="checkbox" id="checkbox-id"/>
-      <label className="search__lable" for="checkbox-id"></label>
+      <label className="search__toggle">
+        <input className="slider" type="checkbox"/>
+        <span className="slider__span"></span>
+      </label>
     </section>
   )
 }
