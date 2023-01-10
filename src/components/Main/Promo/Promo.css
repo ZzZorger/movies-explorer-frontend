@@ -24,3 +24,17 @@
   position: absolute;
   /* top: 82px; */
 }
+
+@media (max-width: 768px) {
+  .promo {
+    padding-top: 224px;
+    padding-bottom: 324px;
+  }
+}
+
+@media (max-width: 320px) {
+  .promo {
+    padding-top: 142px;
+    padding-bottom: 246px;
+  }
+}

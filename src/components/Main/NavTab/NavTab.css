@@ -6,6 +6,7 @@
   align-items: center;
   justify-content: center;
 }
+
 .nav__link {
   color: #FFFFFF;
   font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
@@ -16,8 +17,16 @@
   border-bottom: 1px solid white;
   margin-right: 40px;
 }
+
 .nav__link:last-child {
   margin-right: 0;
 }
 
-
+@media (max-width: 320px) {
+  .nav {
+    font-size: 11px;
+  }
+  .nav__link {
+    margin-right: 24px;
+  }
+}
