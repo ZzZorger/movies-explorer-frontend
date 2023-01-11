@@ -55,6 +55,23 @@
   letter-spacing: -0.04em;
   border-radius: 10px;
 }
+
 .techs__elem:last-child {
   margin-right: 0px;
+}
+
+@media (max-width: 768px) {
+  .techs {
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-top: 92px;
+  }
+  .techs__title {
+    padding-top: 80px;
+  }
+  .techs__description {
+    padding-top: 22px;
+    font-size: 12px;
+    line-height: 18px;
+  }
 }
