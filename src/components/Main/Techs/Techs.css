@@ -74,4 +74,12 @@
     font-size: 12px;
     line-height: 18px;
   }
+  .techs__items {
+    padding-top: 83px;
+    padding-bottom: 90px;
+  }
+  .techs__elem {
+    width: 84px;
+    font-size: 12px;
+  }
 }
