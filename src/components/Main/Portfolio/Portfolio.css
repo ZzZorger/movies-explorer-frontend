@@ -46,7 +46,8 @@
 }
 
 .portfolio__link-image {
-  padding-top: 1px;
+  padding-top: 10px;
+  padding-right: 6px;
 }
 
 @media (max-width: 768px) {
@@ -59,8 +60,8 @@
   .portfolio__subtitle {
     font-size: 28px;
   }
-  .portfolio__link-image {
+  /* .portfolio__link-image {
     padding-top: 10px;
     padding-right: 6px;
-  }
+  } */
 }

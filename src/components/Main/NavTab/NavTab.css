@@ -28,5 +28,6 @@
   }
   .nav__link {
     margin-right: 24px;
+    font-size: 11px;
   }
 }

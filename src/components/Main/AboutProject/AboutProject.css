@@ -114,4 +114,45 @@
     margin-right: 18px;
     padding-top: 70px;
   }
+  .about__block-section {
+    padding-top: 63px;
+    flex-direction: column;
+  }
+  .about__block {
+    padding-right: 0px;
+  }
+  .about__block:last-child {
+    padding-top: 58px;
+  }
+  .about__title {
+    font-size: 18px;
+  }
+  .about__text {
+    padding-top: 16px;
+    font-size: 11px;
+    line-height: 16px;
+  }
+  .about__timeline {
+    padding-top: 60px;
+  }
+  .about__period {
+    width: 35.21%;
+    font-size: 11px;
+    padding-top: 11px;
+    padding-bottom: 11px;
+  }
+  .about__period:last-child {
+    width: 64.78%;
+  }
+  .about__sign {
+    font-weight: 400;
+    font-size: 11px;
+    line-height: auto;
+    width: 35.21%;
+    padding-top: 10px;
+    padding-bottom: 70px;
+  }
+  .about__sign:last-child {
+    width: 64.78%;
+  }
 }
