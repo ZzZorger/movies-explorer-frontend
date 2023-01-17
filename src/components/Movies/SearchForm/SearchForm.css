@@ -12,7 +12,6 @@
 
 .search__form {
   width: 932px;
-  height: 48px;
   position: relative;
 }
 
@@ -20,10 +19,6 @@
   padding: 0;
   margin: 0;
   border: none;
-}
-
-.search__film {
-
 }
 
 .search__input {
@@ -40,7 +35,11 @@
   border: 1.5px solid rgba(170, 170, 170, 0.2);
   border-radius: 50px;
 }
-
+.search__option {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
 .search__submit {
   position: absolute;
   font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
@@ -89,8 +88,8 @@
   height: 14px;
   position: absolute;
   cursor: pointer;
-  top: 0;
-  left: 0;
+  top: -1px;
+  left: 2px;
   right: 0;
   bottom: 0;
   background-color: #ccc;
@@ -123,11 +122,33 @@
 
 @media (max-width: 768px) {
   .search {
-    padding-top: 60px;
-    padding-bottom: 68px;
+    padding-top: 57px;
+    padding-bottom: 57px;
     margin-left: 30px;
     margin-right: 30px;
     margin-bottom: 10px;
     flex-direction: column;
+  }
+  .search__form {
+    width: 708px;
+    position: relative;
+  }
+  .search__input {
+    padding-left: 18px;
+  }
+  .search__film {
+    display: flex;
+    align-items: center;
+  }
+  .search__option {
+    padding-top: 38px;
+    padding-right: 43px;
+  }
+  .search__slider-sign {
+    padding-right: 11px;
+  }
+  .slider__span {
+    top: 0px;
+    left: 0px;
   }
 }

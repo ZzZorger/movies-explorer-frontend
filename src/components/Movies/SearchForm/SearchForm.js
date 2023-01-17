@@ -5,7 +5,7 @@ export default function SearchForm() {
     <section className="search">
       <form className="search__form">
         <fieldset className="search__fieldset">
-          <div classsName="search__film">
+          <div className="search__film">
             <input
               className="search__input"
               type="search"
@@ -15,11 +15,13 @@ export default function SearchForm() {
           </div>
         </fieldset>
       </form>
-      <p className="search__slider-sign">Короткометражки</p>
-      <label className="search__toggle">
-        <input className="slider" type="checkbox"/>
-        <span className="slider__span"></span>
-      </label>
+      <div className="search__option">
+        <p className="search__slider-sign">Короткометражки</p>
+        <label className="search__toggle">
+          <input className="slider" type="checkbox"/>
+          <span className="slider__span"></span>
+        </label>
+      </div>
     </section>
   )
 }

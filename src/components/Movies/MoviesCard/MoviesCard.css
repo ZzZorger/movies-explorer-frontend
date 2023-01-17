@@ -30,9 +30,7 @@
 }
 
 .card__toggle {
-  margin: 0;
-  padding-top: 10px;
-  padding-right: 12px;
+  margin-top: 13px;
   grid-row-start: 2;
   grid-row-end: 3;
   grid-column-start: 2;
@@ -48,10 +46,6 @@
   height: 0;
 }
 
-.card__checkbox {
-
-}
-
 .card__sign {
   margin: 0;
   font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
@@ -59,5 +53,77 @@
   font-size: 11px;
   color: #A0A0A0;
   padding-left: 12px;
-  padding-top: 10px;
+  padding-top: 15px;
+}
+
+.card__delete-button {
+  display: none;
+  background: url("../../../images/cardDelete2.svg") no-repeat center;
+  cursor: pointer;
+  width: 8px;
+  height: 8px;
+  border: 0;
+  margin-top: 5px;
+  margin-left: 2px;
+}
+
+.card__delete-button-active {
+  display: block;
+}
+
+.flag {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+.flag__span {
+  width: 16px;
+  height: 16px;
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #FFFFFF;
+  -webkit-transition: .4s;
+  transition: .4s;
+  border-radius: 20px;
+  box-shadow: 0px 3px 6px 0 rgba(0,0,0,0.09);
+}
+
+.flag__span:before {
+  position: absolute;
+  content: "";
+  height: 12px;
+  width: 12px;
+  left: 2px;
+  bottom: 2px;
+  background-color: #F9F9F9;
+  -webkit-transition: .4s;
+  transition: .4s;
+  border-radius: 50%;
+  
+}
+
+.flag:checked + .flag__span {
+  background-color: #FFFFFF;
+}
+
+.flag:checked + .flag__span:before {
+  background-color: #2BE080;
+}
+
+.flag__span-disabled {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .card {
+    max-width: 339px;
+  }
+  .card__img {
+    width: 339px;
+    height: 190px;
+  }  
 }

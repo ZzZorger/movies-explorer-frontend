@@ -49,6 +49,9 @@
   background-color: #F9F9F9;
   border-radius: 20px;
 }
+.header-movies__menu {
+  display: none;
+}
 
 @media (max-width: 768px) {
   .header-movies {
@@ -60,6 +63,7 @@
     display: none;
   }
   .header-movies__menu {
+    display: block;
     padding-top: 15px;
   }
 }
