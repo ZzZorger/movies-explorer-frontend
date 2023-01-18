@@ -122,7 +122,7 @@
 
 @media (max-width: 768px) {
   .search {
-    padding-top: 57px;
+    padding-top: 58px;
     padding-bottom: 57px;
     margin-left: 30px;
     margin-right: 30px;
@@ -145,10 +145,31 @@
     padding-right: 43px;
   }
   .search__slider-sign {
-    padding-right: 11px;
+    padding-right: 15px;
   }
   .slider__span {
     top: 0px;
     left: 0px;
+  }
+}
+
+@media (max-width: 320px) {
+  .search {
+    margin-left: 14px;
+    margin-right: 14px;
+    padding-bottom: 44px;
+  }
+  .search__form {
+    width: 300px;
+  }
+  .search__input {
+    padding-left: 16px;
+    font-size: 11px;
+  }
+  .search__option {
+    padding-top: 45px;
+  }
+  .search__slider-sign {
+    font-size: 11px;
   }
 }
