@@ -7,7 +7,7 @@
   grid-template-rows: 1fr 26px 41px;
   max-width: 270px;
   background: #FDFDFD;
-  box-shadow: 0px 16px 24px 0 rgba(0,0,0,0.05);
+  box-shadow: 0px 16px 24px 0 rgba(0, 0, 0, 0.05);
 }
 
 .card__img {
@@ -76,6 +76,7 @@
   width: 0;
   height: 0;
 }
+
 .flag__span {
   width: 16px;
   height: 16px;
@@ -89,7 +90,7 @@
   -webkit-transition: .4s;
   transition: .4s;
   border-radius: 20px;
-  box-shadow: 0px 3px 6px 0 rgba(0,0,0,0.09);
+  box-shadow: 0px 3px 6px 0 rgba(0, 0, 0, 0.09);
 }
 
 .flag__span:before {
@@ -103,14 +104,14 @@
   -webkit-transition: .4s;
   transition: .4s;
   border-radius: 50%;
-  
+
 }
 
-.flag:checked + .flag__span {
+.flag:checked+.flag__span {
   background-color: #FFFFFF;
 }
 
-.flag:checked + .flag__span:before {
+.flag:checked+.flag__span:before {
   background-color: #2BE080;
 }
 
@@ -122,18 +123,20 @@
   .card {
     max-width: 339px;
   }
+
   .card__img {
     width: 339px;
     height: 190px;
-  }  
+  }
 }
 
-@media (max-width: 320px) {
+@media (max-width: 360px) {
   .card {
     max-width: 300px;
   }
+
   .card__img {
     width: 300px;
     height: 168px;
-  }  
+  }
 }

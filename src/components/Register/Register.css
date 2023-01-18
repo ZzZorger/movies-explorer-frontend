@@ -37,13 +37,13 @@
   padding: 0;
   margin: 0;
   border: none;
-  padding-bottom: 70px;
+  padding-bottom: 68px;
 }
 
 .register__input-field {
   display: flex;
   flex-direction: column;
-  padding-top: 20px;
+  padding-top: 22px;
 }
 .register__input-field:first-child {
   padding-top: 0px;
@@ -90,15 +90,16 @@
   font-size: 14px;
   color: #FFFFFF;
   padding-top: 13px;
-  padding-bottom: 15px;
+  padding-bottom: 16px;
   cursor: pointer;
   width: 100%;
   border-radius: 3px;
 }
 
 .register__sign {
+  margin: 0;
   text-align: center;
-  padding-top: 16px;
+  padding-top: 17px;
   font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
   font-weight: 400;
   font-size: 14px;

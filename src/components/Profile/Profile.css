@@ -28,12 +28,14 @@
   width: 410px;
   justify-content: space-between;
 }
+
 .profile__input-field:first-child {
   padding-bottom: 16px;
   border-bottom: 1px solid #E8E8E8;
 }
+
 .profile__input-field:last-child {
-  padding-top: 16px;
+  padding-top: 17px;
 }
 
 
@@ -73,4 +75,45 @@
   margin-bottom: 70px;
   color: #FF3055;
   cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .profile__title {
+    padding-top: 236px;
+    padding-bottom: 96px;
+  }
+
+  .profile__fieldset {
+    padding-bottom: 210px;
+  }
+
+  .profile__exit {
+    margin-bottom: 269px;
+  }
+}
+
+@media (max-width: 320px) {
+  .profile__title {
+    padding-top: 70px;
+    padding-bottom: 80px;
+  }
+  .profile__input-field {
+    width: 260px;
+}
+
+  .profile__fieldset {
+    padding-bottom: 380px;
+  }
+
+  .profile__exit {
+    margin-bottom: 40px;
+  }
+
+  .profile__change {
+    font-size: 12px;
+  }
+
+  .profile__exit {
+    font-size: 12px;
+  }
 }

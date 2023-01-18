@@ -33,7 +33,7 @@ export default function Register() {
           </div>
         </fieldset>
         <button className="register__submit transition" type="submit">Зарегистрироваться</button>
-        <p className="register__sign">Уже зарегистрированы? <a className="register__link transition" href="#">Войти</a></p>
+        <p className="register__sign">Уже зарегистрированы?&ensp;<a className="register__link transition" href="/signin">Войти</a></p>
       </div>
     </section>
   );
