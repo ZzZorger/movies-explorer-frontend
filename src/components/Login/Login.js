@@ -8,7 +8,7 @@ export default function Login() {
           <img className="register__logo" alt="логотип сайта" src={headerLogo} />
           <h1 className="register__title">Рады видеть!</h1>
         </div>
-        <fieldset className="register__fieldset login__fieldset">
+        <fieldset className="login__fieldset">
           <div className="register__input-field">
             <p className="register__input-title">E-mail</p>
             <input
@@ -26,7 +26,7 @@ export default function Login() {
           </div>
         </fieldset>
         <button className="register__submit transition" type="submit">Войти</button>
-        <p className="register__sign">Ещё не зарегистрированы? <a className="register__link transition" href="#">Регистрация</a></p>
+        <p className="register__sign">Ещё не зарегистрированы? <a className="register__link transition" href="/signup">Регистрация</a></p>
       </div>
     </section>
   );

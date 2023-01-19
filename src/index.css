@@ -18,6 +18,7 @@
 @import url(./components/Movies/SearchForm/SearchForm.css);
 @import url(./components/Movies/MoviesCardList/MoviesCardList.css);
 @import url(./components/Movies/MoviesCard/MoviesCard.css);
+@import url(./components/Movies/MenuPopup/MenuPopup.css);
 /* Profile */
 @import url(./components/Profile/Profile.css);
 /* Register */

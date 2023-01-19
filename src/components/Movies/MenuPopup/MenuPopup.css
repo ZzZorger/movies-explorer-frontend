@@ -1,0 +1,109 @@
+.menu-popup {
+  align-items: center;
+  background: rgba(0,0,0,.5);
+  display: flex;
+  height: 100%;
+  justify-content: flex-end;
+  left: 0;
+  opacity: 0;
+  position: fixed;
+  top: 0;
+  transition: .3s;
+  visibility: hidden;
+  width: 100%;
+}
+
+.menu-popup_is-opened {
+  opacity: 1;
+  transition: .3s;
+  visibility: visible;
+}
+
+.menu-popup__content {
+  background: #fff;
+  box-shadow: 0 0 25px rgb(0 0 0 / 30%);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  max-width: 520px;
+}
+
+.menu-popup__close-button {
+  position: absolute;
+  right: 22.44px;
+  top: 22.44px;
+  background: url("../../../images/menuCloseBtn.svg") no-repeat center;
+  background-size: 32px 32px;
+  width: 32px;
+  height: 32px;
+  border: none;
+  /* margin: 0px;
+  padding: 0px;
+  align-self: flex-end;
+  margin-right: 22.44px;
+  margin-top: 22.44px; */
+  cursor: pointer;
+}
+
+.menu-popup__nav {
+  padding-top: 159px;
+  /* padding-top: 105.44px; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* padding-bottom: 621px; */
+}
+
+.menu-popup__link {
+  font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  text-decoration: none;
+  color: #000000;
+  padding-bottom: 4px;
+  padding-top: 28px;
+}
+
+.menu-popup__link:first-child {
+  padding-top: 0px;
+}
+
+.menu-popup__link:hover {
+  border-bottom: 2px solid #000000;
+}
+
+.menu-popup__button {
+  position: absolute;
+  bottom: 90px;
+  margin: 0px;
+  padding: 0px;
+  width: 100px;
+  height: 32px;
+  align-self: center;
+  border: none;
+  border-radius: 20px;
+  font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 16px;
+  cursor: pointer;
+
+}
+
+@media (max-width: 320px) {
+  .menu-popup__close-button {
+    margin-right: 13.44px;
+    margin-top: 13.44px;
+  }
+  .menu-popup__nav {
+    padding-top: 99.44px;
+    padding-bottom: 436px;
+  }
+  .menu-popup__link {
+    padding-bottom: 7px;
+    padding-top: 19px;
+  }
+}

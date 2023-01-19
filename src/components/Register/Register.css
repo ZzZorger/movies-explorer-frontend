@@ -45,6 +45,7 @@
   flex-direction: column;
   padding-top: 22px;
 }
+
 .register__input-field:first-child {
   padding-top: 0px;
 }
@@ -112,4 +113,51 @@
   font-weight: 400;
   font-size: 14px;
   color: #3456F3;
+}
+
+@media (max-width: 768px) {
+  .register {
+    padding-top: 232px;
+    padding-bottom: 232px;
+  }
+}
+
+@media (max-width: 480px) {
+  .register {
+    padding-top: 56px;
+    padding-bottom: 30px;
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+
+  .register__content {
+    width: 100%;
+  }
+
+  .register__header {
+    align-items: center;
+  }
+
+  .register__logo {
+    padding-bottom: 50px;
+  }
+
+  .register__title {
+    padding-bottom: 80px;
+  }
+
+  .register__fieldset {
+    padding-bottom: 157px;
+  }
+  .register__submit {
+    font-size: 12px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+  }
+  .register__sign {
+    font-size: 12px;
+  }
+  .register__link {
+    font-size: 12px;
+  }
 }
