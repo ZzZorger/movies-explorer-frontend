@@ -5,8 +5,8 @@ export default function HeaderMain() {
     <header className="header-main">
       <img className="header__logo" alt="логотип сайта" src={headerLogo}/>
       <div className="header__links">
-        <a className="header__registration transition" href="#about">Регистрация</a>
-        <a className="header__signin transition" href="#about">Войти</a>
+        <a className="header__registration transition" href="/signup">Регистрация</a>
+        <a className="header__signin transition" href="/signin">Войти</a>
       </div>
     </header>
   );

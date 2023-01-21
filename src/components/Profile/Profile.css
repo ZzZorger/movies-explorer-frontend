@@ -97,9 +97,10 @@
     padding-top: 70px;
     padding-bottom: 80px;
   }
+
   .profile__input-field {
     width: 260px;
-}
+  }
 
   .profile__fieldset {
     padding-bottom: 380px;

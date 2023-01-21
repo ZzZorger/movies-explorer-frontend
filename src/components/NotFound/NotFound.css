@@ -42,14 +42,17 @@
     padding-top: 332px;
     padding-bottom: 30px;
   }
+
   .not-found__title {
     font-size: 80px;
     padding-bottom: 13px;
   }
+
   .not-found__subtitle {
     font-size: 12px;
     padding-bottom: 285px;
   }
+
   .not-found__link {
     font-size: 12px;
   }

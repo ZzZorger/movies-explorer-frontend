@@ -36,12 +36,14 @@
     padding-top: 142px;
     padding-bottom: 246px;
   }
+
   .promo__title {
     font-size: 31px;
     line-height: 39px;
     max-width: 300px;
     padding-top: 65px;
   }
+
   .promo_image {
     position: absolute;
     width: 248px;

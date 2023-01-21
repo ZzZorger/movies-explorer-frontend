@@ -51,6 +51,7 @@
   font-size: 14px;
   text-decoration: none;
   color: #000000;
+  width: 46px;
 }
 
 .bio__photo {
@@ -92,7 +93,7 @@
   }
 }
 
-@media (max-width: 320px) {
+@media (max-width: 700px) {
   .about-me {
     margin-left: 14px;
     margin-right: 14px;
@@ -103,32 +104,43 @@
     padding-top: 60px;
     flex-direction: column-reverse;
     justify-content: space-between;
+    align-items: center;
   }
 
   .bio__photo {
     width: 292px;
+    align-self: flex-start;
   }
 
   .bio__main {
     padding-top: 38px;
-    width: 292px;
+    width: 100%;
   }
 
   .bio__title {
     font-size: 30px;
     line-height: auto;
   }
+
   .bio__subtitle {
     padding-top: 18px;
     font-size: 11px;
     line-height: 16px;
   }
+
   .bio__text {
     padding-top: 20px;
     font-size: 11px;
     line-height: 16px;
   }
+
   .bio__link {
     padding-top: 40px;
+  }
+}
+
+@media (max-width: 320px) {
+  .bio__photo {
+    width: 100%;
   }
 }

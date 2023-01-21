@@ -1,6 +1,6 @@
 .menu-popup {
   align-items: center;
-  background: rgba(0,0,0,.5);
+  background: rgba(0, 0, 0, .5);
   display: flex;
   height: 100%;
   justify-content: flex-end;
@@ -40,21 +40,14 @@
   width: 32px;
   height: 32px;
   border: none;
-  /* margin: 0px;
-  padding: 0px;
-  align-self: flex-end;
-  margin-right: 22.44px;
-  margin-top: 22.44px; */
   cursor: pointer;
 }
 
 .menu-popup__nav {
   padding-top: 159px;
-  /* padding-top: 105.44px; */
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* padding-bottom: 621px; */
 }
 
 .menu-popup__link {
@@ -76,8 +69,6 @@
 }
 
 .menu-popup__button {
-  position: absolute;
-  bottom: 90px;
   margin: 0px;
   padding: 0px;
   width: 100px;
@@ -90,20 +81,33 @@
   font-size: 14px;
   line-height: 16px;
   cursor: pointer;
-
 }
+
+.menu-popup__elements {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-bottom: 90px;
+  height: 100%;
+}
+
 
 @media (max-width: 320px) {
   .menu-popup__close-button {
-    margin-right: 13.44px;
-    margin-top: 13.44px;
+    right: 13.44px;
+    top: 13.44px;
   }
+
   .menu-popup__nav {
-    padding-top: 99.44px;
-    padding-bottom: 436px;
+    padding-top: 146px;
   }
+
   .menu-popup__link {
     padding-bottom: 7px;
     padding-top: 19px;
+  }
+
+  .menu-popup__elements {
+    padding-bottom: 46px;
   }
 }
