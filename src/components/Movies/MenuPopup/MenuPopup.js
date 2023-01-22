@@ -1,8 +1,8 @@
-export default function MenuPopup() {
+export default function MenuPopup({ isOpen, onClose }) {
   return (
-    <div className="menu-popup">
+    <div className={`menu-popup ${isOpen && 'menu-popup_is-opened'}`}>
       <div className="menu-popup__content">
-        <button className="menu-popup__close-button transition" type="button" aria-label="закрыть меню"></button>
+        <button className="menu-popup__close-button transition" type="button" aria-label="закрыть меню" onClick={onClose} />
         <div className="menu-popup__elements">
           <nav className="menu-popup__nav">
             <a className="menu-popup__link transition" href="/">Главная</a>

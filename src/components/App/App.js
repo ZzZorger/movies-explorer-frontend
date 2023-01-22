@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import Main from '../Main/Main';
 import Movies from '../Movies/Movies';
@@ -8,7 +9,20 @@ import Login from '../Login/Login.js';
 import NotFound from '../NotFound/NotFound.js';
 import './App.css';
 
+
+
 function App() {
+  // Hooks
+  const [isBurgerMenuOpen, isBurgerMenuOpenSetter] = useState(false);
+
+  // Open and Close handlers
+  function handleBurgerMenuClick() {
+    isBurgerMenuOpenSetter(true);
+  }
+  function closeAllPopups() {
+    isBurgerMenuOpenSetter(false);
+  }
+
   return (
     <div className="body">
       <div className="page">
@@ -17,7 +31,11 @@ function App() {
             <Main />
           </Route>
           <Route path="/movies">
-            <Movies />
+            <Movies
+              onBurgerMenu={handleBurgerMenuClick}
+              isBurgerMenuOpen={isBurgerMenuOpen}
+              onClose={closeAllPopups}
+            />
           </Route>
           <Route path="/saved-movies">
             <SavedMovies />

@@ -68,6 +68,7 @@
 
   .header-movies__menu {
     display: block;
+    cursor: pointer;
   }
 }
 

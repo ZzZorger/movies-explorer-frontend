@@ -1,7 +1,7 @@
 import headerLogo from '../../../images/headerLogo.svg';
 import burger from '../../../images/burger.svg';
 
-export default function HeaderMain() {
+export default function HeaderMain({ onBurgerMenu }) {
   return (
     <header className="header-movies">
       <a className="header-movies__logo-link transition" href="/"><img className="header-movies__logo" alt="логотип сайта" src={headerLogo}/></a>
@@ -12,7 +12,7 @@ export default function HeaderMain() {
         </div>
         <a className="header-movies__acc transition" href="/profile">Аккаунт</a>
       </div>
-      <img className="header-movies__menu" alt="изображение списка" src={burger}/>
+      <img className="header-movies__menu transition" alt="изображение списка" src={burger} onClick={onBurgerMenu}/>
     </header>
   );
 }
