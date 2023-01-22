@@ -38,7 +38,11 @@ function App() {
             />
           </Route>
           <Route path="/saved-movies">
-            <SavedMovies />
+            <SavedMovies
+              onBurgerMenu={handleBurgerMenuClick}
+              isBurgerMenuOpen={isBurgerMenuOpen}
+              onClose={closeAllPopups}
+            />
           </Route>
           <Route path="/profile">
             <Profile />
