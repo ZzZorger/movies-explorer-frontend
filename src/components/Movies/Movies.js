@@ -6,12 +6,14 @@ import MenuPopup from './MenuPopup/MenuPopup.js';
 
 export default function Moovies() {
   return (
-    <main className='movies-page'>
+    <div className='movies-page'>
       <HeaderMovies />
-      <SearchForm />
-      <MoviesCardList />
+      <main className='movies-page__main'>
+        <SearchForm />
+        <MoviesCardList />
+      </main>
       <Footer />
       <MenuPopup />
-    </main>
+    </div>
   );
 }

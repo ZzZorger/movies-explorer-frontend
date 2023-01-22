@@ -4,21 +4,21 @@
   padding-top: 113px;
 }
 
-.bio {
+.about-me__bio {
   padding-top: 66px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 }
 
-.bio__main {
+.about-me__main {
   width: 600px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
 
-.bio__title {
+.about-me__title {
   margin: 0;
   font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
   font-weight: 400;
@@ -27,7 +27,7 @@
   letter-spacing: -0.04em;
 }
 
-.bio__subtitle {
+.about-me__subtitle {
   padding-top: 18px;
   margin: 0;
   font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
@@ -36,7 +36,7 @@
   line-height: 20px;
 }
 
-.bio__text {
+.about-me__text {
   padding-top: 26px;
   margin: 0;
   font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
@@ -45,7 +45,7 @@
   line-height: 22px;
 }
 
-.bio__link {
+.about-me__link {
   font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
   font-weight: 500;
   font-size: 14px;
@@ -54,7 +54,7 @@
   width: 46px;
 }
 
-.bio__photo {
+.about-me__photo {
   width: 270px;
   height: 100%;
 }
@@ -66,27 +66,27 @@
     padding-top: 92px;
   }
 
-  .bio__main {
+  .about-me__main {
     width: 364px;
     max-height: 307px;
   }
 
-  .bio__title {
+  .about-me__title {
     font-size: 40px;
     line-height: 40px;
   }
 
-  .bio__photo {
+  .about-me__photo {
     width: 255px;
   }
 
-  .bio__subtitle {
+  .about-me__subtitle {
     padding-top: 16px;
     font-size: 12px;
     line-height: 18px;
   }
 
-  .bio__text {
+  .about-me__text {
     padding-top: 20px;
     font-size: 12px;
     line-height: 18px;
@@ -100,47 +100,47 @@
     padding-top: 74px;
   }
 
-  .bio {
+  .about-me__bio {
     padding-top: 60px;
     flex-direction: column-reverse;
     justify-content: space-between;
     align-items: center;
   }
 
-  .bio__photo {
+  .about-me__photo {
     width: 292px;
     align-self: flex-start;
   }
 
-  .bio__main {
+  .about-me__main {
     padding-top: 38px;
     width: 100%;
   }
 
-  .bio__title {
+  .about-me__title {
     font-size: 30px;
     line-height: auto;
   }
 
-  .bio__subtitle {
+  .about-me__subtitle {
     padding-top: 18px;
     font-size: 11px;
     line-height: 16px;
   }
 
-  .bio__text {
+  .about-me__text {
     padding-top: 20px;
     font-size: 11px;
     line-height: 16px;
   }
 
-  .bio__link {
+  .about-me__link {
     padding-top: 40px;
   }
 }
 
 @media (max-width: 320px) {
-  .bio__photo {
+  .about-me__photo {
     width: 100%;
   }
 }

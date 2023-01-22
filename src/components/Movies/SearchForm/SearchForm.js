@@ -1,5 +1,3 @@
-import searchFormSlider from '../../../images/slider/fundSliderOn.svg';
-
 export default function SearchForm() {
   return (
     <section className="search">
@@ -17,8 +15,8 @@ export default function SearchForm() {
       </form>
       <div className="search__option">
         <p className="search__slider-sign">Короткометражки</p>
-        <label className="search__toggle">
-          <input className="slider" type="checkbox"/>
+        <label className="slider">
+          <input className="slider__checkbox" type="checkbox"/>
           <span className="slider__span"></span>
         </label>
       </div>

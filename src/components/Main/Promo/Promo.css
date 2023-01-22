@@ -20,7 +20,7 @@
   padding-top: 102px;
 }
 
-.promo_image {
+.promo__image {
   position: absolute;
 }
 
@@ -44,7 +44,7 @@
     padding-top: 65px;
   }
 
-  .promo_image {
+  .promo__image {
     position: absolute;
     width: 248px;
   }

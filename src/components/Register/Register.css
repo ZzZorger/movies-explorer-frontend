@@ -43,7 +43,7 @@
 .register__input-field {
   display: flex;
   flex-direction: column;
-  padding-top: 22px;
+  padding-top: 20px;
 }
 
 .register__input-field:first-child {

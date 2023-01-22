@@ -1,4 +1,4 @@
-.header-main {
+.header {
   background-color: #073042;
   display: flex;
   justify-content: space-between;
@@ -32,13 +32,13 @@
 }
 
 @media (max-width: 768px) {
-  .header-main {
+  .header {
     padding: 18px 3.90625%;
   }
 }
 
 @media (max-width: 320px) {
-  .header-main {
+  .header {
     padding: 18px 4.375%;
   }
 

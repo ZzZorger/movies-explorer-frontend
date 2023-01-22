@@ -4,7 +4,7 @@ import burger from '../../../images/burger.svg';
 export default function HeaderMain() {
   return (
     <header className="header-movies">
-      <img className="header-movies__logo" alt="логотип сайта" src={headerLogo}/>
+      <a className="header-movies__logo-link transition" href="/"><img className="header-movies__logo" alt="логотип сайта" src={headerLogo}/></a>
       <div className="header-movies__links">
         <div className="header-movies__films-links">
           <a className="header-movies__films transition" href="/movies">Фильмы</a>

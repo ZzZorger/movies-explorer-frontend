@@ -1,14 +1,14 @@
-.login__fieldset {
+.login-fieldset {
   display: flex;
   flex-direction: column;
   padding: 0;
   margin: 0;
   border: none;
-  padding-bottom: 158px;
+  padding-bottom: 155px;
 }
 
 @media (max-width: 480px) {
-  .login__fieldset {
+  .login-fieldset {
     padding-bottom: 245px;
   }
 }

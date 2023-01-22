@@ -70,7 +70,7 @@
 }
 
 /* The switch - the box around the slider */
-.search__toggle {
+.slider {
   position: relative;
   display: inline-block;
   width: 34px;
@@ -78,7 +78,7 @@
 }
 
 /* Hide default HTML checkbox */
-.search__toggle .slider {
+.slider .slider__checkbox {
   opacity: 0;
   width: 0;
   height: 0;
@@ -113,11 +113,11 @@
   border-radius: 50%;
 }
 
-.slider:checked+.slider__span {
+.slider__checkbox:checked+.slider__span {
   background-color: #2BE080;
 }
 
-.slider:checked+.slider__span:before {
+.slider__checkbox:checked+.slider__span:before {
   transform: translateX(20px);
   background-color: #FFFFFF;
 }

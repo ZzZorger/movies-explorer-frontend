@@ -29,7 +29,7 @@
   padding-left: 12px;
 }
 
-.card__toggle {
+.flag {
   margin-top: 13px;
   grid-row-start: 2;
   grid-row-end: 3;
@@ -40,7 +40,7 @@
   height: 16px;
 }
 
-.card__toggle .slider {
+.flag .flag__checkbox {
   opacity: 0;
   width: 0;
   height: 0;
@@ -76,7 +76,7 @@
   padding: 0px;
 }
 
-.flag {
+.flag__checkbox {
   opacity: 0;
   width: 0;
   height: 0;
@@ -112,11 +112,11 @@
 
 }
 
-.flag:checked+.flag__span {
+.flag__checkbox:checked+.flag__span {
   background-color: #FFFFFF;
 }
 
-.flag:checked+.flag__span:before {
+.flag__checkbox:checked+.flag__span:before {
   background-color: #2BE080;
 }
 
