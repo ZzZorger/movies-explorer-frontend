@@ -2,7 +2,7 @@ import aboutMePhoto from '../../../images/aboutMePhoto.svg';
 
 export default function AboutMe() {
   return(
-    <section className="about-me">
+    <section className="about-me" id="about-me">
       <h2 className="title">Студент</h2>
       <div className="about-me__bio">
         <div className="about-me__main">
