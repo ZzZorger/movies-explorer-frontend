@@ -4,14 +4,16 @@ import HeaderMovies from '../Header/HeaderMovies/HeaderMovies.js';
 import Footer from '../Footer/Footer.js';
 import MenuPopup from './MenuPopup/MenuPopup.js';
 
-export default function Moovies({ onBurgerMenu, isBurgerMenuOpen, onClose }) {
+export default function Moovies({ onBurgerMenu, isBurgerMenuOpen, onClose, getAllMovies }) {
   return (
     <div className='movies-page'>
       <HeaderMovies
         onBurgerMenu={onBurgerMenu}
       />
       <main className='movies-page__main'>
-        <SearchForm />
+        <SearchForm 
+          onSubmit={getAllMovies}
+        />
         <MoviesCardList />
       </main>
       <Footer />

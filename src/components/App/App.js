@@ -9,7 +9,7 @@ import Register from '../Register/Register.js';
 import Login from '../Login/Login.js';
 import NotFound from '../NotFound/NotFound.js';
 import ProtectedRoute from '../ProtectedRoute.js';
-// import './App.css';
+import { moviesApi } from '../../utils/MoviesApi.js';
 
 
 
@@ -19,18 +19,18 @@ function App() {
   const [isBurgerMenuOpen, isBurgerMenuOpenSetter] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
   // UseEffect
-  useEffect(() => {
-    auth.userValid()
-      .then((res) => {
-        console.log(res)
-        setLoggedIn(true);
-        // setUserData(res);
-        history.push("/movies");
-      })
-      .catch((err) => {
-        console.log(`Ошибка: ${err}`);
-      })
-  }, [history]);
+  // useEffect(() => {
+  //   auth.userValid()
+  //     .then((res) => {
+  //       console.log(res)
+  //       setLoggedIn(true);
+  //       // setUserData(res);
+  //       history.push("/movies");
+  //     })
+  //     .catch((err) => {
+  //       console.log(`Ошибка: ${err}`);
+  //     })
+  // }, [history]);
   // Open and Close handlers
   function handleBurgerMenuClick() {
     isBurgerMenuOpenSetter(true);
@@ -38,7 +38,17 @@ function App() {
   function closeAllPopups() {
     isBurgerMenuOpenSetter(false);
   }
-
+  // API
+  function getAllMovies(e) {
+    e.preventDefault();
+    moviesApi.getAllMovies()
+    .then((res) => {
+      console.log(res)
+    })
+    .catch((err) => {
+      console.log(`Ошибка: ${err}`);
+    })
+  }
   return (
     <div className="body">
       <div className="page">
@@ -46,14 +56,19 @@ function App() {
           <Route exact path="/">
             <Main />
           </Route>
-          <ProtectedRoute
+          {/* <ProtectedRoute
             component={Movies}
             onBurgerMenu={handleBurgerMenuClick}
             isBurgerMenuOpen={isBurgerMenuOpen}
             onClose={closeAllPopups}
             loggedIn={loggedIn}
             path={'/movies'}
-          />
+          /> */}
+          <Route path="/movies">
+            <Movies 
+              getAllMovies={getAllMovies}
+            />
+          </Route>
           <ProtectedRoute
             component={SavedMovies}
             onBurgerMenu={handleBurgerMenuClick}

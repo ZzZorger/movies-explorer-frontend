@@ -1,4 +1,4 @@
-export default function SearchForm() {
+export default function SearchForm({ onSubmit }) {
   return (
     <section className="search">
       <form className="search__form">
@@ -9,7 +9,7 @@ export default function SearchForm() {
               type="search"
               placeholder="Фильм"
             />
-            <button className="search__submit transition" type="submit">Найти</button>
+            <button className="search__submit transition" type="submit" onClick={onSubmit}>Найти</button>
           </div>
         </fieldset>
       </form>
