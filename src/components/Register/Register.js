@@ -1,6 +1,27 @@
 import headerLogo from '../../images/headerLogo.svg';
+import { useState } from 'react';
 
-export default function Register() {
+export default function Register({ onRegister }) {
+  const [name, setName] = useState('');
+  const [mail, setMail] = useState('');
+  const [password, setPassword] = useState('');
+  function handleNameChange(e) {
+    setName(e.target.value);
+  }
+  function handleMailChange(e) {
+    setMail(e.target.value);
+  }
+  function handlePasswordChange(e) {
+    setPassword(e.target.value);
+  }
+  function handleSubmit(e) {
+    e.preventDefault();
+    onRegister({
+      name,
+      mail,
+      password
+    })
+  }
   return (
     <section className="register">
       <div className="register__content">
@@ -15,6 +36,10 @@ export default function Register() {
               <input
                 className="register__input"
                 type="text"
+                value={name}
+                onChange={handleNameChange}
+                placeholder="Имя"
+                autoComplete="off"
               />
             </div>
             <div className="register__input-field">
@@ -22,6 +47,10 @@ export default function Register() {
               <input
                 className="register__input"
                 type="text"
+                value={mail}
+                onChange={handleMailChange}
+                placeholder="Почта"
+                autoComplete="off"
               />
             </div>
             <div className="register__input-field">
@@ -29,11 +58,15 @@ export default function Register() {
               <input
                 className="register__input"
                 type="text"
+                value={password}
+                onChange={handlePasswordChange}
+                placeholder="Пароль"
+                autoComplete="off"
               />
               <span className="register__error">Что-то пошло не так...</span>
             </div>
           </fieldset>
-          <button className="register__submit transition" type="submit">Зарегистрироваться</button>
+          <button className="register__submit transition" type="submit" onClick={handleSubmit}>Зарегистрироваться</button>
           <p className="register__sign">Уже зарегистрированы?&ensp;<a className="register__link transition" href="/signin">Войти</a></p>
         </main>
       </div>

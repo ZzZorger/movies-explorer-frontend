@@ -19,18 +19,18 @@ function App() {
   const [isBurgerMenuOpen, isBurgerMenuOpenSetter] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
   // UseEffect
-  // useEffect(() => {
-  //   auth.userValid()
-  //     .then((res) => {
-  //       console.log(res)
-  //       setLoggedIn(true);
-  //       // setUserData(res);
-  //       history.push("/movies");
-  //     })
-  //     .catch((err) => {
-  //       console.log(`Ошибка: ${err}`);
-  //     })
-  // }, [history]);
+  useEffect(() => {
+    auth.userValid()
+      .then((res) => {
+        console.log(res)
+        setLoggedIn(true);
+        // setUserData(res);
+        history.push("/movies");
+      })
+      .catch((err) => {
+        console.log(`Ошибка: ${err}`);
+      })
+  }, [history]);
   // Open and Close handlers
   function handleBurgerMenuClick() {
     isBurgerMenuOpenSetter(true);
@@ -39,11 +39,24 @@ function App() {
     isBurgerMenuOpenSetter(false);
   }
   // API
+  // Получение списка фильмов
   function getAllMovies(e) {
     e.preventDefault();
     moviesApi.getAllMovies()
     .then((res) => {
       console.log(res)
+    })
+    .catch((err) => {
+      console.log(`Ошибка: ${err}`);
+    })
+  }
+  // Регистрация нового пользователя
+  function handleRegister(data) {
+    auth.signUp(data)
+    .then((res) => {
+      if (res) {
+        history.push("/signin");
+      }
     })
     .catch((err) => {
       console.log(`Ошибка: ${err}`);
@@ -56,19 +69,20 @@ function App() {
           <Route exact path="/">
             <Main />
           </Route>
-          {/* <ProtectedRoute
+          <ProtectedRoute
             component={Movies}
             onBurgerMenu={handleBurgerMenuClick}
             isBurgerMenuOpen={isBurgerMenuOpen}
             onClose={closeAllPopups}
             loggedIn={loggedIn}
+            getAllMovies={getAllMovies}
             path={'/movies'}
-          /> */}
-          <Route path="/movies">
+          />
+          {/* <Route path="/movies">
             <Movies 
               getAllMovies={getAllMovies}
             />
-          </Route>
+          </Route> */}
           <ProtectedRoute
             component={SavedMovies}
             onBurgerMenu={handleBurgerMenuClick}
@@ -83,7 +97,9 @@ function App() {
             path={'profile'}
           />
           <Route path="/signup">
-            <Register />
+            <Register 
+              onRegister={handleRegister}
+            />
           </Route>
           <Route path="/signin">
             <Login />
