@@ -64,25 +64,14 @@ function App() {
   }
   // Логин пользователя
   function handleLogin(data) {
+    console.log(data)
     auth.signIn(data)
       .then((jwt) => {
-        // console.log(jwt)
         if (jwt.token) {
-          console.log('good')
-          // setLoggedIn(true);
-          // auth.userValid(jwt.token)
-          // .then((res) => {
-          //   console.log(res)
-          // })
+          // localStorage.setItem('token', jwt.token);
+          setLoggedIn(true);
+          history.push("/movies");
         }
-        // if (jwt.token) {
-        //   auth.userValid(jwt.token)
-        //     .then((res) => {
-        //       setLoggedIn(true);
-        //       history.push("/movies");
-        //       // setUserData(res);
-        //     })
-        // }
       })
       .catch((err) => {
         // isInfoTooltipErrorSetter(true);
