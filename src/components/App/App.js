@@ -19,18 +19,18 @@ function App() {
   const [isBurgerMenuOpen, isBurgerMenuOpenSetter] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
   // UseEffect
-  useEffect(() => {
-    auth.userValid()
-      .then((res) => {
-        console.log(res)
-        setLoggedIn(true);
-        // setUserData(res);
-        history.push("/movies");
-      })
-      .catch((err) => {
-        console.log(`Ошибка: ${err}`);
-      })
-  }, [history]);
+  // useEffect(() => {
+  //   auth.userValid()
+  //     .then((res) => {
+  //       console.log(res)
+  //       setLoggedIn(true);
+  //       // setUserData(res);
+  //       history.push("/movies");
+  //     })
+  //     .catch((err) => {
+  //       console.log(`Ошибка: ${err}`);
+  //     })
+  // }, [history]);
   // Open and Close handlers
   function handleBurgerMenuClick() {
     isBurgerMenuOpenSetter(true);
@@ -55,12 +55,40 @@ function App() {
     auth.signUp(data)
     .then((res) => {
       if (res) {
-        history.push("/signin");
+        history.push("/movies");
       }
     })
     .catch((err) => {
       console.log(`Ошибка: ${err}`);
     })
+  }
+  // Логин пользователя
+  function handleLogin(data) {
+    auth.signIn(data)
+      .then((jwt) => {
+        // console.log(jwt)
+        if (jwt.token) {
+          console.log('good')
+          // setLoggedIn(true);
+          // auth.userValid(jwt.token)
+          // .then((res) => {
+          //   console.log(res)
+          // })
+        }
+        // if (jwt.token) {
+        //   auth.userValid(jwt.token)
+        //     .then((res) => {
+        //       setLoggedIn(true);
+        //       history.push("/movies");
+        //       // setUserData(res);
+        //     })
+        // }
+      })
+      .catch((err) => {
+        // isInfoTooltipErrorSetter(true);
+        // isInfoTooltipOpenSetter(true);
+        console.log(`Ошибка: ${err}`);
+      })
   }
   return (
     <div className="body">
@@ -102,7 +130,9 @@ function App() {
             />
           </Route>
           <Route path="/signin">
-            <Login />
+            <Login 
+              onLogin={handleLogin}
+            />
           </Route>
           <Route path="*">
             <NotFound />
