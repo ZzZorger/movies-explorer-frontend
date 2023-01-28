@@ -20,6 +20,7 @@ function App() {
   const [isBurgerMenuOpen, isBurgerMenuOpenSetter] = useState(false);
   const [loggedIn, setLoggedIn] = useState(true);
   const [currentUser, setUserData] = useState({});
+  const [isSubmitError, isSubmitErrorSetter] = useState(false);
   // UseEffect
   // useEffect(() => {
   //   auth.userValid()
@@ -38,7 +39,6 @@ function App() {
     auth.userValid()
       .then((data) => {
         setUserData(data)
-        console.log(data)
       })
       .catch((err) => {
         history.push("/signin");
@@ -93,6 +93,7 @@ function App() {
       .catch((err) => {
         // isInfoTooltipErrorSetter(true);
         // isInfoTooltipOpenSetter(true);
+        isSubmitErrorSetter(true)
         console.log(`Ошибка: ${err}`);
       })
   }
@@ -134,6 +135,7 @@ function App() {
             <Route path="/signin">
               <Login
                 onLogin={handleLogin}
+                isSubmitError={isSubmitError}
               />
             </Route>
             <Route path="*">

@@ -12,14 +12,14 @@ export default function Register({ onRegister }) {
   const [nameError, setNameError] = useState('Имя не может быть пустым');
   const [mailError, setMailError] = useState('Почта не может быть пустой');
   const [passwordError, setPasswordError] = useState('Пароль не может быть пустым');
-  const [formValid, setFormValid] = useState(false)
+  const [formValid, setFormValid] = useState(false);
   useEffect(() => {
-    if(nameError || mailError || passwordError) {
+    if (nameError || mailError || passwordError) {
       setFormValid(false)
     } else {
       setFormValid(true)
     }
-  }, [nameError, mailError, passwordError])
+  }, [nameError, mailError, passwordError]);
   function handleSubmit(e) {
     e.preventDefault();
     onRegister({
@@ -62,6 +62,8 @@ export default function Register({ onRegister }) {
     setPassword(e.target.value);
     if (e.target.value) {
       setPasswordError('')
+    } else {
+      setPasswordError('Пароль не может быть пустым')
     }
   }
   return (
@@ -116,6 +118,7 @@ export default function Register({ onRegister }) {
               {(passwordFilled && passwordError) && <span className="register__error">{passwordError}</span>}
             </div>
           </fieldset>
+          {(passwordFilled && passwordError) && <span className="register__error">{passwordError}</span>}
           <button className={!formValid ? "register__submit disabled-button" : "register__submit transition"} type="submit" onClick={handleSubmit} disabled={!formValid}>Зарегистрироваться</button>
           <p className="register__sign">Уже зарегистрированы?&ensp;<a className="register__link transition" href="/signin">Войти</a></p>
         </main>

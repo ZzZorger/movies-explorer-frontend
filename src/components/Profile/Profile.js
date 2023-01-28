@@ -1,10 +1,17 @@
 import HeaderMovies from '../Header/HeaderMovies/HeaderMovies';
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { userData } from '../../context/CurrentUserContext.js';
 
 export default function Profile() {
+  // const user = useContext(userData)
+  // const [currentUser, currentUserSetter] = useState('')
+  // currentUserSetter(user)
+  // useEffect(() => {
+  //   currentUserSetter(user)
+  //   // currentUserSetter(useContext(userData))
+  // })
   const currentUser = useContext(userData);
-  console.log(currentUser)
+  // console.log(currentUser)
   return (
     <section className='profile'>
       <HeaderMovies />
