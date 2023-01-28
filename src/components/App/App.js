@@ -18,7 +18,7 @@ function App() {
   const history = useHistory();
   // Hooks
   const [isBurgerMenuOpen, isBurgerMenuOpenSetter] = useState(false);
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(true);
   const [currentUser, setUserData] = useState({});
   // UseEffect
   // useEffect(() => {
@@ -33,9 +33,18 @@ function App() {
   //       console.log(`Ошибка: ${err}`);
   //     })
   // }, [history]);
+  // Проверка авторизации при загрузке страницы
   useEffect(() => {
-    console.log(document.cookie.token)
-  })
+    auth.userValid()
+      .then((data) => {
+        setUserData(data)
+        console.log(data)
+      })
+      .catch((err) => {
+        history.push("/signin");
+        console.log(`Ошибка: ${err}`);
+      })
+  }, [history]);
   // Open and Close handlers
   function handleBurgerMenuClick() {
     isBurgerMenuOpenSetter(true);
@@ -69,17 +78,16 @@ function App() {
   }
   // Логин пользователя
   function handleLogin(data) {
-    console.log(data)
     auth.signIn(data)
       .then((jwt) => {
-        console.log(document.cookie)
+        console.log(jwt)
         if (jwt.token) {
           setLoggedIn(true);
           history.push("/movies");
-          auth.userValid()
-            .then((res) => {
-              console.log(res)
-            })
+          // auth.userValid()
+          //   .then((res) => {
+          //     console.log(res)
+          //   })
         }
       })
       .catch((err) => {
@@ -105,11 +113,6 @@ function App() {
               getAllMovies={getAllMovies}
               path={'/movies'}
             />
-            {/* <Route path="/movies">
-            <Movies 
-              getAllMovies={getAllMovies}
-            />
-          </Route> */}
             <ProtectedRoute
               component={SavedMovies}
               onBurgerMenu={handleBurgerMenuClick}
