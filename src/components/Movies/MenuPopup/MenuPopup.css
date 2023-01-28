@@ -81,6 +81,9 @@
   font-size: 14px;
   line-height: 16px;
   cursor: pointer;
+  background-color: #F9F9F9;
+  text-decoration: none;
+  color: #000000;
 }
 
 .menu-popup__elements {

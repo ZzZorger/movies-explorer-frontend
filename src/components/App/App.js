@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { userData } from '../../context/CurrentUserContext.js';
 import { Route, Switch, useHistory } from 'react-router-dom';
 import { auth } from '../../utils/Auth.js';
 import Main from '../Main/Main';
@@ -18,6 +19,7 @@ function App() {
   // Hooks
   const [isBurgerMenuOpen, isBurgerMenuOpenSetter] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
+  const [currentUser, setUserData] = useState({});
   // UseEffect
   // useEffect(() => {
   //   auth.userValid()
@@ -31,6 +33,9 @@ function App() {
   //       console.log(`Ошибка: ${err}`);
   //     })
   // }, [history]);
+  useEffect(() => {
+    console.log(document.cookie.token)
+  })
   // Open and Close handlers
   function handleBurgerMenuClick() {
     isBurgerMenuOpenSetter(true);
@@ -43,34 +48,38 @@ function App() {
   function getAllMovies(e) {
     e.preventDefault();
     moviesApi.getAllMovies()
-    .then((res) => {
-      console.log(res)
-    })
-    .catch((err) => {
-      console.log(`Ошибка: ${err}`);
-    })
+      .then((res) => {
+        console.log(res)
+      })
+      .catch((err) => {
+        console.log(`Ошибка: ${err}`);
+      })
   }
   // Регистрация нового пользователя
   function handleRegister(data) {
     auth.signUp(data)
-    .then((res) => {
-      if (res) {
-        history.push("/movies");
-      }
-    })
-    .catch((err) => {
-      console.log(`Ошибка: ${err}`);
-    })
+      .then((res) => {
+        if (res) {
+          history.push("/movies");
+        }
+      })
+      .catch((err) => {
+        console.log(`Ошибка: ${err}`);
+      })
   }
   // Логин пользователя
   function handleLogin(data) {
     console.log(data)
     auth.signIn(data)
       .then((jwt) => {
+        console.log(document.cookie)
         if (jwt.token) {
-          // localStorage.setItem('token', jwt.token);
           setLoggedIn(true);
           history.push("/movies");
+          auth.userValid()
+            .then((res) => {
+              console.log(res)
+            })
         }
       })
       .catch((err) => {
@@ -80,55 +89,57 @@ function App() {
       })
   }
   return (
-    <div className="body">
-      <div className="page">
-        <Switch>
-          <Route exact path="/">
-            <Main />
-          </Route>
-          <ProtectedRoute
-            component={Movies}
-            onBurgerMenu={handleBurgerMenuClick}
-            isBurgerMenuOpen={isBurgerMenuOpen}
-            onClose={closeAllPopups}
-            loggedIn={loggedIn}
-            getAllMovies={getAllMovies}
-            path={'/movies'}
-          />
-          {/* <Route path="/movies">
+    <userData.Provider value={currentUser}>
+      <div className="body">
+        <div className="page">
+          <Switch>
+            <Route exact path="/">
+              <Main />
+            </Route>
+            <ProtectedRoute
+              component={Movies}
+              onBurgerMenu={handleBurgerMenuClick}
+              isBurgerMenuOpen={isBurgerMenuOpen}
+              onClose={closeAllPopups}
+              loggedIn={loggedIn}
+              getAllMovies={getAllMovies}
+              path={'/movies'}
+            />
+            {/* <Route path="/movies">
             <Movies 
               getAllMovies={getAllMovies}
             />
           </Route> */}
-          <ProtectedRoute
-            component={SavedMovies}
-            onBurgerMenu={handleBurgerMenuClick}
-            isBurgerMenuOpen={isBurgerMenuOpen}
-            onClose={closeAllPopups}
-            loggedIn={loggedIn}
-            path={'/saved-movies'}
-          />
-          <ProtectedRoute
-            component={Profile}
-            loggedIn={loggedIn}
-            path={'profile'}
-          />
-          <Route path="/signup">
-            <Register 
-              onRegister={handleRegister}
+            <ProtectedRoute
+              component={SavedMovies}
+              onBurgerMenu={handleBurgerMenuClick}
+              isBurgerMenuOpen={isBurgerMenuOpen}
+              onClose={closeAllPopups}
+              loggedIn={loggedIn}
+              path={'/saved-movies'}
             />
-          </Route>
-          <Route path="/signin">
-            <Login 
-              onLogin={handleLogin}
+            <ProtectedRoute
+              component={Profile}
+              loggedIn={loggedIn}
+              path={'/profile'}
             />
-          </Route>
-          <Route path="*">
-            <NotFound />
-          </Route>
-        </Switch>
+            <Route path="/signup">
+              <Register
+                onRegister={handleRegister}
+              />
+            </Route>
+            <Route path="/signin">
+              <Login
+                onLogin={handleLogin}
+              />
+            </Route>
+            <Route path="*">
+              <NotFound />
+            </Route>
+          </Switch>
+        </div>
       </div>
-    </div>
+    </userData.Provider>
   );
 }
 
