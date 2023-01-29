@@ -23,18 +23,6 @@ function App() {
   const [currentUser, setUserData] = useState({});
   const [isSubmitError, isSubmitErrorSetter] = useState(false);
   // UseEffect
-  // useEffect(() => {
-  //   auth.userValid()
-  //     .then((res) => {
-  //       console.log(res)
-  //       setLoggedIn(true);
-  //       // setUserData(res);
-  //       history.push("/movies");
-  //     })
-  //     .catch((err) => {
-  //       console.log(`Ошибка: ${err}`);
-  //     })
-  // }, [history]);
   // Проверка авторизации при загрузке страницы
   useEffect(() => {
     auth.userValid()
@@ -85,15 +73,9 @@ function App() {
         if (jwt.token) {
           setLoggedIn(true);
           history.push("/movies");
-          // auth.userValid()
-          //   .then((res) => {
-          //     console.log(res)
-          //   })
         }
       })
       .catch((err) => {
-        // isInfoTooltipErrorSetter(true);
-        // isInfoTooltipOpenSetter(true);
         isSubmitErrorSetter(true)
         console.log(`Ошибка: ${err}`);
       })
@@ -101,20 +83,20 @@ function App() {
   // Выход из аккаунта
   function handleLogout() {
     auth.signOut()
-    .catch((err) => {
-      console.log(`Ошибка: ${err}`);
-    })
+      .catch((err) => {
+        console.log(`Ошибка: ${err}`);
+      })
   }
   // Редактирование данных профиля
   function handleUpdateUser(data) {
     console.log(data)
     mainApi.patchProfileData(data)
-    .then((newData) => {
-      setUserData(newData.data);
-    })
-    .catch(err => {
-      console.log(`Ошибка: ${err}`)
-    });
+      .then((newData) => {
+        setUserData(newData.data);
+      })
+      .catch(err => {
+        console.log(`Ошибка: ${err}`)
+      });
   }
   return (
     <userData.Provider value={currentUser}>
