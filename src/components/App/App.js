@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { userData } from '../../context/CurrentUserContext.js';
 import { Route, Switch, useHistory } from 'react-router-dom';
 import { auth } from '../../utils/Auth.js';
+import { mainApi } from '../../utils/MainApi.js';
 import Main from '../Main/Main';
 import Movies from '../Movies/Movies';
 import SavedMovies from '../SavedMovies/SavedMovies';
@@ -97,6 +98,24 @@ function App() {
         console.log(`Ошибка: ${err}`);
       })
   }
+  // Выход из аккаунта
+  function handleLogout() {
+    auth.signOut()
+    .catch((err) => {
+      console.log(`Ошибка: ${err}`);
+    })
+  }
+  // Редактирование данных профиля
+  function handleUpdateUser(data) {
+    console.log(data)
+    mainApi.patchProfileData(data)
+    .then((newData) => {
+      setUserData(newData.data);
+    })
+    .catch(err => {
+      console.log(`Ошибка: ${err}`)
+    });
+  }
   return (
     <userData.Provider value={currentUser}>
       <div className="body">
@@ -124,6 +143,8 @@ function App() {
             />
             <ProtectedRoute
               component={Profile}
+              onEdit={handleUpdateUser}
+              onLogout={handleLogout}
               loggedIn={loggedIn}
               path={'/profile'}
             />

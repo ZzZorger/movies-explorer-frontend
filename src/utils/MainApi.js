@@ -9,6 +9,18 @@ class MainApi {
     }
     return Promise.reject(`Ошибка: ${res.status}`)
   }
+  patchProfileData(input) {
+    return fetch(`${this._server}/users/me`, {
+      method: 'PATCH',
+      headers: this._headers,
+      body: JSON.stringify({
+        name: input.name,
+        email: input.email
+      }),
+      credentials: 'include',
+    })
+      .then((res) => this._getResponseData(res))
+  }
   // getServerData() {
   //   return fetch(`${this._server}/users/me`, {
   //     method: 'GET',
@@ -20,7 +32,8 @@ class MainApi {
 }
 
 const mainApi = new MainApi({
-  baseUrl: 'https://api.myseconddomainand.nomoredomains.club',
+    // baseUrl: 'https://api.myseconddomainand.nomoredomains.club',
+  baseUrl: 'http://localhost:3001',
   headers: {
     'Content-Type': 'application/json',
   }

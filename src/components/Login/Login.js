@@ -13,29 +13,28 @@ export default function Login({ onLogin, isSubmitError }) {
   const [formValid, setFormValid] = useState(false);
   useEffect(() => {
     if (mailError || passwordError) {
-      setFormValid(false)
+      setFormValid(false);
     } else {
-      setFormValid(true)
+      setFormValid(true);
     }
   }, [mailError, passwordError]);
   function handleSubmit(e) {
-    console.log(isSubmitError)
     e.preventDefault();
     onLogin({
       mail,
       password
-    })
+    });
     if (isSubmitError) {
-      setSubmitError('Неверно введены логин или пароль')
+      setSubmitError('Неверно введены логин или пароль');
     }
   }
   function focusHandler(e) {
     switch (e.target.name) {
       case 'mail':
-        setMailFilled(true)
+        setMailFilled(true);
         break
       case 'password':
-        setPasswordFilled(true)
+        setPasswordFilled(true);
         break
       default:
     }
@@ -51,9 +50,9 @@ export default function Login({ onLogin, isSubmitError }) {
   function handlePasswordChange(e) {
     setPassword(e.target.value);
     if (e.target.value) {
-      setPasswordError('')
+      setPasswordError('');
     } else {
-      setPasswordError('Пароль не может быть пустым')
+      setPasswordError('Пароль не может быть пустым');
     }
   }
   return (
