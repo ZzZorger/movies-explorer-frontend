@@ -43,11 +43,14 @@ function App() {
   }
   // API
   // Получение списка фильмов
-  function getAllMovies(e) {
-    e.preventDefault();
+  function getAllMovies(text) {
+    // e.preventDefault();
     moviesApi.getAllMovies()
       .then((res) => {
         console.log(res)
+        console.log(res.filter(function(e) {
+          return e.nameRU.match(text)
+        }))
       })
       .catch((err) => {
         console.log(`Ошибка: ${err}`);

@@ -13,7 +13,6 @@ class MoviesApi {
     return fetch(`${this._server}`, {
       method: 'GET',
       headers: this._headers,
-      credentials: 'include',
     })
       .then((res) => this._getResponseData(res))
   }
