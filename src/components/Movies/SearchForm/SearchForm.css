@@ -23,17 +23,21 @@
 
 .search__input {
   display: block;
-  width: 100%;
+  width: 97.2%;
   padding: 0;
   padding-left: 22px;
   font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
   font-weight: 400;
   font-size: 14px;
   line-height: 18px;
-  color: #A0A0A0;
+  color: #000000;
   height: 48px;
   border: 1.5px solid rgba(170, 170, 170, 0.2);
   border-radius: 50px;
+}
+
+.search__input::placeholder {
+  color: #A0A0A0;
 }
 
 .search__option {

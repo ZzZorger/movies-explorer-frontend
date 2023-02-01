@@ -1,6 +1,9 @@
 import { useEffect, useState } from 'react';
 
 export default function SearchForm({ onSubmit }) {
+  const [movies, setMovies] = useState([]);
+  // const [filteredMovies, setFilteredMovies] = useState([]);
+  // const [isLoading, setIsLoading] = useState(false);
   const [search, setSearch] = useState('');
   function handleSearchChange(e) {
     setSearch(e.target.value);
@@ -12,7 +15,11 @@ export default function SearchForm({ onSubmit }) {
   }
   function handleSubmit(e) {
     e.preventDefault();
-    onSubmit(search);
+    // console.log(search)
+    onSubmit()
+    console.log(onSubmit())
+    // setMovies(onSubmit(search));
+    // console.log(movies);
   }
   return (
     <section className="search">
@@ -21,7 +28,7 @@ export default function SearchForm({ onSubmit }) {
           <div className="search__film">
             <input
               className="search__input"
-              type="search"
+              type="text"
               name="search"
               value={search}
               placeholder="Фильм"

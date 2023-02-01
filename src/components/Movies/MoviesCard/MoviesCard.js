@@ -1,6 +1,6 @@
 import cardImage from '../../../images/initialCards/card1.jpg';
 
-export default function MoviesCard() {
+export default function MoviesCard({ card, onCardClick, onCardLike, onCardDelete }) {
   return (
     <article className="card">
       <img className="card__img" alt="фрагмент фильма" src={cardImage} />
