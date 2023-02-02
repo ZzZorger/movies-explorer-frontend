@@ -8,6 +8,10 @@ import { useEffect, useState } from 'react';
 
 export default function Moovies({ onBurgerMenu, isBurgerMenuOpen, onClose }) {
   const [preloader, setPreloader] = useState(false);
+  const [movies, setMovies] = useState(JSON.parse(localStorage.getItem("movies")));
+  const [filteredMovies, setFilteredMovies] = useState(JSON.parse(localStorage.getItem("filteredMovies")) || []);
+  const [nothingFound, setNothingFound] = useState(false);
+
   // useEffect(() => {
   //   moviesApi.getAllMovies()
   //     .then((cards) => {
@@ -15,23 +19,38 @@ export default function Moovies({ onBurgerMenu, isBurgerMenuOpen, onClose }) {
   //       // setFilteredFilms(films)
   //     })
   // }, [])
-  
-  // function filterCards(cards, text) {
-  //   const films = cards.filter(e => e.nameRU.match(text));
-  //   return films;
-  // }
-  function getAllMovies() {
+
+  function filterMovies(filter, movies) {
+    console.log(filter)
+    const filtered = movies.filter((movie) => movie.nameRU.toLowerCase().match(filter));
+    setFilteredMovies(filtered)
+    localStorage.setItem("filteredMovies", JSON.stringify(filtered));
+  }
+  function handleSubmit(filter) {
+    getMovies(filter);
+  }
+  function getMovies(filter) {
     setPreloader(true);
-    moviesApi.getAllMovies()
-    .then((movies) => {
-      localStorage.setItem("movies", JSON.stringify(movies));
-    })
-    .catch((err) => {
-      console.log(`Ошибка: ${err}`)
-    })
-    .finally(() => {
+    if (!movies) {
+      moviesApi.getAllMovies()
+        .then((movies) => {
+          setMovies(movies)
+          localStorage.setItem("movies", JSON.stringify(movies));
+          return movies
+        })
+        .then((movies) => {
+          filterMovies(filter, movies)
+        })
+        .catch((err) => {
+          console.log(`Ошибка: ${err}`)
+        })
+        .finally(() => {
+          setPreloader(false);
+        })
+    } else {
+      filterMovies(filter, movies)
       setPreloader(false);
-    })
+    }
   }
 
   return (
@@ -42,11 +61,12 @@ export default function Moovies({ onBurgerMenu, isBurgerMenuOpen, onClose }) {
       />
       <main className='movies-page__main'>
         <SearchForm
-          getAllMovies={getAllMovies}
+          onSubmit={handleSubmit}
         />
         <MoviesCardList
           isPreloader={preloader}
-        // cards={}
+          filteredMovies={filteredMovies}
+          // nothingFound={nothingFound}
         />
       </main>
       <Footer />

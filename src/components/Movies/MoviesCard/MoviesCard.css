@@ -3,7 +3,7 @@
   border-radius: 10px;
   box-sizing: border-box;
   display: grid;
-  grid-template-columns: max-content 28px;
+  grid-template-columns: 300px 28px;
   grid-template-rows: 1fr 26px 41px;
   max-width: 270px;
   background: #FDFDFD;
@@ -27,6 +27,9 @@
   font-size: 13px;
   padding-top: 14px;
   padding-left: 12px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .flag {

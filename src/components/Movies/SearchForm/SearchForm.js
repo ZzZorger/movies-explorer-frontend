@@ -1,37 +1,13 @@
 import { useEffect, useState } from 'react';
 
-export default function SearchForm({ getAllMovies }) {
-  const [movies, setMovies] = useState([]);
-  // const [filteredMovies, setFilteredMovies] = useState([]);
-  // const [isLoading, setIsLoading] = useState(false);
+export default function SearchForm({ onSubmit }) {
   const [search, setSearch] = useState('');
   function handleSearchChange(e) {
     setSearch(e.target.value);
-    // if (e.target.value.length < 5 || e.target.value.length > 30) {
-    //   setSearchError('Длинна имени должна быть от 5 до 30 символов');
-    // } else {
-    //   setSearchError('');
-    // }
-  }
-  // function filterCards(cards, text) {
-  //   const films = cards.filter(e => e.nameRU.match(text));
-  //   return films;
-  // }
-  function filterMovies(text) {
-    const allMovies = localStorage.getItem("movies")
-    const filteredFilms = allMovies.filter(e => e.nameRU.match(text));
-    console.log(filteredFilms)
   }
   function handleSubmit(e) {
     e.preventDefault();
-    localStorage.setItem("filter", search);
-    // console.log(search)
-    getAllMovies();
-    filterMovies();
-
-    // console.log(onSubmit())
-    // setMovies(onSubmit(search));
-    // console.log(movies);
+    onSubmit(search);
   }
   return (
     <section className="search">

@@ -35,6 +35,19 @@
   font-size: 12px;
 }
 
+.card-list__sign {
+  font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
+  font-weight: 400;
+  font-size: 15px;
+  margin: 0;
+  padding: 0;
+  padding-top: 100px;
+}
+
+.card-list__sign_hidden {
+  display: none;
+}
+
 @media (max-width: 1279px) {
   .card-list__cards {
     grid-template-columns: repeat(3, 270px);
