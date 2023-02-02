@@ -10,8 +10,10 @@ export default function Moovies({ onBurgerMenu, isBurgerMenuOpen, onClose }) {
   const [preloader, setPreloader] = useState(false);
   const [movies, setMovies] = useState(JSON.parse(localStorage.getItem("movies")));
   const [filteredMovies, setFilteredMovies] = useState(JSON.parse(localStorage.getItem("filteredMovies")) || []);
-  const [nothingFound, setNothingFound] = useState(false);
-
+  // const [nothingFound, setNothingFound] = useState(false);
+  // const windowWidth = 
+  // console.log(document.documentElement.clientWidth)
+  // console.log(filteredMovies.length)
   // useEffect(() => {
   //   moviesApi.getAllMovies()
   //     .then((cards) => {
@@ -20,6 +22,21 @@ export default function Moovies({ onBurgerMenu, isBurgerMenuOpen, onClose }) {
   //     })
   // }, [])
 
+  // useEffect(() => {
+  //   if (size.width >= cardsInWindow.large.width) {
+  //     setNumberMoviesShow(cardsInWindow.large.moviesShow);
+  //     setNumberMoviesAdd(cardsInWindow.large.moviesAdd);
+  //   } else if (size.width >= cardsInWindow.medium.width) {
+  //     setNumberMoviesShow(cardsInWindow.medium.moviesShow);
+  //     setNumberMoviesAdd(cardsInWindow.medium.moviesAdd);
+  //   } else if (size.width >= cardsInWindow.small.width) {
+  //     setNumberMoviesShow(cardsInWindow.small.moviesShow);
+  //     setNumberMoviesAdd(cardsInWindow.small.moviesAdd);
+  //   } else {
+  //     setNumberMoviesShow(cardsInWindow.smallest.moviesShow);
+  //     setNumberMoviesAdd(cardsInWindow.smallest.moviesAdd);
+  //   }
+  // }, [size.width]);
   function filterMovies(filter, movies) {
     console.log(filter)
     const filtered = movies.filter((movie) => movie.nameRU.toLowerCase().match(filter));

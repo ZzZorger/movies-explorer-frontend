@@ -1,7 +1,51 @@
-import MoviesCard from '../MoviesCard/MoviesCard.js'
-import Preloader from '../Preloader/Preloader'
+import MoviesCard from '../MoviesCard/MoviesCard.js';
+import Preloader from '../Preloader/Preloader';
+import { useEffect, useState } from 'react';
 
 export default function MoviesCardList({ isPreloader, filteredMovies, nothingFound, cards, onCardClick, onCardLike, onCardDelete }) {
+  const [showCard, setShowCard] = useState('');
+  const [addCard, setAddCard] = useState('');
+  // const cardsInWindow = {
+  //   large: {
+  //     width: 1280,
+  //     showMovies: 12,
+  //     addMovies: 4,
+  //   },
+  //   medium: {
+  //     width: 990,
+  //     showMovies: 9,
+  //     addMovies: 3,
+  //   },
+  //   small: {
+  //     width: 768,
+  //     showMovies: 8,
+  //     addMovies: 2,
+  //   },
+  //   smallest: {
+  //     width: 767,
+  //     showMovies: 5,
+  //     addMovies: 2,
+  //   },
+  // };
+  const cardsInWindow = {show: 0, add: 0};
+  useEffect(() => {
+    const winWidth = document.documentElement.clientWidth;
+    if (winWidth >= 1280) {
+      cardsInWindow.show = 12;
+      cardsInWindow.add = 4;
+    } if (winWidth <= 990) {
+      cardsInWindow.show = 9;
+      cardsInWindow.add = 3;
+    } if (winWidth <= 768) {
+      cardsInWindow.show = 8;
+      cardsInWindow.add = 2;
+    } if (winWidth <= 767) {
+      cardsInWindow.show = 5;
+      cardsInWindow.add = 2;
+    }
+    console.log(cardsInWindow)
+  })
+
   return (
     <section className="card-list">
       <Preloader 
@@ -9,21 +53,8 @@ export default function MoviesCardList({ isPreloader, filteredMovies, nothingFou
       />
       <p className={!isPreloader && nothingFound ? "card-list__sign" : "card-list__sign card-list__sign_hidden"}>Ничего не найдено</p>
       <div className="card-list__cards">
-        {/* <MoviesCard />
-        <MoviesCard />
-        <MoviesCard />
-        <MoviesCard />
-        <MoviesCard /> */}
-        {/* {cards.map(item => {
-          return (
-            <MoviesCard
-
-            />
-          )
-        })} */}
         {filteredMovies.map(movie => {
           return (
-            // console.log(movie)
             <MoviesCard
               key={movie.id}
               movie={movie}
