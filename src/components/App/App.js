@@ -53,7 +53,7 @@ function App() {
         //   res.filter(e.nameRU.match(text))
         // }
         // return films;
-        
+
         // return res.filter(e => e.nameRU.match(text))
         // console.log(res.filter(e => e.nameRU.match(text)))
         // console.log(films)
@@ -93,7 +93,6 @@ function App() {
   function handleLogin(data) {
     auth.signIn(data)
       .then((jwt) => {
-        console.log(jwt)
         if (jwt.token) {
           setLoggedIn(true);
           history.push("/movies");

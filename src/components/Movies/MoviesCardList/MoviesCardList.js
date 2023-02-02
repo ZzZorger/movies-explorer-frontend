@@ -1,10 +1,12 @@
 import MoviesCard from '../MoviesCard/MoviesCard.js'
-// import Preloader from '../Preloader/Preloader'
+import Preloader from '../Preloader/Preloader'
 
-export default function MoviesCardList({ cards, onCardClick, onCardLike, onCardDelete }) {
+export default function MoviesCardList({ isPreloader, cards, onCardClick, onCardLike, onCardDelete }) {
   return (
     <section className="card-list">
-      {/* <Preloader /> */}
+      <Preloader 
+        isPreloader={isPreloader}
+      />
       <div className="card-list__cards">
         {/* <MoviesCard />
         <MoviesCard />
