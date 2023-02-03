@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 export default function MoviesCardList({ isPreloader, filteredMovies, nothingFound, cards, onCardClick, onCardLike, onCardDelete }) {
   const [showCard, setShowCard] = useState('');
   const [addCard, setAddCard] = useState('');
+  const [cardCounter, setCardCounter] = useState(0)
   // const cardsInWindow = {
   //   large: {
   //     width: 1280,
@@ -27,8 +28,11 @@ export default function MoviesCardList({ isPreloader, filteredMovies, nothingFou
   //     addMovies: 2,
   //   },
   // };
-  const cardsInWindow = {show: 0, add: 0};
+  const cardsInWindow = { show: 0, add: 0 };
   useEffect(() => {
+    calcCardCounter();
+  })
+  function calcCardCounter() {
     const winWidth = document.documentElement.clientWidth;
     if (winWidth >= 1280) {
       cardsInWindow.show = 12;
@@ -43,24 +47,28 @@ export default function MoviesCardList({ isPreloader, filteredMovies, nothingFou
       cardsInWindow.show = 5;
       cardsInWindow.add = 2;
     }
-    console.log(cardsInWindow)
-  })
-
+    return cardsInWindow
+  }
   return (
     <section className="card-list">
-      <Preloader 
+      <Preloader
         isPreloader={isPreloader}
       />
       <p className={!isPreloader && nothingFound ? "card-list__sign" : "card-list__sign card-list__sign_hidden"}>Ничего не найдено</p>
       <div className="card-list__cards">
-        {filteredMovies.map(movie => {
-          return (
+        {filteredMovies.map((movie) => 
+        // cardCounter < cardsInWindow.show
             <MoviesCard
               key={movie.id}
               movie={movie}
             />
-          )
-        })}
+          // return (
+          //   <MoviesCard
+          //     key={movie.id}
+          //     movie={movie}
+          //   />
+          // )
+        )}
       </div>
       <div className="card-list__next">
         <button className="card-list__button transition">Ещё</button>
