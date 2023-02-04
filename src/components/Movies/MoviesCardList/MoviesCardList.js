@@ -5,17 +5,16 @@ import { useEffect, useState } from 'react';
 export default function MoviesCardList({ isPreloader, filteredMovies, nothingFound, cards, onCardClick, onCardLike, onCardDelete }) {
   const [showCard, setShowCard] = useState(0);
   const [addCard, setAddCard] = useState(0);
-  const [addMoviesEnbale, setAddMoviesEnable] = useState('false');
+  const [winWidth, setWinWidth] = useState(window.innerWidth);
+  const [addMoviesEnbale, setAddMoviesEnable] = useState(false);
+
   useEffect(() => {
-    function addMoviesStatus() {
-      console.log(filteredMovies.length, showCard)
-      if (filteredMovies.length - showCard > 0) {
-        setAddMoviesEnable(true)
-      } else {
-        setAddMoviesEnable(false)
-      }
-    }
-    const winWidth = window.innerWidth;
+    window.addEventListener('resize', changeWindow);
+    return () => {
+      window.removeEventListener('resize', changeWindow);
+    };
+  }, []);
+  useEffect(() => {
     if (winWidth >= 1280) {
       setShowCard(12)
       setAddCard(4)
@@ -29,9 +28,19 @@ export default function MoviesCardList({ isPreloader, filteredMovies, nothingFou
       setShowCard(5)
       setAddCard(2)
     }
-    addMoviesStatus()
-    // console.log(showCard, addCard, winWidth)
-  },[showCard, addCard, filteredMovies.length])
+  }, [winWidth, filteredMovies.length])
+  useEffect(() => {
+    if (showCard >= filteredMovies.length) {
+      setAddMoviesEnable(true)
+    } else {
+      setAddMoviesEnable(false)
+    }
+  }, [showCard, filteredMovies])
+  function changeWindow() {
+    setTimeout(() => {
+      setWinWidth(window.innerWidth);
+    }, 1000);
+  }
   function handleAddMovies() {
     setShowCard(showCard + addCard);
   }
@@ -42,17 +51,15 @@ export default function MoviesCardList({ isPreloader, filteredMovies, nothingFou
       />
       <p className={!isPreloader && nothingFound ? "card-list__sign" : "card-list__sign card-list__sign_hidden"}>Ничего не найдено</p>
       <div className="card-list__cards">
-        {filteredMovies.slice(0, showCard).map((movie) => 
-        // {filteredMovies.map((movie) => 
-        // cardCounter < cardsInWindow.show
-            <MoviesCard
-              key={movie.id}
-              movie={movie}
-            />
+        {filteredMovies.slice(0, showCard).map((movie) =>
+          <MoviesCard
+            key={movie.id}
+            movie={movie}
+          />
         )}
       </div>
       <div className="card-list__next">
-        {addMoviesEnbale && <button className="card-list__button transition" onClick={handleAddMovies}>Ещё</button>}
+        {!addMoviesEnbale && <button className="card-list__button transition" onClick={handleAddMovies}>Ещё</button>}
       </div>
     </section>
   )

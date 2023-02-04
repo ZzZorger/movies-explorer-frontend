@@ -1,6 +1,7 @@
 // import cardImage from '../../../images/initialCards/card1.jpg';
 
-export default function MoviesCard({ movie, card, onCardClick, onCardLike, onCardDelete }) {
+export default function MoviesCard({ movie }) {
+
   const { nameRU, duration, trailerLink, image, saved } = movie;
   const durationCalc = `${Math.trunc(duration / 60)}ч ${duration % 60}м`;
   return (

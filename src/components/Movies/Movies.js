@@ -4,15 +4,34 @@ import Footer from '../Footer/Footer.js';
 import MenuPopup from './MenuPopup/MenuPopup.js';
 import Header from '../Header/Header.js';
 import { moviesApi } from '../../utils/MoviesApi.js';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 export default function Moovies({ onBurgerMenu, isBurgerMenuOpen, onClose }) {
   const [preloader, setPreloader] = useState(false);
   const [movies, setMovies] = useState(JSON.parse(localStorage.getItem("movies")));
   const [filteredMovies, setFilteredMovies] = useState(JSON.parse(localStorage.getItem("filteredMovies")) || []);
+  const [shortFilm, shortFilmSetter] = useState(Boolean(localStorage.getItem("shortFilmSetter")));
 
+  function handleShortFilm() {
+    if (!shortFilm) {
+      shortFilmSetter(true);
+      localStorage.setItem("shortFilmSetter", true);
+    } else {
+      shortFilmSetter(false);
+      localStorage.removeItem("shortFilmSetter");
+    }
+  }
   function filterMovies(filter, movies) {
-    const filtered = movies.filter((movie) => movie.nameRU.toLowerCase().match(filter));
+    const filtered = movies.filter((movie) => {
+      // const isFiltered = movie.nameRU.toLowerCase().match(filter)
+      // return movie.nameRU.includes(filter)
+      const isFiltered = movie.nameRU.toLowerCase().includes(filter);
+      if (shortFilm) {
+        return movie.duration <= 40 && isFiltered;
+      }
+      return isFiltered;
+    }
+    );
     setFilteredMovies(filtered)
     localStorage.setItem("filteredMovies", JSON.stringify(filtered));
   }
@@ -52,6 +71,8 @@ export default function Moovies({ onBurgerMenu, isBurgerMenuOpen, onClose }) {
       <main className='movies-page__main'>
         <SearchForm
           onSubmit={handleSubmit}
+          onCheck={handleShortFilm}
+          shortFilm={shortFilm}
         />
         <MoviesCardList
           isPreloader={preloader}

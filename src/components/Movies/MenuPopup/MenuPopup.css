@@ -72,7 +72,6 @@
   margin: 0px;
   padding: 0px;
   width: 100px;
-  height: 32px;
   align-self: center;
   border: none;
   border-radius: 20px;
@@ -84,6 +83,9 @@
   background-color: #F9F9F9;
   text-decoration: none;
   color: #000000;
+  text-align: center;
+  padding-top: 8px;
+  padding-bottom: 8px;
 }
 
 .menu-popup__elements {

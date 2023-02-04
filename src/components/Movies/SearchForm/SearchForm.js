@@ -1,7 +1,11 @@
 import { useState } from 'react';
 
-export default function SearchForm({ onSubmit }) {
+export default function SearchForm({ onSubmit, onCheck, shortFilm }) {
   const [search, setSearch] = useState(localStorage.getItem("filter").replace(/['"]+/g, ''));
+
+  function handleCheckboxChange(e) {
+    onCheck();
+  }
   function handleSearchChange(e) {
     setSearch(e.target.value);
   }
@@ -31,7 +35,7 @@ export default function SearchForm({ onSubmit }) {
       <div className="search__option">
         <p className="search__slider-sign">Короткометражки</p>
         <label className="slider">
-          <input className="slider__checkbox" type="checkbox" />
+          <input className="slider__checkbox" type="checkbox" onChange={handleCheckboxChange} checked={shortFilm} />
           <span className="slider__span"></span>
         </label>
       </div>

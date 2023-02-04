@@ -22,7 +22,7 @@ function App() {
   const [loggedIn, setLoggedIn] = useState(true);
   const [currentUser, setUserData] = useState({});
   const [isSubmitError, isSubmitErrorSetter] = useState(false);
-  const [filteredFilms, setFilteredFilms] = useState([]);
+  // const [filteredFilms, setFilteredFilms] = useState([]);
   // UseEffect
   // Проверка авторизации при загрузке страницы
   useEffect(() => {
@@ -45,33 +45,9 @@ function App() {
   // API
   // Получение списка фильмов
   function getAllMovies() {
-    // e.preventDefault();
     moviesApi.getAllMovies()
       .then((res) => {
-        // console.log(res)
-        // const films = (e) => {
-        //   res.filter(e.nameRU.match(text))
-        // }
-        // return films;
-
-        // return res.filter(e => e.nameRU.match(text))
-        // console.log(res.filter(e => e.nameRU.match(text)))
-        // console.log(films)
-        // return exa
-
-        // res.filter(function(e) {
-        //   // console.log(e.nameRU.match(text))
-        //   return e.nameRU.match(text)
-        // })
-
-        // console.log(res.filter(function(e) {
-        //   // return e
-        //   return e.nameRU.match(text)
-        // }))
-
         return res
-        // const films = res.filter(e => e.nameRU.match(text))
-        // setFilteredFilms(films)
       })
       .catch((err) => {
         console.log(`Ошибка: ${err}`);
