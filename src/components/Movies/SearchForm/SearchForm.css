@@ -63,6 +63,15 @@
   cursor: pointer;
 }
 
+.search__form-error {
+  font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
+  font-weight: 500;
+  font-size: 11px;
+  color: #FF3055;
+  text-align: center;
+  padding-left: 20px;
+}
+
 .search__slider-sign {
   margin: 0;
   padding-left: 41px;

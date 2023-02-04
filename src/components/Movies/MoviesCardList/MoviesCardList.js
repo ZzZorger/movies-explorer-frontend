@@ -7,7 +7,8 @@ export default function MoviesCardList({
   showCard,
   addMoviesEnbale,
   handleAddMovies,
-  nothingFound
+  nothingFound,
+  onLikeButton
 }) 
 {
   return (
@@ -21,6 +22,7 @@ export default function MoviesCardList({
           <MoviesCard
             key={movie.id}
             movie={movie}
+            onLikeButton={onLikeButton}
           />
         )}
       </div>

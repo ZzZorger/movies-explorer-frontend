@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-export default function SearchForm({ onSubmit, onCheck, shortFilm }) {
+export default function SearchForm({ onSubmit, onCheck, shortFilm, searchError }) {
   const [search, setSearch] = useState(localStorage.getItem("filter").replace(/['"]+/g, ''));
 
   function handleCheckboxChange(e) {
@@ -31,7 +31,9 @@ export default function SearchForm({ onSubmit, onCheck, shortFilm }) {
             <button className="search__submit transition" type="submit" onClick={handleSubmit}>Найти</button>
           </div>
         </fieldset>
+        {searchError && <span className="search__form-error">Поле поиска не может быть пустым</span>}
       </form>
+      
       <div className="search__option">
         <p className="search__slider-sign">Короткометражки</p>
         <label className="slider">

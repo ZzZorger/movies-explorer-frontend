@@ -21,6 +21,27 @@ class MainApi {
     })
       .then((res) => this._getResponseData(res))
   }
+  saveMovie(input) {
+    return fetch(`${this._server}/movies`, {
+      method: 'POST',
+      headers: this._headers,
+      body: JSON.stringify({
+        country: input.country,
+        director: input.director,
+        duration: input.duration,
+        year: input.year,
+        description: input.description,
+        image: input.image,
+        trailerLink: input.trailerLink,
+        thumbnail: input.thumbnail,
+        movieId: input.movieId,
+        nameRU: input.nameRU,
+        nameEN: input.nameEN
+      }),
+      credentials: 'include',
+    })
+      .then((res) => this._getResponseData(res))
+  }
   // getServerData() {
   //   return fetch(`${this._server}/users/me`, {
   //     method: 'GET',

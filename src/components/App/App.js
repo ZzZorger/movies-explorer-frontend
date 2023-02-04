@@ -28,12 +28,14 @@ function App() {
   const [movies, setMovies] = useState(JSON.parse(localStorage.getItem("movies")));
   const [filteredMovies, setFilteredMovies] = useState(JSON.parse(localStorage.getItem("filteredMovies")) || []);
   const [shortFilm, setShortFilm] = useState(Boolean(localStorage.getItem("setShortFilm")));
+  const [searchError, setSearchError] = useState(false);
   // Movies Card list
   const [showCard, setShowCard] = useState(0);
   const [addCard, setAddCard] = useState(0);
   const [winWidth, setWinWidth] = useState(window.innerWidth);
   const [addMoviesEnbale, setAddMoviesEnable] = useState(false);
   const [nothingFound, setNothingFound] = useState(false);
+
   ////
   //// UseEffect
   // Проверка авторизации при загрузке страницы
@@ -96,6 +98,7 @@ function App() {
   }
   // Фильтрация массива фильмов
   function filterMovies(filter, movies) {
+    console.log(movies)
     const filtered = movies.filter((movie) => {
       const isFiltered = movie.nameRU.toLowerCase().includes(filter);
       if (shortFilm) {
@@ -109,7 +112,12 @@ function App() {
   }
   // Обработчик нажатия на кнопку поиска
   function handleSubmitMovie(filter) {
-    handleGetMovies(filter);
+    if (filter) {
+      setSearchError(false);
+      handleGetMovies(filter);
+    } else {
+      setSearchError(true);
+    }
   }
   // Получить все фильмы и отфильтровать их по запросу
 
@@ -133,9 +141,18 @@ function App() {
   function closeAllPopups() {
     isBurgerMenuOpenSetter(false);
   }
+  // Saved movies
+  function onLikeButton(movie) {
+    console.log(currentUser)
+    // movie.like = 
+    console.log(movie.like)
+    // const isLiked = card.likes.some(i => i === currentUser._id);
+    // const isLiked = movie
+    // console.log('done')
+  }
   ////
   //// API
-  // Получение списка фильмов
+  // Получение списка фильмов и их фильтрация
   function handleGetMovies(filter) {
     setPreloader(true);
     if (!movies) {
@@ -194,7 +211,6 @@ function App() {
   }
   // Редактирование данных профиля
   function handleUpdateUser(data) {
-    console.log(data)
     mainApi.patchProfileData(data)
       .then((newData) => {
         setUserData(newData.data);
@@ -202,6 +218,13 @@ function App() {
       .catch(err => {
         console.log(`Ошибка: ${err}`)
       });
+  }
+  // Сохранение фильма
+  function handleSaveMovie(data) {
+    mainApi.saveMovie(data)
+      .then((movie) => {
+        console.log(movie)
+      })
   }
   ////
   return (
@@ -227,6 +250,8 @@ function App() {
               addMoviesEnbale={addMoviesEnbale}
               handleAddMovies={handleAddMovies}
               nothingFound={nothingFound}
+              searchError={searchError}
+              onLikeButton={onLikeButton}
               path={'/movies'}
             />
             <ProtectedRoute

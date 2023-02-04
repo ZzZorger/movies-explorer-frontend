@@ -16,7 +16,9 @@ export default function Moovies({
   showCard,
   addMoviesEnbale,
   handleAddMovies,
-  nothingFound
+  nothingFound,
+  searchError,
+  onLikeButton
 }) {
   return (
     <div className='movies-page'>
@@ -29,6 +31,7 @@ export default function Moovies({
           onSubmit={handleSubmit}
           onCheck={handleShortFilm}
           shortFilm={shortFilm}
+          searchError={searchError}
         />
         <MoviesCardList
           isPreloader={preloader}
@@ -37,6 +40,7 @@ export default function Moovies({
           addMoviesEnbale={addMoviesEnbale}
           handleAddMovies={handleAddMovies}
           nothingFound={nothingFound}
+          onLikeButton={onLikeButton}
         />
       </main>
       <Footer />

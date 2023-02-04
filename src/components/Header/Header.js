@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
 import headerLogo from '../../images/headerLogo.svg';
 import burger from '../../images/burger.svg';
-import { Route } from 'react-router-dom';
+// import { Route } from 'react-router-dom';
 
 export default function Header({ onPath, onBurgerMenu }) {
   const [headerStyle, setHeaderStyle] = useState('');
   const [mainHeader, setMainHeader] = useState(false);
   const [moviesHeader, setMoviesHeader] = useState(false);
-  const [savedHeader, setSavedHeader] = useState(false);
+  // const [savedHeader, setSavedHeader] = useState(false);
 
   useEffect(() => {
     switch (onPath) {
@@ -15,19 +15,19 @@ export default function Header({ onPath, onBurgerMenu }) {
         setHeaderStyle('main');
         setMainHeader(true);
         setMoviesHeader(false);
-        setSavedHeader(false);
+        // setSavedHeader(false);
         break
       case 'movies':
         setHeaderStyle('movies');
         setMainHeader(false);
         setMoviesHeader(true);
-        setSavedHeader(false);
+        // setSavedHeader(false);
         break
       case 'saved':
         setHeaderStyle('saved');
         setMainHeader(false);
         setMoviesHeader(false);
-        setSavedHeader(true);
+        // setSavedHeader(true);
         break
       default:
     }
