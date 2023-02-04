@@ -23,8 +23,6 @@ export default function Moovies({ onBurgerMenu, isBurgerMenuOpen, onClose }) {
   }
   function filterMovies(filter, movies) {
     const filtered = movies.filter((movie) => {
-      // const isFiltered = movie.nameRU.toLowerCase().match(filter)
-      // return movie.nameRU.includes(filter)
       const isFiltered = movie.nameRU.toLowerCase().includes(filter);
       if (shortFilm) {
         return movie.duration <= 40 && isFiltered;
