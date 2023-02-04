@@ -10,7 +10,6 @@ export default function Header({ onPath, onBurgerMenu }) {
   const [savedHeader, setSavedHeader] = useState(false);
 
   useEffect(() => {
-    // console.log(mainHeader, moviesHeader, savedHeader)
     switch (onPath) {
       case 'main':
         setHeaderStyle('main');
@@ -34,32 +33,7 @@ export default function Header({ onPath, onBurgerMenu }) {
     }
   }, [onPath]);
   return (
-    // <header className={`header header-${headerStyle}`}></header>
-    // <header className="header">
-    // <header className={`header-${headerStyle}`}>
-    //   {mainHeader &&
-    //     <div className={`header-${headerStyle}`}>
-    //       <img className="header__logo" alt="логотип сайта" src={headerLogo} />
-    //       <div className="header__links">
-    //         <a className="header__registration transition" href="/signup">Регистрация</a>
-    //         <a className="header__signin transition" href="/signin">Войти</a>
-    //       </div>
-    //     </div>}
-    //   {moviesHeader &&
-    //     <div className={`header-${headerStyle}`}>
-    //       <a className="header-movies__logo-link transition" href="/"><img className="header-movies__logo" alt="логотип сайта" src={headerLogo} /></a>
-    //       <div className="header-movies__links">
-    //         <div className="header-movies__films-links">
-    //           <a className="header-movies__films transition" href="/movies">Фильмы</a>
-    //           <a className="header-movies__saved transition" href="/saved-movies">Сохранённые фильмы</a>
-    //         </div>
-    //         <a className="header-movies__acc transition" href="/profile">Аккаунт</a>
-    //       </div>
-    //       <img className="header-movies__menu transition" alt="изображение списка" src={burger} onClick={onBurgerMenu} />
-    //     </div>}
-    // </header>
     <header className={`header-${headerStyle}`}>
-      {/* <img className="header__logo" alt="логотип сайта" src={headerLogo} /> */}
       <a className="header-movies__logo-link transition" href="/"><img className="header-movies__logo" alt="логотип сайта" src={headerLogo} /></a>
       {mainHeader && <div className="header__links">
         <a className="header__registration transition" href="/signup">Регистрация</a>

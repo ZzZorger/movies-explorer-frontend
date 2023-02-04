@@ -27,9 +27,15 @@ function App() {
   const [preloader, setPreloader] = useState(false);
   const [movies, setMovies] = useState(JSON.parse(localStorage.getItem("movies")));
   const [filteredMovies, setFilteredMovies] = useState(JSON.parse(localStorage.getItem("filteredMovies")) || []);
-  const [shortFilm, shortFilmSetter] = useState(Boolean(localStorage.getItem("shortFilmSetter")));
+  const [shortFilm, setShortFilm] = useState(Boolean(localStorage.getItem("setShortFilm")));
+  // Movies Card list
+  const [showCard, setShowCard] = useState(0);
+  const [addCard, setAddCard] = useState(0);
+  const [winWidth, setWinWidth] = useState(window.innerWidth);
+  const [addMoviesEnbale, setAddMoviesEnable] = useState(false);
+  const [nothingFound, setNothingFound] = useState(false);
   ////
-  // UseEffect
+  //// UseEffect
   // Проверка авторизации при загрузке страницы
   useEffect(() => {
     auth.userValid()
@@ -41,16 +47,54 @@ function App() {
         console.log(`Ошибка: ${err}`);
       })
   }, [history]);
+  // Movies Card list
+  useEffect(() => {
+    window.addEventListener('resize', changeWindow);
+    return () => {
+      window.removeEventListener('resize', changeWindow);
+    };
+  }, []);
+  useEffect(() => {
+    if (winWidth >= 1280) {
+      setShowCard(12)
+      setAddCard(4)
+    } if (winWidth > 990 && winWidth < 1280) {
+      setShowCard(9)
+      setAddCard(3)
+    } if (winWidth >= 768 && winWidth <= 990) {
+      setShowCard(8)
+      setAddCard(2)
+    } if (winWidth < 767) {
+      setShowCard(5)
+      setAddCard(2)
+    }
+  }, [winWidth, filteredMovies.length])
+  useEffect(() => {
+    if (showCard >= filteredMovies.length) {
+      setAddMoviesEnable(true)
+    } else {
+      setAddMoviesEnable(false)
+    }
+    if (filteredMovies.length === 0) {
+      setNothingFound(true)
+    } else if (filteredMovies.length > 0) {
+      setNothingFound(false)
+    }
+  }, [showCard, filteredMovies])
+  ////
+  //// Functions
   // Movies
+  // Переключатель короткометражек
   function handleShortFilm() {
     if (!shortFilm) {
-      shortFilmSetter(true);
-      localStorage.setItem("shortFilmSetter", true);
+      setShortFilm(true);
+      localStorage.setItem("setShortFilm", true);
     } else {
-      shortFilmSetter(false);
-      localStorage.removeItem("shortFilmSetter");
+      setShortFilm(false);
+      localStorage.removeItem("setShortFilm");
     }
   }
+  // Фильтрация массива фильмов
   function filterMovies(filter, movies) {
     const filtered = movies.filter((movie) => {
       const isFiltered = movie.nameRU.toLowerCase().includes(filter);
@@ -63,10 +107,36 @@ function App() {
     setFilteredMovies(filtered)
     localStorage.setItem("filteredMovies", JSON.stringify(filtered));
   }
+  // Обработчик нажатия на кнопку поиска
   function handleSubmitMovie(filter) {
-    getMovies(filter);
+    handleGetMovies(filter);
   }
-  function getMovies(filter) {
+  // Получить все фильмы и отфильтровать их по запросу
+
+  // Movies Card list
+  // Установка таймера на изменение размера окна
+  function changeWindow() {
+    setTimeout(() => {
+      setWinWidth(window.innerWidth);
+    }, 1000);
+  }
+  // Установка параметров кнопки добавления карточек
+  function handleAddMovies() {
+    setShowCard(showCard + addCard);
+  }
+  //// Open and Close handlers
+  //
+  function handleBurgerMenuClick() {
+    isBurgerMenuOpenSetter(true);
+  }
+  // Закрыть все попапы
+  function closeAllPopups() {
+    isBurgerMenuOpenSetter(false);
+  }
+  ////
+  //// API
+  // Получение списка фильмов
+  function handleGetMovies(filter) {
     setPreloader(true);
     if (!movies) {
       moviesApi.getAllMovies()
@@ -88,25 +158,6 @@ function App() {
       filterMovies(filter, movies)
       setPreloader(false);
     }
-  }
-  // 
-  // Open and Close handlers
-  function handleBurgerMenuClick() {
-    isBurgerMenuOpenSetter(true);
-  }
-  function closeAllPopups() {
-    isBurgerMenuOpenSetter(false);
-  }
-  // API
-  // Получение списка фильмов
-  function getAllMovies() {
-    moviesApi.getAllMovies()
-      .then((res) => {
-        return res
-      })
-      .catch((err) => {
-        console.log(`Ошибка: ${err}`);
-      })
   }
   // Регистрация нового пользователя
   function handleRegister(data) {
@@ -152,6 +203,7 @@ function App() {
         console.log(`Ошибка: ${err}`)
       });
   }
+  ////
   return (
     <userData.Provider value={currentUser}>
       <div className="body">
@@ -166,12 +218,15 @@ function App() {
               isBurgerMenuOpen={isBurgerMenuOpen}
               onClose={closeAllPopups}
               loggedIn={loggedIn}
-              getAllMovies={getAllMovies}
               handleSubmit={handleSubmitMovie}
               handleShortFilm={handleShortFilm}
               shortFilm={shortFilm}
               preloader={preloader}
               filteredMovies={filteredMovies}
+              showCard={showCard}
+              addMoviesEnbale={addMoviesEnbale}
+              handleAddMovies={handleAddMovies}
+              nothingFound={nothingFound}
               path={'/movies'}
             />
             <ProtectedRoute
@@ -180,6 +235,14 @@ function App() {
               isBurgerMenuOpen={isBurgerMenuOpen}
               onClose={closeAllPopups}
               loggedIn={loggedIn}
+              handleSubmit={handleSubmitMovie}
+              handleShortFilm={handleShortFilm}
+              shortFilm={shortFilm}
+              preloader={preloader}
+              filteredMovies={filteredMovies}
+              showCard={showCard}
+              addMoviesEnbale={addMoviesEnbale}
+              handleAddMovies={handleAddMovies}
               path={'/saved-movies'}
             />
             <ProtectedRoute

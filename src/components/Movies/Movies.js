@@ -12,7 +12,11 @@ export default function Moovies({
   handleShortFilm,
   shortFilm,
   preloader,
-  filteredMovies
+  filteredMovies,
+  showCard,
+  addMoviesEnbale,
+  handleAddMovies,
+  nothingFound
 }) {
   return (
     <div className='movies-page'>
@@ -29,6 +33,10 @@ export default function Moovies({
         <MoviesCardList
           isPreloader={preloader}
           filteredMovies={filteredMovies}
+          showCard={showCard}
+          addMoviesEnbale={addMoviesEnbale}
+          handleAddMovies={handleAddMovies}
+          nothingFound={nothingFound}
         />
       </main>
       <Footer />
