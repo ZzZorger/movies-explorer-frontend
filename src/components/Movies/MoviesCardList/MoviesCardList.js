@@ -2,7 +2,7 @@ import MoviesCard from '../MoviesCard/MoviesCard.js';
 import Preloader from '../Preloader/Preloader';
 import { useEffect, useState } from 'react';
 
-export default function MoviesCardList({ isPreloader, filteredMovies, nothingFound, cards, onCardClick, onCardLike, onCardDelete }) {
+export default function MoviesCardList({ isPreloader, filteredMovies }) {
   const [showCard, setShowCard] = useState(0);
   const [addCard, setAddCard] = useState(0);
   const [winWidth, setWinWidth] = useState(window.innerWidth);
@@ -49,7 +49,7 @@ export default function MoviesCardList({ isPreloader, filteredMovies, nothingFou
       <Preloader
         isPreloader={isPreloader}
       />
-      <p className={!isPreloader && nothingFound ? "card-list__sign" : "card-list__sign card-list__sign_hidden"}>Ничего не найдено</p>
+      <p className={!isPreloader ? "card-list__sign" : "card-list__sign card-list__sign_hidden"}>Ничего не найдено</p>
       <div className="card-list__cards">
         {filteredMovies.slice(0, showCard).map((movie) =>
           <MoviesCard

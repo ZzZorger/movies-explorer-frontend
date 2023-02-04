@@ -17,12 +17,18 @@ import { moviesApi } from '../../utils/MoviesApi.js';
 
 function App() {
   const history = useHistory();
-  // Hooks
+  //// Hooks
+  // General
   const [isBurgerMenuOpen, isBurgerMenuOpenSetter] = useState(false);
   const [loggedIn, setLoggedIn] = useState(true);
   const [currentUser, setUserData] = useState({});
   const [isSubmitError, isSubmitErrorSetter] = useState(false);
-  // const [filteredFilms, setFilteredFilms] = useState([]);
+  // Movies
+  const [preloader, setPreloader] = useState(false);
+  const [movies, setMovies] = useState(JSON.parse(localStorage.getItem("movies")));
+  const [filteredMovies, setFilteredMovies] = useState(JSON.parse(localStorage.getItem("filteredMovies")) || []);
+  const [shortFilm, shortFilmSetter] = useState(Boolean(localStorage.getItem("shortFilmSetter")));
+  ////
   // UseEffect
   // Проверка авторизации при загрузке страницы
   useEffect(() => {
@@ -35,6 +41,55 @@ function App() {
         console.log(`Ошибка: ${err}`);
       })
   }, [history]);
+  // Movies
+  function handleShortFilm() {
+    if (!shortFilm) {
+      shortFilmSetter(true);
+      localStorage.setItem("shortFilmSetter", true);
+    } else {
+      shortFilmSetter(false);
+      localStorage.removeItem("shortFilmSetter");
+    }
+  }
+  function filterMovies(filter, movies) {
+    const filtered = movies.filter((movie) => {
+      const isFiltered = movie.nameRU.toLowerCase().includes(filter);
+      if (shortFilm) {
+        return movie.duration <= 40 && isFiltered;
+      }
+      return isFiltered;
+    }
+    );
+    setFilteredMovies(filtered)
+    localStorage.setItem("filteredMovies", JSON.stringify(filtered));
+  }
+  function handleSubmitMovie(filter) {
+    getMovies(filter);
+  }
+  function getMovies(filter) {
+    setPreloader(true);
+    if (!movies) {
+      moviesApi.getAllMovies()
+        .then((movies) => {
+          setMovies(movies)
+          localStorage.setItem("movies", JSON.stringify(movies));
+          return movies
+        })
+        .then((movies) => {
+          filterMovies(filter, movies)
+        })
+        .catch((err) => {
+          console.log(`Ошибка: ${err}`)
+        })
+        .finally(() => {
+          setPreloader(false);
+        })
+    } else {
+      filterMovies(filter, movies)
+      setPreloader(false);
+    }
+  }
+  // 
   // Open and Close handlers
   function handleBurgerMenuClick() {
     isBurgerMenuOpenSetter(true);
@@ -112,6 +167,11 @@ function App() {
               onClose={closeAllPopups}
               loggedIn={loggedIn}
               getAllMovies={getAllMovies}
+              handleSubmit={handleSubmitMovie}
+              handleShortFilm={handleShortFilm}
+              shortFilm={shortFilm}
+              preloader={preloader}
+              filteredMovies={filteredMovies}
               path={'/movies'}
             />
             <ProtectedRoute
