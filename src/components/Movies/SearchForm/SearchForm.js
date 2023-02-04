@@ -1,12 +1,13 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 export default function SearchForm({ onSubmit }) {
-  const [search, setSearch] = useState('');
+  const [search, setSearch] = useState(localStorage.getItem("filter").replace(/['"]+/g, ''));
   function handleSearchChange(e) {
     setSearch(e.target.value);
   }
   function handleSubmit(e) {
     e.preventDefault();
+    localStorage.setItem("filter", JSON.stringify(search));
     onSubmit(search);
   }
   return (
@@ -30,7 +31,7 @@ export default function SearchForm({ onSubmit }) {
       <div className="search__option">
         <p className="search__slider-sign">Короткометражки</p>
         <label className="slider">
-          <input className="slider__checkbox" type="checkbox"/>
+          <input className="slider__checkbox" type="checkbox" />
           <span className="slider__span"></span>
         </label>
       </div>

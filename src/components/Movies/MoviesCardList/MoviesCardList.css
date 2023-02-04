@@ -54,13 +54,13 @@
   }
 }
 
-@media (max-width: 989px) {
+/* @media (max-width: 989px) {
   .card-list__cards {
     grid-template-columns: repeat(2, 270px);
   }
-}
+} */
 
-@media (max-width: 768px) {
+@media (max-width: 990px) {
   .card-list {
     margin-left: 3.9%;
     margin-right: 3.9%;

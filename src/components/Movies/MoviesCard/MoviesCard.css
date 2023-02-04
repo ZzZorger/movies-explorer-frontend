@@ -127,7 +127,7 @@
   display: none;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 990px) {
   .card {
     max-width: 339px;
   }
