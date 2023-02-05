@@ -20,13 +20,15 @@ function App() {
   //// Hooks
   // General
   const [isBurgerMenuOpen, isBurgerMenuOpenSetter] = useState(false);
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(true);
   const [currentUser, setUserData] = useState({});
   const [isSubmitError, isSubmitErrorSetter] = useState(false);
   // Search form
-  const [search, setSearch] = useState(localStorage.getItem("filter").replace(/['"]+/g, ''));
+  const [search, setSearch] = useState('');
+  // const [search, setSearch] = useState(localStorage.getItem("filter").replace(/['"]+/g, ''));
   // Search form saved
-  const [searchSaved, setSearchSaved] = useState(localStorage.getItem("filterSaved").replace(/['"]+/g, ''));
+  const [searchSaved, setSearchSaved] = useState('');
+  // const [searchSaved, setSearchSaved] = useState(localStorage.getItem("filterSaved").replace(/['"]+/g, ''));
   // Movies
   const [preloader, setPreloader] = useState(false);
   const [movies, setMovies] = useState(JSON.parse(localStorage.getItem("movies")));
@@ -47,16 +49,16 @@ function App() {
   ////
   //// UseEffect
   // Проверка авторизации при загрузке страницы
-  // useEffect(() => {
-  //   auth.userValid()
-  //     .then((data) => {
-  //       setUserData(data)
-  //     })
-  //     .catch((err) => {
-  //       history.push("/signin");
-  //       console.log(`Ошибка: ${err}`);
-  //     })
-  // }, [history]);
+  useEffect(() => {
+    auth.userValid()
+      .then((data) => {
+        setUserData(data)
+      })
+      .catch((err) => {
+        history.push("/signin");
+        console.log(`Ошибка: ${err}`);
+      })
+  }, [history]);
   // Movies Card list
   // useEffect(() => {
   //   auth.userValid()
