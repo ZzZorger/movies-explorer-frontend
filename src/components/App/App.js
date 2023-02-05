@@ -371,6 +371,12 @@ function App() {
       setFilteredMovies([])
       setShortFilm(false)
       setFilteredMoviesSaved([])
+      localStorage.removeItem('movies');
+      localStorage.removeItem('filteredMovies');
+      localStorage.removeItem('setShortFilm');
+      localStorage.removeItem('filteredMoviesSaved');
+      localStorage.removeItem('token');
+      localStorage.removeItem('filter');
     })
       .catch((err) => {
         console.log(`Ошибка: ${err}`);
