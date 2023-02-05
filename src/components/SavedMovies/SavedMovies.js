@@ -20,7 +20,11 @@ export default function SavedMovies({
   searchError,
   onLikeButton,
   onDislikeButton,
-  savedMovies
+  savedMovies,
+  handleCheckboxChange,
+  handleSearchChange,
+  handleSubmitSearchForm,
+  search
 }) {
   return (
     <div className='movies-page'>
@@ -30,10 +34,12 @@ export default function SavedMovies({
       />
       <main className='movies-page__main'>
         <SearchForm
-          onSubmit={handleSubmit}
-          onCheck={handleShortFilm}
           shortFilm={shortFilm}
           searchError={searchError}
+          handleCheckboxChange={handleCheckboxChange}
+          handleSearchChange={handleSearchChange}
+          handleSubmitSearchForm={handleSubmitSearchForm}
+          search={search}
         />
         <MoviesCardList
           isPreloader={preloader}

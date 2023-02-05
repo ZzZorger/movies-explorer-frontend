@@ -20,11 +20,13 @@ function App() {
   //// Hooks
   // General
   const [isBurgerMenuOpen, isBurgerMenuOpenSetter] = useState(false);
-  const [loggedIn, setLoggedIn] = useState(true);
+  const [loggedIn, setLoggedIn] = useState(false);
   const [currentUser, setUserData] = useState({});
   const [isSubmitError, isSubmitErrorSetter] = useState(false);
   // Search form
-  
+  const [search, setSearch] = useState(localStorage.getItem("filter").replace(/['"]+/g, ''));
+  // Search form saved
+  const [searchSaved, setSearchSaved] = useState(localStorage.getItem("filterSaved").replace(/['"]+/g, ''));
   // Movies
   const [preloader, setPreloader] = useState(false);
   const [movies, setMovies] = useState(JSON.parse(localStorage.getItem("movies")));
@@ -34,6 +36,7 @@ function App() {
   // Saved movies
   const [filteredMoviesSaved, setFilteredMoviesSaved] = useState(JSON.parse(localStorage.getItem("filteredMoviesSaved")) || []);
   const [searchErrorSaved, setSearchErrorSaved] =useState(false);
+  const [nothingFoundSaved, setNothingFoundSaved] = useState(false);
   // Movies Card list
   const [showCard, setShowCard] = useState(0);
   const [addCard, setAddCard] = useState(0);
@@ -44,17 +47,27 @@ function App() {
   ////
   //// UseEffect
   // Проверка авторизации при загрузке страницы
-  useEffect(() => {
-    auth.userValid()
-      .then((data) => {
-        setUserData(data)
-      })
-      .catch((err) => {
-        history.push("/signin");
-        console.log(`Ошибка: ${err}`);
-      })
-  }, [history]);
+  // useEffect(() => {
+  //   auth.userValid()
+  //     .then((data) => {
+  //       setUserData(data)
+  //     })
+  //     .catch((err) => {
+  //       history.push("/signin");
+  //       console.log(`Ошибка: ${err}`);
+  //     })
+  // }, [history]);
   // Movies Card list
+  // useEffect(() => {
+  //   auth.userValid()
+  //     .then((data) => {
+  //       setUserData(data)
+  //     })
+  //     .catch((err) => {
+  //       // history.push("/signin");
+  //       console.log(`Ошибка: ${err}`);
+  //     })
+  // }, [])
   useEffect(() => {
     window.addEventListener('resize', changeWindow);
     return () => {
@@ -91,6 +104,14 @@ function App() {
   // Загрузка фильмов при заходе
   useEffect(() => {
     if (loggedIn) {
+      // auth.userValid()
+      // .then((data) => {
+      //   setUserData(data)
+      // })
+      // .catch((err) => {
+      //   // history.push("/signin");
+      //   console.log(`Ошибка: ${err}`);
+      // })
       mainApi
         .getMovies()
         .then((res) => {
@@ -102,6 +123,30 @@ function App() {
   ////
   //// Functions
   // Movies
+  // Search form
+  function handleCheckboxChange(e) {
+    handleShortFilm();
+  }
+  function handleSearchChange(e) {
+    setSearch(e.target.value);
+  }
+  function handleSubmit(e) {
+    e.preventDefault();
+    localStorage.setItem("filter", JSON.stringify(search));
+    handleSubmitMovie(search);
+  }
+  // Search form saved
+  function handleCheckboxChangeSaved(e) {
+    handleShortFilm();
+  }
+  function handleSearchChangeSaved(e) {
+    setSearchSaved(e.target.value);
+  }
+  function handleSubmitSaved(e) {
+    e.preventDefault();
+    localStorage.setItem("filterSaved", JSON.stringify(searchSaved));
+    handleSubmitMovie(searchSaved);
+  }
   // Переключатель короткометражек
   function handleShortFilm() {
     if (!shortFilm) {
@@ -268,6 +313,7 @@ function App() {
     auth.signIn(data)
       .then((jwt) => {
         if (jwt.token) {
+          localStorage.setItem("token", jwt.token)
           setLoggedIn(true);
           history.push("/movies");
         }
@@ -280,6 +326,14 @@ function App() {
   // Выход из аккаунта
   function handleLogout() {
     auth.signOut()
+    .then(() => {
+      setSearch('')
+      setSearchSaved('')
+      setMovies([])
+      setFilteredMovies([])
+      setShortFilm(false)
+      setFilteredMoviesSaved([])
+    })
       .catch((err) => {
         console.log(`Ошибка: ${err}`);
       })
@@ -322,6 +376,10 @@ function App() {
               onLikeButton={onLikeButton}
               onDislikeButton={onDislikeButton}
               savedMovies={savedMovies}
+              handleCheckboxChange={handleCheckboxChange}
+              handleSearchChange={handleSearchChange}
+              handleSubmitSearchForm={handleSubmit}
+              search={search}
               path={'/movies'}
             />
             <ProtectedRoute
@@ -331,7 +389,7 @@ function App() {
               onClose={closeAllPopups}
               loggedIn={loggedIn}
               // filterMoviesSaved
-              handleSubmit={handleSubmitMovie}
+              handleSubmit={handleSubmitMovieSaved}
               handleShortFilm={handleShortFilm}
               shortFilm={shortFilm}
               // preloader={preloader}
@@ -339,11 +397,15 @@ function App() {
               // showCard={showCard}
               addMoviesEnbale={addMoviesEnbale}
               handleAddMovies={handleAddMovies}
-              nothingFound={nothingFound}
+              nothingFound={nothingFoundSaved}
               searchError={searchErrorSaved}
               // onLikeButton={onLikeButton}
               onDislikeButton={onDislikeButton}
               savedMovies={savedMovies}
+              handleCheckboxChange={handleCheckboxChangeSaved}
+              handleSearchChange={handleSearchChangeSaved}
+              handleSubmitSearchForm={handleSubmitSaved}
+              search={searchSaved}
               path={'/saved-movies'}
             />
             <ProtectedRoute
