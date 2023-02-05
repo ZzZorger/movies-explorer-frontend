@@ -31,16 +31,16 @@ function App() {
   // const [searchSaved, setSearchSaved] = useState(localStorage.getItem("filterSaved").replace(/['"]+/g, '') || '');
   // Movies
   const [preloader, setPreloader] = useState(false);
-  const [movies, setMovies] = useState([]);
-  // const [movies, setMovies] = useState(JSON.parse(localStorage.getItem("movies")));
-  const [filteredMovies, setFilteredMovies] = useState([]);
-  // const [filteredMovies, setFilteredMovies] = useState(JSON.parse(localStorage.getItem("filteredMovies")) || []);
-  const [shortFilm, setShortFilm] = useState(false);
-  // const [shortFilm, setShortFilm] = useState(Boolean(localStorage.getItem("setShortFilm")));
+  // const [movies, setMovies] = useState([]);
+  const [movies, setMovies] = useState(JSON.parse(localStorage.getItem("movies")));
+  // const [filteredMovies, setFilteredMovies] = useState([]);
+  const [filteredMovies, setFilteredMovies] = useState(JSON.parse(localStorage.getItem("filteredMovies")) || []);
+  // const [shortFilm, setShortFilm] = useState(false);
+  const [shortFilm, setShortFilm] = useState(Boolean(localStorage.getItem("setShortFilm")));
   const [searchError, setSearchError] = useState(false);
   // Saved movies
-  // const [filteredMoviesSaved, setFilteredMoviesSaved] = useState(JSON.parse(localStorage.getItem("filteredMoviesSaved")) || []);
-  const [filteredMoviesSaved, setFilteredMoviesSaved] = useState([]);
+  const [filteredMoviesSaved, setFilteredMoviesSaved] = useState(JSON.parse(localStorage.getItem("filteredMoviesSaved")) || []);
+  // const [filteredMoviesSaved, setFilteredMoviesSaved] = useState([]);
   const [searchErrorSaved, setSearchErrorSaved] =useState(false);
   const [nothingFoundSaved, setNothingFoundSaved] = useState(false);
   // Movies Card list
@@ -84,14 +84,14 @@ function App() {
   }, [loggedIn, history]);
   useEffect(() => {
     if (localStorage.getItem("filter").replace(/['"]+/g, '')) {
-      setSearch(localStorage.getItem("filter").replace(/['"]+/g, '') || '')
+      setSearch(localStorage.getItem("filter").replace(/['"]+/g, ''))
       setShortFilm(Boolean(localStorage.getItem("setShortFilm")))
     }
     // if (JSON.parse(localStorage.getItem("movies"))) {
     //   setMovies(JSON.parse(localStorage.getItem("movies")))
     // }
     // if ()
-    // setSearchSaved(localStorage.getItem("filterSaved").replace(/['"]+/g, '') || '')
+    // setSearchSaved(localStorage.getItem("filterSaved").replace(/['"]+/g, ''))
     // setFilteredMovies(JSON.parse(localStorage.getItem("filteredMovies")))
     // setShortFilm(Boolean(localStorage.getItem("setShortFilm")))
     // setFilteredMoviesSaved(JSON.parse(localStorage.getItem("filteredMoviesSaved")))
