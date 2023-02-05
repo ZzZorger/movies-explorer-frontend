@@ -20,7 +20,7 @@ function App() {
   //// Hooks
   // General
   const [isBurgerMenuOpen, isBurgerMenuOpenSetter] = useState(false);
-  const [loggedIn, setLoggedIn] = useState(true);
+  const [loggedIn, setLoggedIn] = useState(false);
   const [currentUser, setUserData] = useState({});
   const [isSubmitError, isSubmitErrorSetter] = useState(false);
   // Search form
@@ -50,15 +50,34 @@ function App() {
   //// UseEffect
   // Проверка авторизации при загрузке страницы
   useEffect(() => {
-    auth.userValid()
+    console.log(loggedIn)
+    if(localStorage.getItem("movies")) {
+      // setLoggedIn(true)
+      // console.log('true')
+    } else {
+      // console.log('false')
+    }
+  },[])
+  useEffect(() => {
+    if (loggedIn) {
+      auth.userValid()
       .then((data) => {
         setUserData(data)
       })
       .catch((err) => {
-        history.push("/signin");
+        // history.push("/signin");
         console.log(`Ошибка: ${err}`);
       })
-  }, [history]);
+      mainApi.getMovies()
+      .then((res) => {
+        setSavedMovies(res);
+      })
+      .catch((err) => {
+        // history.push("/signin");
+        console.log(`Ошибка: ${err}`);
+      })
+    }
+  }, [loggedIn]);
   // Movies Card list
   // useEffect(() => {
   //   auth.userValid()
@@ -104,24 +123,24 @@ function App() {
     }
   }, [showCard, filteredMovies])
   // Загрузка фильмов при заходе
-  useEffect(() => {
-    if (loggedIn) {
-      // auth.userValid()
-      // .then((data) => {
-      //   setUserData(data)
-      // })
-      // .catch((err) => {
-      //   // history.push("/signin");
-      //   console.log(`Ошибка: ${err}`);
-      // })
-      mainApi
-        .getMovies()
-        .then((res) => {
-          setSavedMovies(res);
-        })
-        .catch((err) => console.log(err));
-    }
-  }, [loggedIn]);
+  // useEffect(() => {
+  //   if (loggedIn) {
+  //     // auth.userValid()
+  //     // .then((data) => {
+  //     //   setUserData(data)
+  //     // })
+  //     // .catch((err) => {
+  //     //   // history.push("/signin");
+  //     //   console.log(`Ошибка: ${err}`);
+  //     // })
+  //     mainApi
+  //       .getMovies()
+  //       .then((res) => {
+  //         setSavedMovies(res);
+  //       })
+  //       .catch((err) => console.log(err));
+  //   }
+  // }, [loggedIn]);
   ////
   //// Functions
   // Movies
@@ -329,12 +348,12 @@ function App() {
   function handleLogout() {
     auth.signOut()
     .then(() => {
-      setSearch('')
-      setSearchSaved('')
-      setMovies([])
-      setFilteredMovies([])
-      setShortFilm(false)
-      setFilteredMoviesSaved([])
+      // setSearch('')
+      // setSearchSaved('')
+      // setMovies([])
+      // setFilteredMovies([])
+      // setShortFilm(false)
+      // setFilteredMoviesSaved([])
     })
       .catch((err) => {
         console.log(`Ошибка: ${err}`);
