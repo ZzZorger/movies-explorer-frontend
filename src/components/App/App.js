@@ -69,7 +69,7 @@ function App() {
         setUserData(data)
       })
       .catch((err) => {
-        history.push("/signin");
+        // history.push("/signin");
         console.log(`Ошибка: ${err}`);
       })
       mainApi.getMovies()
@@ -77,7 +77,7 @@ function App() {
         setSavedMovies(res);
       })
       .catch((err) => {
-        history.push("/signin");
+        // history.push("/signin");
         console.log(`Ошибка: ${err}`);
       })
     }
