@@ -23,12 +23,17 @@ function App() {
   const [loggedIn, setLoggedIn] = useState(true);
   const [currentUser, setUserData] = useState({});
   const [isSubmitError, isSubmitErrorSetter] = useState(false);
+  // Search form
+  
   // Movies
   const [preloader, setPreloader] = useState(false);
   const [movies, setMovies] = useState(JSON.parse(localStorage.getItem("movies")));
   const [filteredMovies, setFilteredMovies] = useState(JSON.parse(localStorage.getItem("filteredMovies")) || []);
   const [shortFilm, setShortFilm] = useState(Boolean(localStorage.getItem("setShortFilm")));
   const [searchError, setSearchError] = useState(false);
+  // Saved movies
+  const [filteredMoviesSaved, setFilteredMoviesSaved] = useState(JSON.parse(localStorage.getItem("filteredMoviesSaved")) || []);
+  const [searchErrorSaved, setSearchErrorSaved] =useState(false);
   // Movies Card list
   const [showCard, setShowCard] = useState(0);
   const [addCard, setAddCard] = useState(0);
@@ -36,7 +41,6 @@ function App() {
   const [addMoviesEnbale, setAddMoviesEnable] = useState(false);
   const [nothingFound, setNothingFound] = useState(false);
   const [savedMovies, setSavedMovies] = useState([]);
-  const [savedMoviesList, setSavedMoviesList] = useState([]);
   ////
   //// UseEffect
   // Проверка авторизации при загрузке страницы
@@ -87,18 +91,10 @@ function App() {
   // Загрузка фильмов при заходе
   useEffect(() => {
     if (loggedIn) {
-      // mainApi
-      //   .getUserInfo()
-      //   .then((data) => {
-      //     setCurrentUser(data);
-      //   })
-      //   .catch((err) => console.log(err));
       mainApi
         .getMovies()
         .then((res) => {
-          // console.log(res)
           setSavedMovies(res);
-          // setSavedMoviesList(res.data);
         })
         .catch((err) => console.log(err));
     }
@@ -118,7 +114,6 @@ function App() {
   }
   // Фильтрация массива фильмов
   function filterMovies(filter, movies) {
-    console.log(movies)
     const filtered = movies.filter((movie) => {
       const isFiltered = movie.nameRU.toLowerCase().includes(filter);
       if (shortFilm) {
@@ -130,6 +125,20 @@ function App() {
     setFilteredMovies(filtered)
     localStorage.setItem("filteredMovies", JSON.stringify(filtered));
   }
+  // Фильтрация массива сохраненных фильмов
+  // filteredMoviesSaved
+  function filterMoviesSaved(filter, movies) {
+    const filtered = movies.filter((movie) => {
+      const isFiltered = movie.nameRU.toLowerCase().includes(filter);
+      if (shortFilm) {
+        return movie.duration <= 40 && isFiltered;
+      }
+      return isFiltered;
+    }
+    );
+    setFilteredMoviesSaved(filtered)
+    localStorage.setItem("filteredMoviesSaved", JSON.stringify(filtered));
+  }
   // Обработчик нажатия на кнопку поиска
   function handleSubmitMovie(filter) {
     if (filter) {
@@ -137,6 +146,16 @@ function App() {
       handleGetMovies(filter);
     } else {
       setSearchError(true);
+    }
+  }
+  // Обработчик нажатия на кнопку поиска сохраненных фильмов
+  function handleSubmitMovieSaved(filter) {
+    if (filter) {
+      setSearchErrorSaved(false);
+      // handleGetMovies(filter);
+      filterMoviesSaved(filter, movies)
+    } else {
+      setSearchErrorSaved(true);
     }
   }
   // Получить все фильмы и отфильтровать их по запросу
@@ -174,6 +193,9 @@ function App() {
   // Delete movies
   function onDislikeButton(movieId) {
     mainApi.deleteMovie(movieId)
+    .then(() => {
+      setSavedMovies(savedMovies.filter((item) => item._id !== movieId))
+    })
     .catch((err) => {
       console.log(`Ошибка: ${err}`)
     })
@@ -204,6 +226,31 @@ function App() {
       setPreloader(false);
     }
   }
+  // Получение списка сохраненных фильмов и их фильтрация
+  // function handleGetMoviesSaved(filter) {
+  //   // setPreloader(true);
+  //   if (!savedMovies) {
+  //     moviesApi.getAllMovies()
+  //       .then((movies) => {
+  //         setMovies(movies)
+  //         localStorage.setItem("movies", JSON.stringify(movies));
+  //         return movies
+  //       })
+  //       .then((movies) => {
+  //         filterMovies(filter, movies)
+  //       })
+  //       .catch((err) => {
+  //         console.log(`Ошибка: ${err}`)
+  //       })
+  //       .finally(() => {
+  //         setPreloader(false);
+  //       })
+  //   } else {
+  //     filterMovies(filter, movies)
+  //     setPreloader(false);
+  //   }
+  // }
+  //filterMoviesSaved
   // Регистрация нового пользователя
   function handleRegister(data) {
     auth.signUp(data)
@@ -247,13 +294,6 @@ function App() {
         console.log(`Ошибка: ${err}`)
       });
   }
-  // Сохранение фильма
-  // function handleSaveMovie(data) {
-  //   mainApi.saveMovie(data)
-  //     .then((movie) => {
-  //       console.log(movie)
-  //     })
-  // }
   ////
   return (
     <userData.Provider value={currentUser}>
@@ -282,7 +322,6 @@ function App() {
               onLikeButton={onLikeButton}
               onDislikeButton={onDislikeButton}
               savedMovies={savedMovies}
-              savedMoviesList={savedMoviesList}
               path={'/movies'}
             />
             <ProtectedRoute
@@ -291,14 +330,20 @@ function App() {
               isBurgerMenuOpen={isBurgerMenuOpen}
               onClose={closeAllPopups}
               loggedIn={loggedIn}
+              // filterMoviesSaved
               handleSubmit={handleSubmitMovie}
               handleShortFilm={handleShortFilm}
               shortFilm={shortFilm}
-              preloader={preloader}
-              filteredMovies={filteredMovies}
-              showCard={showCard}
+              // preloader={preloader}
+              filteredMovies={filteredMoviesSaved}
+              // showCard={showCard}
               addMoviesEnbale={addMoviesEnbale}
               handleAddMovies={handleAddMovies}
+              nothingFound={nothingFound}
+              searchError={searchErrorSaved}
+              // onLikeButton={onLikeButton}
+              onDislikeButton={onDislikeButton}
+              savedMovies={savedMovies}
               path={'/saved-movies'}
             />
             <ProtectedRoute

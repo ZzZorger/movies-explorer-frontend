@@ -20,8 +20,7 @@ export default function Moovies({
   searchError,
   onLikeButton,
   onDislikeButton,
-  savedMovies,
-  savedMoviesList
+  savedMovies
 }) {
   return (
     <div className='movies-page'>
@@ -46,7 +45,6 @@ export default function Moovies({
           onLikeButton={onLikeButton}
           onDislikeButton={onDislikeButton}
           savedMovies={savedMovies}
-          savedMoviesList={savedMoviesList}
         />
       </main>
       <Footer />

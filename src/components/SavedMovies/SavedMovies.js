@@ -15,7 +15,12 @@ export default function SavedMovies({
   filteredMovies,
   showCard,
   addMoviesEnbale,
-  handleAddMovies
+  handleAddMovies,
+  nothingFound,
+  searchError,
+  onLikeButton,
+  onDislikeButton,
+  savedMovies
 }) {
   return (
     <div className='movies-page'>
@@ -28,13 +33,18 @@ export default function SavedMovies({
           onSubmit={handleSubmit}
           onCheck={handleShortFilm}
           shortFilm={shortFilm}
+          searchError={searchError}
         />
         <MoviesCardList
           isPreloader={preloader}
-          filteredMovies={filteredMovies}
+          filteredMovies={savedMovies}
           showCard={showCard}
           addMoviesEnbale={addMoviesEnbale}
           handleAddMovies={handleAddMovies}
+          nothingFound={nothingFound}
+          onLikeButton={onLikeButton}
+          onDislikeButton={onDislikeButton}
+          savedMovies={savedMovies}
         />
       </main>
       <Footer />

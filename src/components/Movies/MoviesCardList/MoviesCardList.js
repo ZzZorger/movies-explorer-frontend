@@ -10,8 +10,7 @@ export default function MoviesCardList({
   nothingFound,
   onLikeButton,
   onDislikeButton,
-  savedMovies,
-  savedMoviesList
+  savedMovies
 }) 
 {
   return (
@@ -23,12 +22,12 @@ export default function MoviesCardList({
       <div className="card-list__cards">
         {filteredMovies.slice(0, showCard).map((movie) =>
           <MoviesCard
-            key={movie.id}
+            key={movie.id || movie._id}
             movie={movie}
             onLikeButton={onLikeButton}
             onDislikeButton={onDislikeButton}
             savedMovies={savedMovies}
-            savedMoviesList={savedMoviesList}
+            filteredMovies={filteredMovies}
           />
         )}
       </div>
