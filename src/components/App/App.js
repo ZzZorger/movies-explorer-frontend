@@ -82,7 +82,7 @@ function App() {
     }
   }, [loggedIn, history]);
   useEffect(() => {
-    if (localStorage.getItem("filter").replace(/['"]+/g, '')) {
+    if (localStorage.getItem("filter")) {
       setSearch(localStorage.getItem("filter").replace(/['"]+/g, ''))
       setShortFilm(Boolean(localStorage.getItem("setShortFilm")))
     }
@@ -377,6 +377,7 @@ function App() {
       localStorage.removeItem('filteredMoviesSaved');
       localStorage.removeItem('token');
       localStorage.removeItem('filter');
+      localStorage.removeItem('filterSaved');
     })
       .catch((err) => {
         console.log(`Ошибка: ${err}`);
