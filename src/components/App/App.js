@@ -365,12 +365,12 @@ function App() {
   function handleLogout() {
     auth.signOut()
     .then(() => {
-      // setSearch('')
-      // setSearchSaved('')
-      // setMovies([])
-      // setFilteredMovies([])
-      // setShortFilm(false)
-      // setFilteredMoviesSaved([])
+      setSearch('')
+      setSearchSaved('')
+      setMovies([])
+      setFilteredMovies([])
+      setShortFilm(false)
+      setFilteredMoviesSaved([])
     })
       .catch((err) => {
         console.log(`Ошибка: ${err}`);
