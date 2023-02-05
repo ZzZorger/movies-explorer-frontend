@@ -8,7 +8,10 @@ export default function MoviesCardList({
   addMoviesEnbale,
   handleAddMovies,
   nothingFound,
-  onLikeButton
+  onLikeButton,
+  onDislikeButton,
+  savedMovies,
+  savedMoviesList
 }) 
 {
   return (
@@ -23,6 +26,9 @@ export default function MoviesCardList({
             key={movie.id}
             movie={movie}
             onLikeButton={onLikeButton}
+            onDislikeButton={onDislikeButton}
+            savedMovies={savedMovies}
+            savedMoviesList={savedMoviesList}
           />
         )}
       </div>

@@ -31,16 +31,34 @@ class MainApi {
         duration: input.duration,
         year: input.year,
         description: input.description,
-        image: input.image,
+        image: `https://api.nomoreparties.co${input.image.url}`,
         trailerLink: input.trailerLink,
-        thumbnail: input.thumbnail,
-        movieId: input.movieId,
+        thumbnail: `https://api.nomoreparties.co${input.image.url}`,
+        movieId: input.id,
         nameRU: input.nameRU,
         nameEN: input.nameEN
       }),
       credentials: 'include',
     })
       .then((res) => this._getResponseData(res))
+  }
+
+  getMovies() {
+    return fetch(`${this._server}/movies`, {
+      method: 'GET',
+      headers: this._headers,
+      credentials: 'include',
+    })
+      .then((res) => this._getResponseData(res))
+  }
+
+  deleteMovie(id) {
+    return fetch(`${this._server}/movies/${id}`, {
+      method: 'DELETE',
+      headers: this._headers,
+      credentials: 'include',
+    })
+    .then((res) => this._getResponseData(res))
   }
   // getServerData() {
   //   return fetch(`${this._server}/users/me`, {
@@ -53,7 +71,7 @@ class MainApi {
 }
 
 const mainApi = new MainApi({
-    // baseUrl: 'https://api.myseconddomainand.nomoredomains.club',
+  // baseUrl: 'https://api.myseconddomainand.nomoredomains.club',
   baseUrl: 'http://localhost:3001',
   headers: {
     'Content-Type': 'application/json',

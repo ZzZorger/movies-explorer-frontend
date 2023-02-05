@@ -18,7 +18,10 @@ export default function Moovies({
   handleAddMovies,
   nothingFound,
   searchError,
-  onLikeButton
+  onLikeButton,
+  onDislikeButton,
+  savedMovies,
+  savedMoviesList
 }) {
   return (
     <div className='movies-page'>
@@ -41,6 +44,9 @@ export default function Moovies({
           handleAddMovies={handleAddMovies}
           nothingFound={nothingFound}
           onLikeButton={onLikeButton}
+          onDislikeButton={onDislikeButton}
+          savedMovies={savedMovies}
+          savedMoviesList={savedMoviesList}
         />
       </main>
       <Footer />

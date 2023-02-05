@@ -35,7 +35,8 @@ function App() {
   const [winWidth, setWinWidth] = useState(window.innerWidth);
   const [addMoviesEnbale, setAddMoviesEnable] = useState(false);
   const [nothingFound, setNothingFound] = useState(false);
-
+  const [savedMovies, setSavedMovies] = useState([]);
+  const [savedMoviesList, setSavedMoviesList] = useState([]);
   ////
   //// UseEffect
   // Проверка авторизации при загрузке страницы
@@ -83,6 +84,25 @@ function App() {
       setNothingFound(false)
     }
   }, [showCard, filteredMovies])
+  // Загрузка фильмов при заходе
+  useEffect(() => {
+    if (loggedIn) {
+      // mainApi
+      //   .getUserInfo()
+      //   .then((data) => {
+      //     setCurrentUser(data);
+      //   })
+      //   .catch((err) => console.log(err));
+      mainApi
+        .getMovies()
+        .then((res) => {
+          // console.log(res)
+          setSavedMovies(res);
+          // setSavedMoviesList(res.data);
+        })
+        .catch((err) => console.log(err));
+    }
+  }, [loggedIn]);
   ////
   //// Functions
   // Movies
@@ -143,12 +163,20 @@ function App() {
   }
   // Saved movies
   function onLikeButton(movie) {
-    console.log(currentUser)
-    // movie.like = 
-    console.log(movie.like)
-    // const isLiked = card.likes.some(i => i === currentUser._id);
-    // const isLiked = movie
-    // console.log('done')
+    mainApi.saveMovie(movie)
+    .then((savedMovie) => {
+      setSavedMovies([savedMovie, ...savedMovies])
+    })
+    .catch((err) => {
+      console.log(`Ошибка: ${err}`)
+    })
+  }
+  // Delete movies
+  function onDislikeButton(movieId) {
+    mainApi.deleteMovie(movieId)
+    .catch((err) => {
+      console.log(`Ошибка: ${err}`)
+    })
   }
   ////
   //// API
@@ -220,12 +248,12 @@ function App() {
       });
   }
   // Сохранение фильма
-  function handleSaveMovie(data) {
-    mainApi.saveMovie(data)
-      .then((movie) => {
-        console.log(movie)
-      })
-  }
+  // function handleSaveMovie(data) {
+  //   mainApi.saveMovie(data)
+  //     .then((movie) => {
+  //       console.log(movie)
+  //     })
+  // }
   ////
   return (
     <userData.Provider value={currentUser}>
@@ -252,6 +280,9 @@ function App() {
               nothingFound={nothingFound}
               searchError={searchError}
               onLikeButton={onLikeButton}
+              onDislikeButton={onDislikeButton}
+              savedMovies={savedMovies}
+              savedMoviesList={savedMoviesList}
               path={'/movies'}
             />
             <ProtectedRoute
