@@ -25,18 +25,22 @@ function App() {
   const [isSubmitError, isSubmitErrorSetter] = useState(false);
   // Search form
   const [search, setSearch] = useState('');
-  // const [search, setSearch] = useState(localStorage.getItem("filter").replace(/['"]+/g, ''));
+  // const [search, setSearch] = useState(localStorage.getItem("filter").replace(/['"]+/g, '') || '');
   // Search form saved
   const [searchSaved, setSearchSaved] = useState('');
-  // const [searchSaved, setSearchSaved] = useState(localStorage.getItem("filterSaved").replace(/['"]+/g, ''));
+  // const [searchSaved, setSearchSaved] = useState(localStorage.getItem("filterSaved").replace(/['"]+/g, '') || '');
   // Movies
   const [preloader, setPreloader] = useState(false);
-  const [movies, setMovies] = useState(JSON.parse(localStorage.getItem("movies")));
-  const [filteredMovies, setFilteredMovies] = useState(JSON.parse(localStorage.getItem("filteredMovies")) || []);
-  const [shortFilm, setShortFilm] = useState(Boolean(localStorage.getItem("setShortFilm")));
+  const [movies, setMovies] = useState([]);
+  // const [movies, setMovies] = useState(JSON.parse(localStorage.getItem("movies")));
+  const [filteredMovies, setFilteredMovies] = useState([]);
+  // const [filteredMovies, setFilteredMovies] = useState(JSON.parse(localStorage.getItem("filteredMovies")) || []);
+  const [shortFilm, setShortFilm] = useState(false);
+  // const [shortFilm, setShortFilm] = useState(Boolean(localStorage.getItem("setShortFilm")));
   const [searchError, setSearchError] = useState(false);
   // Saved movies
-  const [filteredMoviesSaved, setFilteredMoviesSaved] = useState(JSON.parse(localStorage.getItem("filteredMoviesSaved")) || []);
+  // const [filteredMoviesSaved, setFilteredMoviesSaved] = useState(JSON.parse(localStorage.getItem("filteredMoviesSaved")) || []);
+  const [filteredMoviesSaved, setFilteredMoviesSaved] = useState([]);
   const [searchErrorSaved, setSearchErrorSaved] =useState(false);
   const [nothingFoundSaved, setNothingFoundSaved] = useState(false);
   // Movies Card list
@@ -76,6 +80,12 @@ function App() {
         history.push("/signin");
         console.log(`Ошибка: ${err}`);
       })
+      setSearch(localStorage.getItem("filter").replace(/['"]+/g, ''))
+      setSearchSaved(localStorage.getItem("filterSaved").replace(/['"]+/g, ''))
+      setMovies(JSON.parse(localStorage.getItem("movies")))
+      setFilteredMovies(JSON.parse(localStorage.getItem("filteredMovies")))
+      setShortFilm(Boolean(localStorage.getItem("setShortFilm")))
+      setFilteredMoviesSaved(JSON.parse(localStorage.getItem("filteredMoviesSaved")))
     }
   }, [loggedIn, history]);
   // Movies Card list
