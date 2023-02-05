@@ -80,14 +80,22 @@ function App() {
         history.push("/signin");
         console.log(`Ошибка: ${err}`);
       })
-      setSearch(localStorage.getItem("filter").replace(/['"]+/g, '') || '')
-      setSearchSaved(localStorage.getItem("filterSaved").replace(/['"]+/g, '') || '')
-      // setMovies(JSON.parse(localStorage.getItem("movies")))
-      // setFilteredMovies(JSON.parse(localStorage.getItem("filteredMovies")))
-      // setShortFilm(Boolean(localStorage.getItem("setShortFilm")))
-      // setFilteredMoviesSaved(JSON.parse(localStorage.getItem("filteredMoviesSaved")))
     }
   }, [loggedIn, history]);
+  useEffect(() => {
+    if (localStorage.getItem("filter").replace(/['"]+/g, '')) {
+      setSearch(localStorage.getItem("filter").replace(/['"]+/g, '') || '')
+      setShortFilm(Boolean(localStorage.getItem("setShortFilm")))
+    }
+    // if (JSON.parse(localStorage.getItem("movies"))) {
+    //   setMovies(JSON.parse(localStorage.getItem("movies")))
+    // }
+    // if ()
+    // setSearchSaved(localStorage.getItem("filterSaved").replace(/['"]+/g, '') || '')
+    // setFilteredMovies(JSON.parse(localStorage.getItem("filteredMovies")))
+    // setShortFilm(Boolean(localStorage.getItem("setShortFilm")))
+    // setFilteredMoviesSaved(JSON.parse(localStorage.getItem("filteredMoviesSaved")))
+  },[])
   // Movies Card list
   // useEffect(() => {
   //   auth.userValid()
