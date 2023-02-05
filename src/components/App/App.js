@@ -20,7 +20,7 @@ function App() {
   //// Hooks
   // General
   const [isBurgerMenuOpen, isBurgerMenuOpenSetter] = useState(false);
-  const [loggedIn, setLoggedIn] = useState(true);
+  const [loggedIn, setLoggedIn] = useState(false);
   const [currentUser, setUserData] = useState({});
   const [isSubmitError, isSubmitErrorSetter] = useState(false);
   // Search form
@@ -53,15 +53,14 @@ function App() {
   ////
   //// UseEffect
   // Проверка авторизации при загрузке страницы
-  // useEffect(() => {
-    // console.log(loggedIn)
-    // if(localStorage.getItem("movies")) {
-      // setLoggedIn(true)
-      // console.log('true')
-    // } else {
-      // console.log('false')
-    // }
-  // },[])
+  useEffect(() => {
+    console.log(localStorage.getItem("token"))
+    if(localStorage.getItem("token")) {
+      setLoggedIn(true)
+    } else {
+      setLoggedIn(false)
+    }
+  },[])
   useEffect(() => {
     if (loggedIn) {
       auth.userValid()
@@ -352,7 +351,7 @@ function App() {
     auth.signIn(data)
       .then((jwt) => {
         if (jwt.token) {
-          // localStorage.setItem("token", jwt.token)
+          localStorage.setItem("token", jwt.token)
           setLoggedIn(true);
           history.push("/movies");
         }
