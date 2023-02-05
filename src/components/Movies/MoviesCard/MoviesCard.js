@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
 
-export default function MoviesCard({ movie, onLikeButton, onDislikeButton, savedMovies }) {
-  console.log(movie)
-  
+export default function MoviesCard({ movie, onLikeButton, onDislikeButton, savedMovies }) {  
   const { nameRU, duration, trailerLink, image } = movie;
   const durationCalc = `${Math.trunc(duration / 60)}ч ${duration % 60}м`;
 

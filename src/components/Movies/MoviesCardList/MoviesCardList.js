@@ -12,7 +12,7 @@ export default function MoviesCardList({
   onDislikeButton,
   savedMovies
 }) 
-{console.log(!isPreloader, nothingFound)
+{
   return (
     
     <section className="card-list">
