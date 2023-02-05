@@ -43,6 +43,7 @@ function App() {
   // const [filteredMoviesSaved, setFilteredMoviesSaved] = useState([]);
   const [searchErrorSaved, setSearchErrorSaved] =useState(false);
   const [nothingFoundSaved, setNothingFoundSaved] = useState(false);
+  const [addMoviesSavedEnable, setAddMoviesSavedEnable] = useState(false);
   // Movies Card list
   const [showCard, setShowCard] = useState(0);
   const [addCard, setAddCard] = useState(0);
@@ -54,7 +55,6 @@ function App() {
   //// UseEffect
   // Проверка авторизации при загрузке страницы
   useEffect(() => {
-    console.log(localStorage.getItem("token"))
     if(localStorage.getItem("token")) {
       setLoggedIn(true)
     } else {
@@ -139,6 +139,20 @@ function App() {
       setNothingFound(false)
     }
   }, [showCard, filteredMovies])
+
+  useEffect(() => {
+    if (showCard >= filteredMoviesSaved.length) {
+      setAddMoviesSavedEnable(true)
+    } else {
+      setAddMoviesSavedEnable(false)
+    }
+    if (filteredMoviesSaved.length === 0) {
+      setNothingFoundSaved(true)
+    } else if (filteredMoviesSaved.length > 0) {
+      setNothingFoundSaved(false)
+    }
+  }, [showCard, filteredMoviesSaved])
+  
   // Загрузка фильмов при заходе
   // useEffect(() => {
   //   if (loggedIn) {
@@ -433,18 +447,17 @@ function App() {
               isBurgerMenuOpen={isBurgerMenuOpen}
               onClose={closeAllPopups}
               loggedIn={loggedIn}
-              // filterMoviesSaved
               handleSubmit={handleSubmitMovieSaved}
               handleShortFilm={handleShortFilm}
               shortFilm={shortFilm}
-              // preloader={preloader}
+              preloader={preloader}
               filteredMovies={filteredMoviesSaved}
-              // showCard={showCard}
-              addMoviesEnbale={addMoviesEnbale}
+              showCard={showCard}
+              addMoviesEnbale={addMoviesSavedEnable}
               handleAddMovies={handleAddMovies}
               nothingFound={nothingFoundSaved}
               searchError={searchErrorSaved}
-              // onLikeButton={onLikeButton}
+              onLikeButton={onLikeButton}
               onDislikeButton={onDislikeButton}
               savedMovies={savedMovies}
               handleCheckboxChange={handleCheckboxChangeSaved}
