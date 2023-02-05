@@ -86,7 +86,7 @@ function App() {
         })
       mainApi.getMovies()
         .then((res) => {
-          // console.log(res)
+          console.log(res)
           setSavedMovies(res);
           if (res) {
             setNothingFoundSaved(false)
