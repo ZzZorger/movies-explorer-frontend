@@ -49,15 +49,15 @@ function App() {
   ////
   //// UseEffect
   // Проверка авторизации при загрузке страницы
-  useEffect(() => {
-    console.log(loggedIn)
-    if(localStorage.getItem("movies")) {
+  // useEffect(() => {
+    // console.log(loggedIn)
+    // if(localStorage.getItem("movies")) {
       // setLoggedIn(true)
       // console.log('true')
-    } else {
+    // } else {
       // console.log('false')
-    }
-  },[])
+    // }
+  // },[])
   useEffect(() => {
     if (loggedIn) {
       auth.userValid()
@@ -65,7 +65,7 @@ function App() {
         setUserData(data)
       })
       .catch((err) => {
-        // history.push("/signin");
+        history.push("/signin");
         console.log(`Ошибка: ${err}`);
       })
       mainApi.getMovies()
@@ -73,11 +73,11 @@ function App() {
         setSavedMovies(res);
       })
       .catch((err) => {
-        // history.push("/signin");
+        history.push("/signin");
         console.log(`Ошибка: ${err}`);
       })
     }
-  }, [loggedIn]);
+  }, [loggedIn, history]);
   // Movies Card list
   // useEffect(() => {
   //   auth.userValid()
@@ -334,7 +334,7 @@ function App() {
     auth.signIn(data)
       .then((jwt) => {
         if (jwt.token) {
-          localStorage.setItem("token", jwt.token)
+          // localStorage.setItem("token", jwt.token)
           setLoggedIn(true);
           history.push("/movies");
         }
