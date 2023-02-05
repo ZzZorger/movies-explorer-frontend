@@ -20,7 +20,7 @@ function App() {
   //// Hooks
   // General
   const [isBurgerMenuOpen, isBurgerMenuOpenSetter] = useState(false);
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(localStorage.getItem("token") || '');
   const [currentUser, setUserData] = useState({});
   const [isSubmitError, isSubmitErrorSetter] = useState(false);
   // Search form
