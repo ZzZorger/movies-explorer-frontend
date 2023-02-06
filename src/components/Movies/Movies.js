@@ -3,32 +3,39 @@ import MoviesCardList from './MoviesCardList/MoviesCardList.js';
 import Footer from '../Footer/Footer.js';
 import MenuPopup from './MenuPopup/MenuPopup.js';
 import Header from '../Header/Header.js';
+import { useState } from 'react';
 
 export default function Moovies({
-  onBurgerMenu,
-  isBurgerMenuOpen,
-  onClose,
+  // Переменные SearchForm
   shortFilm,
-  preloader,
-  filteredMovies,
-  showCard,
-  addMoviesEnbale,
-  handleAddMovies,
-  nothingFound,
   searchError,
-  onLikeButton,
-  onDislikeButton,
-  savedMovies,
   handleCheckboxChange,
   handleSearchChange,
   handleSubmitSearchForm,
-  search
+  search,
+  // Переменные MoviesCardList
+  preloader,
+  filteredMovies,
+  showCard,
+  addMoviesEnable,
+  handleAddMovies,
+  nothingFound,
+  onLikeButton,
+  onDislikeButton,
+  savedMovies
 }) {
+  const [isBurgerMenuOpen, isBurgerMenuOpenSetter] = useState(false);
+  function handleBurgerMenuClick() {
+    isBurgerMenuOpenSetter(true);
+  }
+  function closeAllPopups() {
+    isBurgerMenuOpenSetter(false);
+  }
   return (
     <div className='movies-page'>
       <Header
         onPath={'movies'}
-        onBurgerMenu={onBurgerMenu}
+        onBurgerMenu={handleBurgerMenuClick}
       />
       <main className='movies-page__main'>
         <SearchForm
@@ -43,7 +50,7 @@ export default function Moovies({
           isPreloader={preloader}
           filteredMovies={filteredMovies}
           showCard={showCard}
-          addMoviesEnbale={addMoviesEnbale}
+          addMoviesEnable={addMoviesEnable}
           handleAddMovies={handleAddMovies}
           nothingFound={nothingFound}
           onLikeButton={onLikeButton}
@@ -54,7 +61,7 @@ export default function Moovies({
       <Footer />
       <MenuPopup
         isOpen={isBurgerMenuOpen}
-        onClose={onClose}
+        onClose={closeAllPopups}
       />
     </div>
   );

@@ -1,4 +1,11 @@
-export default function SearchForm({ shortFilm, searchError, handleCheckboxChange, handleSearchChange, handleSubmitSearchForm, search }) {
+export default function SearchForm({ 
+  shortFilm, 
+  searchError, 
+  handleCheckboxChange, 
+  handleSearchChange, 
+  handleSubmitSearchForm, 
+  search 
+}) {
   return (
     <section className="search">
       <form className="search__form">

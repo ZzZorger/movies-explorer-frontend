@@ -3,34 +3,43 @@ import MoviesCardList from '../Movies/MoviesCardList/MoviesCardList.js';
 import Footer from '../Footer/Footer.js';
 import MenuPopup from '../Movies/MenuPopup/MenuPopup.js';
 import Header from '../Header/Header.js';
+import { useState } from 'react';
 
 export default function SavedMovies({
-  onBurgerMenu,
-  isBurgerMenuOpen,
-  onClose,
-  handleSubmit,
-  handleShortFilm,
+  // Переменные SearchForm
   shortFilm,
-  preloader,
-  filteredMovies,
-  showCard,
-  addMoviesEnbale,
-  handleAddMovies,
-  nothingFound,
   searchError,
-  onLikeButton,
-  onDislikeButton,
-  savedMovies,
   handleCheckboxChange,
   handleSearchChange,
   handleSubmitSearchForm,
-  search
+  search,
+  // Переменные MoviesCardList
+  preloader,
+  filteredMovies,
+  showCard,
+  addMoviesEnable,
+  handleAddMovies,
+  nothingFound,
+  onLikeButton,
+  onDislikeButton,
+  savedMovies
 }) {
+  // console.log(filteredMovies, savedMovies)
+  const [isBurgerMenuOpen, isBurgerMenuOpenSetter] = useState(false);
+  //// Open and Close handlers
+  //
+  function handleBurgerMenuClick() {
+    isBurgerMenuOpenSetter(true);
+  }
+  // Закрыть все попапы
+  function closeAllPopups() {
+    isBurgerMenuOpenSetter(false);
+  }
   return (
     <div className='movies-page'>
       <Header
         onPath={'movies'}
-        onBurgerMenu={onBurgerMenu}
+        onBurgerMenu={handleBurgerMenuClick}
       />
       <main className='movies-page__main'>
         <SearchForm
@@ -45,7 +54,7 @@ export default function SavedMovies({
           isPreloader={preloader}
           filteredMovies={savedMovies}
           showCard={showCard}
-          addMoviesEnbale={addMoviesEnbale}
+          addMoviesEnable={addMoviesEnable}
           handleAddMovies={handleAddMovies}
           nothingFound={nothingFound}
           onLikeButton={onLikeButton}
@@ -56,7 +65,7 @@ export default function SavedMovies({
       <Footer />
       <MenuPopup
         isOpen={isBurgerMenuOpen}
-        onClose={onClose}
+        onClose={closeAllPopups}
       />
     </div>
   );

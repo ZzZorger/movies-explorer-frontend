@@ -19,16 +19,13 @@ function App() {
   const history = useHistory();
   //// Hooks
   // General
-  const [isBurgerMenuOpen, isBurgerMenuOpenSetter] = useState(false);
   const [loggedIn, setLoggedIn] = useState(localStorage.getItem("token") || '');
   const [currentUser, setUserData] = useState({});
   const [isSubmitError, isSubmitErrorSetter] = useState(false);
   // Search form
   const [search, setSearch] = useState('');
-  // const [search, setSearch] = useState(localStorage.getItem("filter").replace(/['"]+/g, '') || '');
   // Search form saved
   const [searchSaved, setSearchSaved] = useState('');
-  // const [searchSaved, setSearchSaved] = useState(localStorage.getItem("filterSaved").replace(/['"]+/g, '') || '');
   // Movies
   const [preloader, setPreloader] = useState(false);
   // const [movies, setMovies] = useState([]);
@@ -48,9 +45,10 @@ function App() {
   const [showCard, setShowCard] = useState(0);
   const [addCard, setAddCard] = useState(0);
   const [winWidth, setWinWidth] = useState(window.innerWidth);
-  const [addMoviesEnbale, setAddMoviesEnable] = useState(false);
+  const [addMoviesEnable, setAddMoviesEnable] = useState(false);
   const [nothingFound, setNothingFound] = useState(false);
   const [savedMovies, setSavedMovies] = useState([]);
+  const [savedMoviesList, setSavedMoviesList] = useState(JSON.parse(localStorage.getItem("savedMovies")) || []);
   ////
   //// UseEffect
   // Проверка авторизации при загрузке страницы
@@ -98,7 +96,8 @@ function App() {
           console.log(`Ошибка: ${err}`);
         })
     }
-  }, [loggedIn, history]);
+  }, []);
+  // }, [loggedIn, history]);
   useEffect(() => {
     if (localStorage.getItem("filter")) {
       setSearch(localStorage.getItem("filter").replace(/['"]+/g, ''))
@@ -139,6 +138,19 @@ function App() {
       setNothingFound(false)
     }
   }, [showCard, filteredMovies])
+  useEffect(() => {
+    console.log(savedMoviesList.length)
+    if (showCard >= savedMoviesList.length) {
+      setAddMoviesSavedEnable(true)
+    } else {
+      setAddMoviesSavedEnable(false)
+    }
+    if (savedMoviesList.length === 0) {
+      setNothingFoundSaved(true)
+    } else if (savedMoviesList.length > 0) {
+      setNothingFoundSaved(false)
+    }
+  }, [showCard, savedMoviesList])
 
   //// Functions
   // Movies
@@ -235,20 +247,14 @@ function App() {
   function handleAddMovies() {
     setShowCard(showCard + addCard);
   }
-  //// Open and Close handlers
-  //
-  function handleBurgerMenuClick() {
-    isBurgerMenuOpenSetter(true);
-  }
-  // Закрыть все попапы
-  function closeAllPopups() {
-    isBurgerMenuOpenSetter(false);
-  }
+
   // Saved movies
   function onLikeButton(movie) {
     mainApi.saveMovie(movie)
       .then((savedMovie) => {
         setSavedMovies([savedMovie, ...savedMovies])
+        setSavedMoviesList([savedMovie, ...savedMoviesList])
+        localStorage.setItem("savedMovies", savedMoviesList)
       })
       .catch((err) => {
         console.log(`Ошибка: ${err}`)
@@ -385,52 +391,47 @@ function App() {
             </Route>
             <ProtectedRoute
               component={Movies}
-              onBurgerMenu={handleBurgerMenuClick}
-              isBurgerMenuOpen={isBurgerMenuOpen}
-              onClose={closeAllPopups}
               loggedIn={loggedIn}
-              handleSubmit={handleSubmitMovie}
-              handleShortFilm={handleShortFilm}
-              shortFilm={shortFilm}
-              preloader={preloader}
-              filteredMovies={filteredMovies}
-              showCard={showCard}
-              addMoviesEnbale={addMoviesEnbale}
-              handleAddMovies={handleAddMovies}
-              nothingFound={nothingFound}
-              searchError={searchError}
-              onLikeButton={onLikeButton}
-              onDislikeButton={onDislikeButton}
-              savedMovies={savedMovies}
+              // Переменные SearchForm          
+              shortFilm={shortFilm}              
+              searchError={searchError}              
               handleCheckboxChange={handleCheckboxChange}
               handleSearchChange={handleSearchChange}
               handleSubmitSearchForm={handleSubmit}
               search={search}
+              // Переменные MoviesCardList
+              preloader={preloader}
+              filteredMovies={filteredMovies}
+              showCard={showCard}
+              addMoviesEnable={addMoviesEnable}
+              handleAddMovies={handleAddMovies}
+              nothingFound={nothingFound}
+              onLikeButton={onLikeButton}
+              onDislikeButton={onDislikeButton}
+              savedMovies={savedMovies}
               path={'/movies'}
             />
             <ProtectedRoute
               component={SavedMovies}
-              onBurgerMenu={handleBurgerMenuClick}
-              isBurgerMenuOpen={isBurgerMenuOpen}
-              onClose={closeAllPopups}
               loggedIn={loggedIn}
-              handleSubmit={handleSubmitMovieSaved}
-              handleShortFilm={handleShortFilm}
-              // shortFilm={shortFilm}
-              preloader={preloader}
-              filteredMovies={filteredMoviesSaved}
-              showCard={showCard}
-              addMoviesEnbale={addMoviesSavedEnable}
-              handleAddMovies={handleAddMovies}
-              nothingFound={nothingFoundSaved}
+              // Переменные SearchForm             
+              shortFilm={shortFilm}          
               searchError={searchErrorSaved}
-              onLikeButton={onLikeButton}
-              onDislikeButton={onDislikeButton}
-              savedMovies={savedMovies}
               handleCheckboxChange={handleCheckboxChangeSaved}
               handleSearchChange={handleSearchChangeSaved}
               handleSubmitSearchForm={handleSubmitSaved}
               search={searchSaved}
+              // Переменные MoviesCardList
+              preloader={preloader}
+              filteredMovies={savedMovies}
+              // filteredMovies={filteredMoviesSaved}
+              showCard={showCard}
+              addMoviesEnable={addMoviesSavedEnable}
+              handleAddMovies={handleAddMovies}
+              nothingFound={nothingFoundSaved}
+              onLikeButton={onLikeButton}
+              onDislikeButton={onDislikeButton}
+              savedMovies={savedMovies}
               path={'/saved-movies'}
             />
             <ProtectedRoute

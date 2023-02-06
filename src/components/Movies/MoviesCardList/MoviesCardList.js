@@ -5,7 +5,7 @@ export default function MoviesCardList({
   isPreloader, 
   filteredMovies, 
   showCard,
-  addMoviesEnbale,
+  addMoviesEnable,
   handleAddMovies,
   nothingFound,
   onLikeButton,
@@ -33,7 +33,7 @@ export default function MoviesCardList({
         )}
       </div>
       <div className="card-list__next">
-        {!addMoviesEnbale && <button className="card-list__button transition" onClick={handleAddMovies}>Ещё</button>}
+        {!addMoviesEnable && <button className="card-list__button transition" onClick={handleAddMovies}>Ещё</button>}
       </div>
     </section>
   )
