@@ -329,7 +329,7 @@ function App() {
     auth.signUp(data)
       .then((res) => {
         if (res) {
-          history.push("/movies");
+          handleLogin(data)
         }
       })
       .catch((err) => {
@@ -338,6 +338,7 @@ function App() {
   }
   // Логин пользователя
   function handleLogin(data) {
+    console.log(data)
     auth.signIn(data)
       .then((jwt) => {
         if (jwt.token) {
@@ -378,9 +379,16 @@ function App() {
     mainApi.patchProfileData(data)
       .then((newData) => {
         setUserData(newData.data);
+        data.setChangeIsOk(true)
+        data.setServerError(false)
+        data.setFormChanged(false)
       })
       .catch(err => {
-        console.log(`Ошибка: ${err}`)
+        if(err === 'Ошибка: 500') {
+          data.setServerError(true)
+        }
+        console.log(`${err}`)
+        data.setChangeIsOk(false)
       });
   }
   ////

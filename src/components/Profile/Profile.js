@@ -14,6 +14,8 @@ export default function Profile({ onLogout, onEdit }) {
   const [nameError, setNameError] = useState('');
   const [emailError, setEmailError] = useState('');
   const [formChanged, setFormChanged] = useState(false);
+  const [changeIsOk, setChangeIsOk] = useState(false);
+  const [serverError, setServerError] = useState(false)
   useEffect(() => {
     setName(currentUser.name);
     setEmail(currentUser.email);
@@ -27,9 +29,14 @@ export default function Profile({ onLogout, onEdit }) {
     onEdit({
       name,
       email,
+      setChangeIsOk,
+      setServerError,
+      setFormChanged,
     })
   }
   function focusHandler(e) {
+    setServerError(false)
+    setChangeIsOk(false)
     switch (e.target.name) {
       case 'email':
         setEmailFilled(true)
@@ -93,7 +100,9 @@ export default function Profile({ onLogout, onEdit }) {
           </div>
           {(emailFilled && emailError) && <span className="profile__error">{emailError}</span>}
         </fieldset>
-        <button className={!formChanged ? "profile__change disabled-sign" : "profile__change transition"} type="submit" onClick={handleEdit} disabled={!formChanged}>Редактировать</button>
+        {changeIsOk && <span className="profile__span">Данные успешно сохранены</span>}
+        {serverError && <span className="profile__span-error">Пользователь с данной почтой уже зарегестрирован</span>}
+        <button className={(!formChanged || serverError) ? "profile__change disabled-sign" : "profile__change transition"} type="submit" onClick={handleEdit} disabled={!formChanged}>Редактировать</button>
         <button className="profile__exit transition" type="button" onClick={handleLogout}>Выйти из аккаунта</button>
       </div>
     </section>
