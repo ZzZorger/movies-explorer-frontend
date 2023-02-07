@@ -30,6 +30,7 @@ export default function SearchForm({
         <p className="search__slider-sign">Короткометражки</p>
         <label className="slider">
           <input className="slider__checkbox" type="checkbox" onChange={handleCheckboxChange} checked={shortFilm} />
+          {/* <input className="slider__checkbox" type="checkbox" onChange={handleCheckboxChange} checked={shortFilm} /> */}
           <span className="slider__span"></span>
         </label>
       </div>

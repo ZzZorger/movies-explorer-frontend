@@ -157,12 +157,13 @@ function App() {
   // Search form
   function handleCheckboxChange(e) {
     if (!shortFilm) {
-      setShortFilm(true);
+      setShortFilm(true)
       localStorage.setItem("setShortFilm", true);
     } else {
       setShortFilm(false);
       localStorage.removeItem("setShortFilm");
     }
+    filterMovies(search, movies)
   }
   function handleSearchChange(e) {
     setSearch(e.target.value);
