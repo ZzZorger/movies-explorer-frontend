@@ -151,16 +151,25 @@ function App() {
       setNothingFoundSaved(false)
     }
   }, [showCard, savedMoviesList])
-
+  // useEffect(() => {
+  //   if (shortFilm) {
+  //     filterMovies(search, movies)
+  //   } else if (!shortFilm){
+  //     filterMovies(search, movies)
+  //   }
+  // }, [shortFilm])
   //// Functions
   // Movies
   // Search form
   function handleCheckboxChange(e) {
+    console.log(shortFilm)
     if (!shortFilm) {
       setShortFilm(true)
+      console.log(shortFilm)
       localStorage.setItem("setShortFilm", true);
     } else {
       setShortFilm(false);
+      console.log(shortFilm)
       localStorage.removeItem("setShortFilm");
     }
     filterMovies(search, movies)
@@ -205,16 +214,18 @@ function App() {
   // }
   // Фильтрация массива фильмов
   function filterMovies(filter, movies) {
-    const filtered = movies.filter((movie) => {
-      const isFiltered = movie.nameRU.toLowerCase().includes(filter);
-      if (shortFilm) {
-        return movie.duration <= 40 && isFiltered;
+    
+      const filtered = movies.filter((movie) => {
+        const isFiltered = movie.nameRU.toLowerCase().includes(filter);
+        if (shortFilm) {
+          return movie.duration <= 40 && isFiltered;
+        }
+        return isFiltered;
       }
-      return isFiltered;
-    }
-    );
-    setFilteredMovies(filtered)
-    localStorage.setItem("filteredMovies", JSON.stringify(filtered));
+      );
+      setFilteredMovies(filtered)
+      localStorage.setItem("filteredMovies", JSON.stringify(filtered));
+
   }
   // Фильтрация массива сохраненных фильмов
   // filteredMoviesSaved
@@ -256,9 +267,9 @@ function App() {
   function onLikeButton(movie) {
     mainApi.saveMovie(movie)
       .then((savedMovie) => {
-        // setSavedMovies([savedMovie, ...savedMovies])
-        // setSavedMoviesList([savedMovie, ...savedMoviesList])
-        // localStorage.setItem("savedMovies", savedMoviesList)
+        setSavedMovies([savedMovie, ...savedMovies])
+        setSavedMoviesList([savedMovie, ...savedMoviesList])
+        localStorage.setItem("savedMovies", savedMoviesList)
       })
       .catch((err) => {
         console.log(`Ошибка: ${err}`)
@@ -339,7 +350,6 @@ function App() {
   }
   // Логин пользователя
   function handleLogin(data) {
-    console.log(data)
     auth.signIn(data)
       .then((jwt) => {
         if (jwt.token) {
@@ -366,6 +376,7 @@ function App() {
         localStorage.removeItem('movies');
         localStorage.removeItem('filteredMovies');
         localStorage.removeItem('setShortFilm');
+        // localStorage.setItem('setShortFilm', false);
         localStorage.removeItem('filteredMoviesSaved');
         localStorage.removeItem('token');
         localStorage.removeItem('filter');
@@ -385,7 +396,7 @@ function App() {
         data.setFormChanged(false)
       })
       .catch(err => {
-        if(err === 'Ошибка: 500') {
+        if (err === 'Ошибка: 500') {
           data.setServerError(true)
         }
         console.log(`${err}`)
@@ -405,8 +416,8 @@ function App() {
               component={Movies}
               loggedIn={loggedIn}
               // Переменные SearchForm          
-              shortFilm={shortFilm}              
-              searchError={searchError}              
+              shortFilm={shortFilm}
+              searchError={searchError}
               handleCheckboxChange={handleCheckboxChange}
               handleSearchChange={handleSearchChange}
               handleSubmitSearchForm={handleSubmit}
@@ -427,7 +438,7 @@ function App() {
               component={SavedMovies}
               loggedIn={loggedIn}
               // Переменные SearchForm             
-              shortFilm={shortFilm}          
+              shortFilm={shortFilm}
               searchError={searchErrorSaved}
               handleCheckboxChange={handleCheckboxChangeSaved}
               handleSearchChange={handleSearchChangeSaved}
