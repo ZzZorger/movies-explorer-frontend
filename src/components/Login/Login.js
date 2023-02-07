@@ -27,8 +27,6 @@ export default function Login({ onLogin, isSubmitError }) {
     if (isSubmitError) {
       console.log(isSubmitError)
       setSubmitError('Неверно введены логин или пароль');
-    } else {
-      
     }
   }
   function focusHandler(e) {
