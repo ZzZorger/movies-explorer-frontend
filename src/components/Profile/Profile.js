@@ -64,7 +64,7 @@ export default function Profile({ onLogout, onEdit }) {
     <section className='profile'>
       <HeaderMovies />
       <div className="profile__content">
-        <h1 className="profile__title">Привет, Виталий!</h1>
+        <h1 className="profile__title">Привет, {currentUser.name}</h1>
         <fieldset className="profile__fieldset">
           <div className="profile__input-field">
             <p className="profile__input-title">Имя</p>

@@ -48,7 +48,8 @@ function App() {
   const [addMoviesEnable, setAddMoviesEnable] = useState(false);
   const [nothingFound, setNothingFound] = useState(false);
   const [savedMovies, setSavedMovies] = useState([]);
-  const [savedMoviesList, setSavedMoviesList] = useState(JSON.parse(localStorage.getItem("savedMovies")) || []);
+  // const [savedMoviesList, setSavedMoviesList] = useState(JSON.parse(localStorage.getItem("savedMovies")) || []);
+  const [savedMoviesList, setSavedMoviesList] = useState([]);
   ////
   //// UseEffect
   // Проверка авторизации при загрузке страницы
@@ -139,7 +140,6 @@ function App() {
     }
   }, [showCard, filteredMovies])
   useEffect(() => {
-    console.log(savedMoviesList.length)
     if (showCard >= savedMoviesList.length) {
       setAddMoviesSavedEnable(true)
     } else {
@@ -156,30 +156,6 @@ function App() {
   // Movies
   // Search form
   function handleCheckboxChange(e) {
-    handleShortFilm();
-  }
-  function handleSearchChange(e) {
-    setSearch(e.target.value);
-  }
-  function handleSubmit(e) {
-    e.preventDefault();
-    localStorage.setItem("filter", JSON.stringify(search));
-    handleSubmitMovie(search);
-  }
-  // Search form saved
-  function handleCheckboxChangeSaved(e) {
-    handleShortFilm();
-  }
-  function handleSearchChangeSaved(e) {
-    setSearchSaved(e.target.value);
-  }
-  function handleSubmitSaved(e) {
-    e.preventDefault();
-    localStorage.setItem("filterSaved", JSON.stringify(searchSaved));
-    handleSubmitMovie(searchSaved);
-  }
-  // Переключатель короткометражек
-  function handleShortFilm() {
     if (!shortFilm) {
       setShortFilm(true);
       localStorage.setItem("setShortFilm", true);
@@ -188,6 +164,44 @@ function App() {
       localStorage.removeItem("setShortFilm");
     }
   }
+  function handleSearchChange(e) {
+    setSearch(e.target.value);
+  }
+  function handleSubmit(e) {
+    e.preventDefault();
+    if (search) {
+      setSearchError(false);
+      handleGetMovies(search);
+      localStorage.setItem("filter", JSON.stringify(search));
+    } else {
+      setSearchError(true);
+    }
+    // handleSubmitMovie(search);
+  }
+  // Search form saved
+  function handleCheckboxChangeSaved(e) {
+    if (!shortFilm) {
+      setShortFilm(true);
+      localStorage.setItem("setShortFilm", true);
+    } else {
+      setShortFilm(false);
+      localStorage.removeItem("setShortFilm");
+    }
+  }
+  function handleSearchChangeSaved(e) {
+    setSearchSaved(e.target.value);
+  }
+  function handleSubmitSaved(e) {
+    e.preventDefault();
+    if (searchSaved) {
+      setSearchError(false);
+      handleGetMovies(searchSaved);
+      localStorage.setItem("filterSaved", JSON.stringify(searchSaved));
+    } else {
+      setSearchError(true);
+    }
+  }
+  // }
   // Фильтрация массива фильмов
   function filterMovies(filter, movies) {
     const filtered = movies.filter((movie) => {
@@ -215,15 +229,6 @@ function App() {
     setFilteredMoviesSaved(filtered)
     localStorage.setItem("filteredMoviesSaved", JSON.stringify(filtered));
   }
-  // Обработчик нажатия на кнопку поиска
-  function handleSubmitMovie(filter) {
-    if (filter) {
-      setSearchError(false);
-      handleGetMovies(filter);
-    } else {
-      setSearchError(true);
-    }
-  }
   // Обработчик нажатия на кнопку поиска сохраненных фильмов
   function handleSubmitMovieSaved(filter) {
     if (filter) {
@@ -234,8 +239,6 @@ function App() {
       setSearchErrorSaved(true);
     }
   }
-  // Получить все фильмы и отфильтровать их по запросу
-
   // Movies Card list
   // Установка таймера на изменение размера окна
   function changeWindow() {
@@ -252,9 +255,9 @@ function App() {
   function onLikeButton(movie) {
     mainApi.saveMovie(movie)
       .then((savedMovie) => {
-        setSavedMovies([savedMovie, ...savedMovies])
-        setSavedMoviesList([savedMovie, ...savedMoviesList])
-        localStorage.setItem("savedMovies", savedMoviesList)
+        // setSavedMovies([savedMovie, ...savedMovies])
+        // setSavedMoviesList([savedMovie, ...savedMoviesList])
+        // localStorage.setItem("savedMovies", savedMoviesList)
       })
       .catch((err) => {
         console.log(`Ошибка: ${err}`)

@@ -16,6 +16,7 @@ export default function MoviesCard({ movie, onLikeButton, onDislikeButton, saved
     }
   }
 
+
   return (
     <article className="card">
       <a className="card__link" href={trailerLink} alt="ссылка на трейлер фильма" target="_blank" rel="noreferrer">
