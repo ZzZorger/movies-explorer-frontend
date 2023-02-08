@@ -62,7 +62,18 @@ function App() {
     if (localStorage.getItem("savedMovies")) {
       setSavedMovies(JSON.parse(localStorage.getItem("savedMovies")))
     }
-    // if (localStorage.getItem("filteredMoviesSaved"))
+    if (localStorage.getItem("filteredMoviesSaved")) {
+      setFilteredMoviesSaved(JSON.parse(localStorage.getItem("filteredMoviesSaved")))
+    }
+    if (localStorage.getItem("setShortFilm")) {
+      setShortFilm(Boolean(localStorage.getItem("setShortFilm")))
+    }
+    if (localStorage.getItem("filteredMovies")) {
+      setFilteredMovies(JSON.parse(localStorage.getItem("filteredMovies")))
+    }
+    if (localStorage.getItem("movies")) {
+      setMovies(JSON.parse(localStorage.getItem("movies")))
+    }
     // const [filteredMoviesSaved, setFilteredMoviesSaved] = useState(JSON.parse(localStorage.getItem("filteredMoviesSaved")) || []);
     // const [shortFilm, setShortFilm] = useState(Boolean(localStorage.getItem("setShortFilm")));
     // const [filteredMovies, setFilteredMovies] = useState(JSON.parse(localStorage.getItem("filteredMovies")) || []);
