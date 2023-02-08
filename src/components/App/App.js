@@ -134,6 +134,18 @@ function App() {
       setNothingFound(false)
     }
   }, [showCard, filteredMovies])
+  useEffect(() => {
+    if (showCard >= filteredMoviesSaved.length) {
+      setAddMoviesSavedEnable(true)
+    } else {
+      setAddMoviesSavedEnable(false)
+    }
+    if (filteredMoviesSaved.length === 0) {
+      setNothingFoundSaved(true)
+    } else if (filteredMoviesSaved.length > 0) {
+      setNothingFoundSaved(false)
+    }
+  }, [showCard, filteredMoviesSaved])
 
   //// Functions
   // Movies
@@ -239,10 +251,8 @@ function App() {
 
   // Saved movies
   function onLikeButton(movie) {
-    console.log(movie)
     mainApi.saveMovie(movie)
       .then((savedMovie) => {
-        console.log(savedMovie.data)
         setSavedMovies([savedMovie.data, ...savedMovies])
         localStorage.setItem("savedMovies", JSON.stringify(savedMovies))
       })
