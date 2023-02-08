@@ -22,9 +22,12 @@ export default function Moovies({
   nothingFound,
   onLikeButton,
   onDislikeButton,
-  savedMovies
+  savedMovies,
+  onSavedPageFlag,
+  currentUser
 }) {
   const [isBurgerMenuOpen, isBurgerMenuOpenSetter] = useState(false);
+  const savedMoviesByOwner = savedMovies.filter(movie => movie.owner === currentUser._id);
   function handleBurgerMenuClick() {
     isBurgerMenuOpenSetter(true);
   }
@@ -55,7 +58,9 @@ export default function Moovies({
           nothingFound={nothingFound}
           onLikeButton={onLikeButton}
           onDislikeButton={onDislikeButton}
-          savedMovies={savedMovies}
+          savedMovies={savedMoviesByOwner}
+          // savedMovies={savedMovies}
+          onSavedPageFlag={onSavedPageFlag}
         />
       </main>
       <Footer />

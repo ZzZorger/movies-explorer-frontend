@@ -3,7 +3,7 @@ import MoviesCardList from '../Movies/MoviesCardList/MoviesCardList.js';
 import Footer from '../Footer/Footer.js';
 import MenuPopup from '../Movies/MenuPopup/MenuPopup.js';
 import Header from '../Header/Header.js';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export default function SavedMovies({
   // Переменные SearchForm
@@ -22,8 +22,15 @@ export default function SavedMovies({
   nothingFound,
   onLikeButton,
   onDislikeButton,
-  savedMovies
+  savedMovies,
+  onSavedPageFlag,
+  setOnSavedPageFlag,
+  currentUser
 }) {
+  useEffect(() => {
+    setOnSavedPageFlag(true)
+  },[])
+  const savedMoviesByOwner = savedMovies.filter(movie => movie.owner === currentUser._id);
   const [isBurgerMenuOpen, isBurgerMenuOpenSetter] = useState(false);
   //// Open and Close handlers
   //
@@ -51,14 +58,15 @@ export default function SavedMovies({
         />
         <MoviesCardList
           isPreloader={preloader}
-          filteredMovies={savedMovies}
+          filteredMovies={savedMoviesByOwner}
           showCard={showCard}
           addMoviesEnable={addMoviesEnable}
           handleAddMovies={handleAddMovies}
           nothingFound={nothingFound}
           onLikeButton={onLikeButton}
           onDislikeButton={onDislikeButton}
-          savedMovies={savedMovies}
+          savedMovies={savedMoviesByOwner}
+          onSavedPageFlag={onSavedPageFlag}
         />
       </main>
       <Footer />

@@ -48,8 +48,8 @@ function App() {
   const [addMoviesEnable, setAddMoviesEnable] = useState(false);
   const [nothingFound, setNothingFound] = useState(false);
   const [savedMovies, setSavedMovies] = useState([]);
-  // const [savedMoviesList, setSavedMoviesList] = useState(JSON.parse(localStorage.getItem("savedMovies")) || []);
-  const [savedMoviesList, setSavedMoviesList] = useState([]);
+  // const [savedMovies, setSavedMovies] = useState(JSON.parse(localStorage.getItem("savedMovies")) || []);
+  const [onSavedPageFlag, setOnSavedPageFlag] = useState(false)
   ////
   //// UseEffect
   // Проверка авторизации при загрузке страницы
@@ -59,6 +59,14 @@ function App() {
     } else {
       setLoggedIn(false)
     }
+    if (localStorage.getItem("savedMovies")) {
+      setSavedMovies(JSON.parse(localStorage.getItem("savedMovies")))
+    }
+    // if (localStorage.getItem("filteredMoviesSaved"))
+    // const [filteredMoviesSaved, setFilteredMoviesSaved] = useState(JSON.parse(localStorage.getItem("filteredMoviesSaved")) || []);
+    // const [shortFilm, setShortFilm] = useState(Boolean(localStorage.getItem("setShortFilm")));
+    // const [filteredMovies, setFilteredMovies] = useState(JSON.parse(localStorage.getItem("filteredMovies")) || []);
+    // const [movies, setMovies] = useState(JSON.parse(localStorage.getItem("movies")));
   }, [])
   // useEffect(() => {
   //   console.log(filteredMoviesSaved)
@@ -80,12 +88,12 @@ function App() {
           setUserData(data)
         })
         .catch((err) => {
-          // history.push("/signin");
           console.log(`Ошибка: ${err}`);
         })
       mainApi.getMovies()
         .then((res) => {
           setSavedMovies(res);
+          // localStorage.setItem("savedMovies", JSON.stringify(res))
           if (res) {
             setNothingFoundSaved(false)
           } else {
@@ -93,12 +101,10 @@ function App() {
           }
         })
         .catch((err) => {
-          // history.push("/signin");
           console.log(`Ошибка: ${err}`);
         })
     }
   }, []);
-  // }, [loggedIn, history]);
   useEffect(() => {
     if (localStorage.getItem("filter")) {
       setSearch(localStorage.getItem("filter").replace(/['"]+/g, ''))
@@ -139,30 +145,27 @@ function App() {
       setNothingFound(false)
     }
   }, [showCard, filteredMovies])
-  useEffect(() => {
-    if (showCard >= savedMoviesList.length) {
-      setAddMoviesSavedEnable(true)
-    } else {
-      setAddMoviesSavedEnable(false)
-    }
-    if (savedMoviesList.length === 0) {
-      setNothingFoundSaved(true)
-    } else if (savedMoviesList.length > 0) {
-      setNothingFoundSaved(false)
-    }
-  }, [showCard, savedMoviesList])
   // useEffect(() => {
-  //   if (shortFilm) {
-  //     filterMovies(search, movies)
-  //   } else if (!shortFilm){
-  //     filterMovies(search, movies)
+  //   if (showCard >= savedMoviesList.length) {
+  //     setAddMoviesSavedEnable(true)
+  //   } else {
+  //     setAddMoviesSavedEnable(false)
   //   }
+  //   if (savedMoviesList.length === 0) {
+  //     setNothingFoundSaved(true)
+  //   } else if (savedMoviesList.length > 0) {
+  //     setNothingFoundSaved(false)
+  //   }
+  // }, [showCard, savedMoviesList])
+  // useEffect(() => {
+  //   filterMovies(search, movies)
   // }, [shortFilm])
   //// Functions
   // Movies
   // Search form
 
   function handleCheckboxChange(e) {
+    e.preventDefault();
     if (!shortFilm) {
       setShortFilm(true)
       localStorage.setItem("setShortFilm", true);
@@ -170,6 +173,8 @@ function App() {
       setShortFilm(false);
       localStorage.removeItem("setShortFilm");
     }
+    filterMovies(search, movies);
+    // filterMoviesSaved(search, movies);
   }
   function handleSearchChange(e) {
     setSearch(e.target.value);
@@ -211,17 +216,17 @@ function App() {
   // }
   // Фильтрация массива фильмов
   function filterMovies(filter, movies) {
-    
-      const filtered = movies.filter((movie) => {
-        const isFiltered = movie.nameRU.toLowerCase().includes(filter);
-        if (shortFilm) {
-          return movie.duration <= 40 && isFiltered;
-        }
-        return isFiltered;
+
+    const filtered = movies.filter((movie) => {
+      const isFiltered = movie.nameRU.toLowerCase().includes(filter);
+      if (shortFilm) {
+        return movie.duration <= 40 && isFiltered;
       }
-      );
-      setFilteredMovies(filtered)
-      localStorage.setItem("filteredMovies", JSON.stringify(filtered));
+      return isFiltered;
+    }
+    );
+    setFilteredMovies(filtered)
+    localStorage.setItem("filteredMovies", JSON.stringify(filtered));
 
   }
   // Фильтрация массива сохраненных фильмов
@@ -262,10 +267,12 @@ function App() {
 
   // Saved movies
   function onLikeButton(movie) {
+    console.log(movie)
     mainApi.saveMovie(movie)
       .then((savedMovie) => {
+        console.log(savedMovie.data)
         setSavedMovies([savedMovie.data, ...savedMovies])
-        localStorage.setItem("savedMovies", savedMovies)
+        localStorage.setItem("savedMovies", JSON.stringify(savedMovies))
       })
       .catch((err) => {
         console.log(`Ошибка: ${err}`)
@@ -276,6 +283,7 @@ function App() {
     mainApi.deleteMovie(movieId)
       .then(() => {
         setSavedMovies(savedMovies.filter((item) => item._id !== movieId))
+        localStorage.setItem("savedMovies", JSON.stringify(savedMovies))
       })
       .catch((err) => {
         console.log(`Ошибка: ${err}`)
@@ -376,6 +384,7 @@ function App() {
         localStorage.removeItem('token');
         localStorage.removeItem('filter');
         localStorage.removeItem('filterSaved');
+        localStorage.removeItem("savedMovies");
       })
       .catch((err) => {
         console.log(`Ошибка: ${err}`);
@@ -427,6 +436,8 @@ function App() {
               onLikeButton={onLikeButton}
               onDislikeButton={onDislikeButton}
               savedMovies={savedMovies}
+              onSavedPageFlag={onSavedPageFlag}
+              currentUser={currentUser}
               path={'/movies'}
             />
             <ProtectedRoute
@@ -450,6 +461,9 @@ function App() {
               onLikeButton={onLikeButton}
               onDislikeButton={onDislikeButton}
               savedMovies={savedMovies}
+              currentUser={currentUser}
+              onSavedPageFlag={onSavedPageFlag}
+              setOnSavedPageFlag={setOnSavedPageFlag}
               path={'/saved-movies'}
             />
             <ProtectedRoute

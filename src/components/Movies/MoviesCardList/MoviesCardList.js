@@ -1,20 +1,19 @@
 import MoviesCard from '../MoviesCard/MoviesCard.js';
 import Preloader from '../Preloader/Preloader';
 
-export default function MoviesCardList({ 
-  isPreloader, 
-  filteredMovies, 
+export default function MoviesCardList({
+  isPreloader,
+  filteredMovies,
   showCard,
   addMoviesEnable,
   handleAddMovies,
   nothingFound,
   onLikeButton,
   onDislikeButton,
-  savedMovies
-}) 
-{
+  savedMovies,
+  onSavedPageFlag
+}) {
   return (
-    
     <section className="card-list">
       <Preloader
         isPreloader={isPreloader}
@@ -23,14 +22,15 @@ export default function MoviesCardList({
       <div className="card-list__cards">
         {filteredMovies.slice(0, showCard).map((movie) => {
           return (
-          <MoviesCard
-            key={movie.id || movie._id}
-            movie={movie}
-            onLikeButton={onLikeButton}
-            onDislikeButton={onDislikeButton}
-            savedMovies={savedMovies}
-            filteredMovies={filteredMovies}
-          />)
+            <MoviesCard
+              key={movie.id || movie._id}
+              movie={movie}
+              onLikeButton={onLikeButton}
+              onDislikeButton={onDislikeButton}
+              savedMovies={savedMovies}
+              filteredMovies={filteredMovies}
+              onSavedPageFlag={onSavedPageFlag}
+            />)
         }
         )}
       </div>
