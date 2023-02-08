@@ -59,7 +59,6 @@ export default function Moovies({
           onLikeButton={onLikeButton}
           onDislikeButton={onDislikeButton}
           savedMovies={savedMoviesByOwner}
-          // savedMovies={savedMovies}
           onSavedPageFlag={onSavedPageFlag}
         />
       </main>

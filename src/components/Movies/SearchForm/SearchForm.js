@@ -6,10 +6,7 @@ export default function SearchForm({
   handleSubmitSearchForm, 
   search 
 }) {
-  function onChange(e) {
-    e.preventDefault();
 
-  }
   return (
     <section className="search">
       <form className="search__form">
@@ -34,7 +31,6 @@ export default function SearchForm({
         <p className="search__slider-sign">Короткометражки</p>
         <label className="slider">
           <input className="slider__checkbox" type="checkbox" onChange={handleCheckboxChange} checked={shortFilm} />
-          {/* <input className="slider__checkbox" type="checkbox" onClick={handleCheckboxChange} checked={shortFilm} /> */}
           <span className="slider__span"></span>
         </label>
       </div>
