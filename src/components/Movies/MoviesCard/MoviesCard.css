@@ -65,12 +65,16 @@
 }
 
 .card__delete-button {
-  display: none;
+  /* display: none; */
+  padding: 0px;
+  margin: 0px;
   background: url("../../../images/cardDelete2.svg") no-repeat center;
   cursor: pointer;
   width: 8px;
   height: 8px;
   border: 0;
+  padding-top: 40px;
+  padding-left: 20px;
 }
 
 .card__delete-button-active {

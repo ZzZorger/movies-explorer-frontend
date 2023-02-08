@@ -21,7 +21,8 @@ export default function MoviesCardList({
       />
       <p className={!isPreloader && nothingFound ? "card-list__sign" : "card-list__sign card-list__sign_hidden"}>Ничего не найдено</p>
       <div className="card-list__cards">
-        {filteredMovies.slice(0, showCard).map((movie) =>
+        {filteredMovies.slice(0, showCard).map((movie) => {
+          return (
           <MoviesCard
             key={movie.id || movie._id}
             movie={movie}
@@ -29,7 +30,8 @@ export default function MoviesCardList({
             onDislikeButton={onDislikeButton}
             savedMovies={savedMovies}
             filteredMovies={filteredMovies}
-          />
+          />)
+        }
         )}
       </div>
       <div className="card-list__next">

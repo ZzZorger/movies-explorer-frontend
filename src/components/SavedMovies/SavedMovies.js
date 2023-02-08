@@ -24,7 +24,6 @@ export default function SavedMovies({
   onDislikeButton,
   savedMovies
 }) {
-  // console.log(filteredMovies, savedMovies)
   const [isBurgerMenuOpen, isBurgerMenuOpenSetter] = useState(false);
   //// Open and Close handlers
   //
