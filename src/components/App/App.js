@@ -161,18 +161,15 @@ function App() {
   //// Functions
   // Movies
   // Search form
+
   function handleCheckboxChange(e) {
-    console.log(shortFilm)
     if (!shortFilm) {
       setShortFilm(true)
-      console.log(shortFilm)
       localStorage.setItem("setShortFilm", true);
     } else {
       setShortFilm(false);
-      console.log(shortFilm)
       localStorage.removeItem("setShortFilm");
     }
-    filterMovies(search, movies)
   }
   function handleSearchChange(e) {
     setSearch(e.target.value);
@@ -267,9 +264,8 @@ function App() {
   function onLikeButton(movie) {
     mainApi.saveMovie(movie)
       .then((savedMovie) => {
-        setSavedMovies([savedMovie, ...savedMovies])
-        setSavedMoviesList([savedMovie, ...savedMoviesList])
-        localStorage.setItem("savedMovies", savedMoviesList)
+        setSavedMovies([savedMovie.data, ...savedMovies])
+        localStorage.setItem("savedMovies", savedMovies)
       })
       .catch((err) => {
         console.log(`Ошибка: ${err}`)
@@ -376,7 +372,6 @@ function App() {
         localStorage.removeItem('movies');
         localStorage.removeItem('filteredMovies');
         localStorage.removeItem('setShortFilm');
-        // localStorage.setItem('setShortFilm', false);
         localStorage.removeItem('filteredMoviesSaved');
         localStorage.removeItem('token');
         localStorage.removeItem('filter');
