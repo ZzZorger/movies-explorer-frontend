@@ -13,8 +13,6 @@ import NotFound from '../NotFound/NotFound.js';
 import ProtectedRoute from '../ProtectedRoute.js';
 import { moviesApi } from '../../utils/MoviesApi.js';
 
-
-
 function App() {
   const history = useHistory();
   //// Hooks
