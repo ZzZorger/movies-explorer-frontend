@@ -13,8 +13,8 @@ export default function MoviesCardList({
   savedMovies,
   onSavedPageFlag
 }) {
-  // console.log(filteredMovies)
-  console.log(savedMovies)
+  console.log(filteredMovies, savedMovies)
+  // console.log(savedMovies)
   return (
     <section className="card-list">
       <Preloader
@@ -37,7 +37,7 @@ export default function MoviesCardList({
           }
           )}
         </div>
-        : (filteredMovies ?
+        : (filteredMovies === [] ?
           <div className="card-list__cards">
             {filteredMovies.slice(0, showCard).map((movie) => {
               return (
