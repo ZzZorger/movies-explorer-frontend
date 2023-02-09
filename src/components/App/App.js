@@ -44,6 +44,7 @@ function App() {
   const [nothingFound, setNothingFound] = useState(false);
   const [savedMovies, setSavedMovies] = useState(JSON.parse(localStorage.getItem("savedMovies") || '[]'));
   const [onSavedPageFlag, setOnSavedPageFlag] = useState(false);
+  const [afterFilterFlag, setAfterFilterFlag] = useState(false);
   // console.log(movies, savedMovies)
   ////
   //// UseEffect
@@ -202,7 +203,7 @@ function App() {
       return isFiltered;
     }
     );
-    setFilteredMovies(filtered)
+    setFilteredMovies(filtered);
     localStorage.setItem("filteredMovies", JSON.stringify(filtered));
   }
   function filterMoviesSaved(name, isShorts) {
@@ -214,7 +215,8 @@ function App() {
       return isFiltered;
     }
     );
-    setFilteredMoviesSaved(filtered)
+    setAfterFilterFlag(true);
+    setFilteredMoviesSaved(filtered);
     localStorage.setItem("filteredMoviesSaved", JSON.stringify(filtered));
   }
 
@@ -423,6 +425,7 @@ function App() {
               onSavedPageFlag={onSavedPageFlag}
               setOnSavedPageFlag={setOnSavedPageFlag}
               path={'/saved-movies'}
+              afterFilterFlag={afterFilterFlag}
             />
             <ProtectedRoute
               component={Profile}

@@ -24,7 +24,8 @@ export default function SavedMovies({
   onDislikeButton,
   savedMovies,
   onSavedPageFlag,
-  setOnSavedPageFlag
+  setOnSavedPageFlag,
+  afterFilterFlag
 }) {
   useEffect(() => {
     setOnSavedPageFlag(true)
@@ -65,6 +66,7 @@ export default function SavedMovies({
           onDislikeButton={onDislikeButton}
           savedMovies={savedMovies}
           onSavedPageFlag={onSavedPageFlag}
+          afterFilterFlag={afterFilterFlag}
         />
       </main>
       <Footer />
