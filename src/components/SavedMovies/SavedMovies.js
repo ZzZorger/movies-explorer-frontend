@@ -24,13 +24,11 @@ export default function SavedMovies({
   onDislikeButton,
   savedMovies,
   onSavedPageFlag,
-  setOnSavedPageFlag,
-  currentUser
+  setOnSavedPageFlag
 }) {
   useEffect(() => {
     setOnSavedPageFlag(true)
   },[])
-  // const savedMoviesByOwner = savedMovies.filter(movie => movie.owner === currentUser._id);
   const [isBurgerMenuOpen, isBurgerMenuOpenSetter] = useState(false);
   //// Open and Close handlers
   //

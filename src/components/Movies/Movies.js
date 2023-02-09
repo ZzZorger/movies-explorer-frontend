@@ -27,7 +27,6 @@ export default function Moovies({
   currentUser
 }) {
   const [isBurgerMenuOpen, isBurgerMenuOpenSetter] = useState(false);
-  // const savedMoviesByOwner = savedMovies.filter(movie => movie.owner === currentUser._id);
   function handleBurgerMenuClick() {
     isBurgerMenuOpenSetter(true);
   }
