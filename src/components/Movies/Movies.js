@@ -23,8 +23,7 @@ export default function Moovies({
   onLikeButton,
   onDislikeButton,
   savedMovies,
-  onSavedPageFlag,
-  currentUser
+  onSavedPageFlag
 }) {
   const [isBurgerMenuOpen, isBurgerMenuOpenSetter] = useState(false);
   function handleBurgerMenuClick() {

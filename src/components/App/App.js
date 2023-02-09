@@ -31,6 +31,7 @@ function App() {
   const [movies, setMovies] = useState(JSON.parse(localStorage.getItem("movies") || '[]'));
   const [filteredMovies, setFilteredMovies] = useState(JSON.parse(localStorage.getItem("filteredMovies") || '[]'));
   const [shortFilm, setShortFilm] = useState(localStorage.getItem("setShortFilm") === 'true');
+  const [shortFilmSaved, setShortFilmSaved] = useState(localStorage.getItem("setShortFilmSaved") === 'true');
   const [searchError, setSearchError] = useState(false);
   // Saved movies
   const [filteredMoviesSaved, setFilteredMoviesSaved] = useState(JSON.parse(localStorage.getItem("filteredMoviesSaved") || '[]'));
@@ -96,11 +97,9 @@ function App() {
     }
   }, []);
   useEffect(() => {
-    // if (localStorage.getItem("filter")) {
       setSearch(localStorage.getItem("filter") || '')
       setShortFilm(localStorage.getItem("setShortFilm") === 'true')
       setSearchSaved(localStorage.getItem("filterSaved") || '')
-    // }
   }, [])
 
   useEffect(() => {
@@ -136,6 +135,23 @@ function App() {
       setNothingFound(false)
     }
   }, [showCard, filteredMovies])
+  useEffect(() => {
+    if (showCard >= savedMovies.length) {
+      setAddMoviesSavedEnable(true)
+    } else {
+      setAddMoviesSavedEnable(false)
+    }
+    if (savedMovies.length === 0) {
+      setNothingFoundSaved(true)
+    } else if (savedMovies.length > 0) {
+      setNothingFoundSaved(false)
+    }
+    if (showCard >= filteredMoviesSaved.length) {
+      setAddMoviesSavedEnable(true)
+    } else {
+      setAddMoviesSavedEnable(false)
+    }
+  }, [showCard, savedMovies, filteredMoviesSaved])
 
   //// Functions
   // Movies
@@ -160,13 +176,9 @@ function App() {
   }
   // Search form saved
   function handleCheckboxChangeSaved(e) {
-    if (!shortFilm) {
-      setShortFilm(true);
-      localStorage.setItem("setShortFilm", true);
-    } else {
-      setShortFilm(false);
-      localStorage.removeItem("setShortFilm");
-    }
+    setShortFilmSaved(e.target.checked);
+    localStorage.setItem("setShortFilmSaved", e.target.checked);
+    filterMoviesSaved(search, e.target.checked);
   }
   function handleSearchChangeSaved(e) {
     setSearchSaved(e.target.value);
@@ -273,7 +285,7 @@ function App() {
     }
   }
   function handleGetMoviesSaved(filter) {
-    filterMoviesSaved(filter, shortFilm)
+    filterMoviesSaved(filter, shortFilmSaved)
   }
 
   // Регистрация нового пользователя
@@ -311,12 +323,14 @@ function App() {
         setSearchSaved('')
         setMovies([])
         setFilteredMovies([])
-        setShortFilm(false)
         setFilteredMoviesSaved([])
+        setShortFilm(false)
+        setShortFilmSaved(false)
         localStorage.removeItem('movies');
         localStorage.removeItem('filteredMovies');
-        localStorage.removeItem('setShortFilm');
         localStorage.removeItem('filteredMoviesSaved');
+        localStorage.removeItem('setShortFilm');
+        localStorage.removeItem('setShortFilmSaved');
         localStorage.removeItem('token');
         localStorage.removeItem('filter');
         localStorage.removeItem('filterSaved');
@@ -391,7 +405,7 @@ function App() {
               component={SavedMovies}
               loggedIn={loggedIn}
               // Переменные SearchForm             
-              shortFilm={shortFilm}
+              shortFilm={shortFilmSaved}
               searchError={searchErrorSaved}
               handleCheckboxChange={handleCheckboxChangeSaved}
               handleSearchChange={handleSearchChangeSaved}

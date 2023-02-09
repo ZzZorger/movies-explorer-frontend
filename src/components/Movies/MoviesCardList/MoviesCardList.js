@@ -35,22 +35,38 @@ export default function MoviesCardList({
           }
           )}
         </div>
-        :
-        <div className="card-list__cards">
-          {savedMovies.slice(0, showCard).map((movie) => {
-            return (
-              <MoviesCard
-                key={movie.id || movie._id}
-                movie={movie}
-                onLikeButton={onLikeButton}
-                onDislikeButton={onDislikeButton}
-                savedMovies={savedMovies}
-                filteredMovies={filteredMovies}
-                onSavedPageFlag={onSavedPageFlag}
-              />)
-          }
-          )}
-        </div>
+        : (filteredMovies ?
+          <div className="card-list__cards">
+            {filteredMovies.slice(0, showCard).map((movie) => {
+              return (
+                <MoviesCard
+                  key={movie.id || movie._id}
+                  movie={movie}
+                  onLikeButton={onLikeButton}
+                  onDislikeButton={onDislikeButton}
+                  savedMovies={savedMovies}
+                  filteredMovies={filteredMovies}
+                  onSavedPageFlag={onSavedPageFlag}
+                />)
+            }
+            )}
+          </div> :
+          <div className="card-list__cards">
+            {savedMovies.slice(0, showCard).map((movie) => {
+              return (
+                <MoviesCard
+                  key={movie.id || movie._id}
+                  movie={movie}
+                  onLikeButton={onLikeButton}
+                  onDislikeButton={onDislikeButton}
+                  savedMovies={savedMovies}
+                  filteredMovies={filteredMovies}
+                  onSavedPageFlag={onSavedPageFlag}
+                />)
+            }
+            )}
+          </div>
+        )
       }
       <div className="card-list__next">
         {!addMoviesEnable && <button className="card-list__button transition" onClick={handleAddMovies}>Ещё</button>}
