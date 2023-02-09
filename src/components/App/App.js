@@ -99,6 +99,7 @@ function App() {
     // if (localStorage.getItem("filter")) {
       setSearch(localStorage.getItem("filter") || '')
       setShortFilm(localStorage.getItem("setShortFilm") === 'true')
+      setSearchSaved(localStorage.getItem("filterSaved") || '')
     // }
   }, [])
 
@@ -175,7 +176,7 @@ function App() {
     if (searchSaved) {
       setSearchErrorSaved(false);
       handleGetMoviesSaved(searchSaved);
-      localStorage.setItem("filterSaved", JSON.stringify(searchSaved));
+      localStorage.setItem("filterSaved", searchSaved);
     } else {
       setSearchErrorSaved(true);
     }
@@ -194,7 +195,7 @@ function App() {
     setFilteredMovies(filtered)
     localStorage.setItem("filteredMovies", JSON.stringify(filtered));
   }
-  function filterMoviesSaved(name, isShorts, movies) {
+  function filterMoviesSaved(name, isShorts) {
     const filtered = savedMovies.filter((movie) => {
       const isFiltered = movie.nameRU.includes(name);
       if (isShorts) {
@@ -203,7 +204,7 @@ function App() {
       return isFiltered;
     }
     );
-    setFilteredMovies(filtered)
+    setFilteredMoviesSaved(filtered)
     localStorage.setItem("filteredMoviesSaved", JSON.stringify(filtered));
   }
 
@@ -221,7 +222,6 @@ function App() {
 
   // Saved movies
   function onLikeButton(movie) {
-    // console.log()
     mainApi.saveMovie(movie)
       .then((savedMovie) => {
         const newState = [savedMovie.data, ...savedMovies]
@@ -273,7 +273,7 @@ function App() {
     }
   }
   function handleGetMoviesSaved(filter) {
-    filterMoviesSaved(filter)
+    filterMoviesSaved(filter, shortFilm)
   }
 
   // Регистрация нового пользователя
@@ -399,7 +399,7 @@ function App() {
               search={searchSaved}
               // Переменные MoviesCardList
               preloader={preloader}
-              filteredMovies={savedMovies}
+              filteredMovies={filteredMoviesSaved}
               showCard={showCard}
               addMoviesEnable={addMoviesSavedEnable}
               handleAddMovies={handleAddMovies}

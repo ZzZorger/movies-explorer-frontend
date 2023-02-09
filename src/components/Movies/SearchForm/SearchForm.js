@@ -6,7 +6,6 @@ export default function SearchForm({
   handleSubmitSearchForm, 
   search 
 }) {
-
   return (
     <section className="search">
       <form className="search__form">

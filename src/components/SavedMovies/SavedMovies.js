@@ -30,7 +30,7 @@ export default function SavedMovies({
   useEffect(() => {
     setOnSavedPageFlag(true)
   },[])
-  const savedMoviesByOwner = savedMovies.filter(movie => movie.owner === currentUser._id);
+  // const savedMoviesByOwner = savedMovies.filter(movie => movie.owner === currentUser._id);
   const [isBurgerMenuOpen, isBurgerMenuOpenSetter] = useState(false);
   //// Open and Close handlers
   //
@@ -58,14 +58,14 @@ export default function SavedMovies({
         />
         <MoviesCardList
           isPreloader={preloader}
-          filteredMovies={savedMoviesByOwner}
+          filteredMovies={filteredMovies}
           showCard={showCard}
           addMoviesEnable={addMoviesEnable}
           handleAddMovies={handleAddMovies}
           nothingFound={nothingFound}
           onLikeButton={onLikeButton}
           onDislikeButton={onDislikeButton}
-          savedMovies={savedMoviesByOwner}
+          savedMovies={savedMovies}
           onSavedPageFlag={onSavedPageFlag}
         />
       </main>
