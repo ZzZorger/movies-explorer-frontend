@@ -14,6 +14,7 @@ export default function MoviesCardList({
   onSavedPageFlag,
   afterFilterFlag
 }) {
+  console.log(savedMovies, filteredMovies)
   return (
     <section className="card-list">
       <Preloader

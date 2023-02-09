@@ -248,9 +248,17 @@ function App() {
   function onDislikeButton(movieId) {
     mainApi.deleteMovie(movieId)
       .then(() => {
+        console.log(afterFilterFlag)
+        if (afterFilterFlag === true) {
+          const newState = filteredMoviesSaved.filter((item) => item._id !== movieId)
+          setSavedMovies(newState)
+          setFilteredMoviesSaved(newState)
+          localStorage.setItem("savedMovies", JSON.stringify(newState))
+        } else {
         const newState = savedMovies.filter((item) => item._id !== movieId)
         setSavedMovies(newState)
         localStorage.setItem("savedMovies", JSON.stringify(newState))
+      }
       })
       .catch((err) => {
         console.log(`Ошибка: ${err}`)
