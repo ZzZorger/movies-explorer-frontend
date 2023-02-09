@@ -60,14 +60,6 @@ class MainApi {
     })
     .then((res) => this._getResponseData(res))
   }
-  // getServerData() {
-  //   return fetch(`${this._server}/users/me`, {
-  //     method: 'GET',
-  //     headers: this._headers,
-  //     credentials: 'include',
-  //   })
-  //     .then((res) => this._getResponseData(res))
-  // }
 }
 
 const mainApi = new MainApi({
