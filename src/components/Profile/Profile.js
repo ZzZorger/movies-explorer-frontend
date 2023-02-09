@@ -53,17 +53,26 @@ export default function Profile({ onLogout, onEdit }) {
     if (e.target.value.length < 5 || e.target.value.length > 30) {
       setFormChanged(false);
       setNameError('Длинна имени должна быть от 5 до 30 символов');
-    } else {
+    } 
+    else if (e.target.value === currentUser.name) {
+      setFormChanged(false);
+    }
+    else {
       setNameError('');
     }
+    
   }
   function handleEmailChange(e) {
     setFormChanged(true);
     setEmail(e.target.value);
     if (e.target.value.match(emailRegexp)) {
       setEmailError('');
-    } else {
+    } 
+    else {
       setEmailError('Некорректный email');
+      setFormChanged(false);
+    }
+    if (e.target.value === currentUser.email) {
       setFormChanged(false);
     }
   }

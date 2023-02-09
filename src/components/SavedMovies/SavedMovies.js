@@ -26,6 +26,7 @@ export default function SavedMovies({
   onSavedPageFlag,
   setOnSavedPageFlag
 }) {
+  
   useEffect(() => {
     setOnSavedPageFlag(true)
   },[])
