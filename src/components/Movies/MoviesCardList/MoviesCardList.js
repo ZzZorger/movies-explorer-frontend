@@ -14,13 +14,15 @@ export default function MoviesCardList({
   onSavedPageFlag,
   afterFilterFlag
 }) {
-  console.log(savedMovies, filteredMovies)
   return (
     <section className="card-list">
       <Preloader
         isPreloader={isPreloader}
       />
-      <p className={!isPreloader && nothingFound ? "card-list__sign" : "card-list__sign card-list__sign_hidden"}>Ничего не найдено</p>
+      {!onSavedPageFlag ?
+      <p className={filteredMovies.length === 0 ? "card-list__sign" : "card-list__sign card-list__sign_hidden"}>Ничего не найдено</p> :
+      <p className={filteredMovies.length === 0 && nothingFound ? "card-list__sign" : "card-list__sign card-list__sign_hidden"}>Ничего не найдено</p>
+      }
       {!onSavedPageFlag ?
         <div className="card-list__cards">
           {filteredMovies.slice(0, showCard).map((movie) => {
@@ -66,7 +68,7 @@ export default function MoviesCardList({
         )
       }
       <div className="card-list__next">
-        {!addMoviesEnable && <button className="card-list__button transition" onClick={handleAddMovies}>Ещё</button>}
+        {!addMoviesEnable && !onSavedPageFlag && <button className="card-list__button transition" onClick={handleAddMovies}>Ещё</button>}
       </div>
     </section>
   )

@@ -67,6 +67,7 @@ export default function SavedMovies({
           savedMovies={savedMovies}
           onSavedPageFlag={onSavedPageFlag}
           afterFilterFlag={afterFilterFlag}
+          shortFilm={shortFilm}
         />
       </main>
       <Footer />

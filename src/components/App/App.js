@@ -35,7 +35,6 @@ function App() {
   const [filteredMoviesSaved, setFilteredMoviesSaved] = useState(JSON.parse(localStorage.getItem("filteredMoviesSaved") || '[]'));
   const [searchErrorSaved, setSearchErrorSaved] = useState(false);
   const [nothingFoundSaved, setNothingFoundSaved] = useState(false);
-  const [addMoviesSavedEnable, setAddMoviesSavedEnable] = useState(false);
   // Movies Card list
   const [showCard, setShowCard] = useState(12);
   const [addCard, setAddCard] = useState(0);
@@ -96,9 +95,9 @@ function App() {
     }
   }, []);
   useEffect(() => {
-      setSearch(localStorage.getItem("filter") || '')
-      setShortFilm(localStorage.getItem("setShortFilm") === 'true')
-      setSearchSaved(localStorage.getItem("filterSaved") || '')
+    setSearch(localStorage.getItem("filter") || '')
+    setShortFilm(localStorage.getItem("setShortFilm") === 'true')
+    setSearchSaved(localStorage.getItem("filterSaved") || '')
   }, [])
 
   useEffect(() => {
@@ -135,23 +134,10 @@ function App() {
     }
   }, [showCard, filteredMovies])
   useEffect(() => {
-    if (showCard >= savedMovies.length) {
-      setAddMoviesSavedEnable(true)
-    } else {
-      setAddMoviesSavedEnable(false)
+    if (shortFilmSaved) {
+      setAfterFilterFlag(true)
     }
-    if (savedMovies.length === 0) {
-      setNothingFoundSaved(true)
-    } else if (savedMovies.length > 0) {
-      setNothingFoundSaved(false)
-    }
-    if (showCard >= filteredMoviesSaved.length) {
-      setAddMoviesSavedEnable(true)
-    } else {
-      setAddMoviesSavedEnable(false)
-    }
-  }, [showCard, savedMovies, filteredMoviesSaved])
-
+  })
   //// Functions
   // Movies
   // Search form
@@ -177,7 +163,7 @@ function App() {
   function handleCheckboxChangeSaved(e) {
     setShortFilmSaved(e.target.checked);
     localStorage.setItem("setShortFilmSaved", e.target.checked);
-    filterMoviesSaved(search, e.target.checked);
+    filterMoviesSaved(searchSaved, e.target.checked);
   }
   function handleSearchChangeSaved(e) {
     setSearchSaved(e.target.value);
@@ -215,6 +201,9 @@ function App() {
       return isFiltered;
     }
     );
+    if (filtered.length === 0) {
+      setNothingFoundSaved(true)
+    }
     setAfterFilterFlag(true);
     setFilteredMoviesSaved(filtered);
     localStorage.setItem("filteredMoviesSaved", JSON.stringify(filtered));
@@ -248,17 +237,22 @@ function App() {
   function onDislikeButton(movieId) {
     mainApi.deleteMovie(movieId)
       .then(() => {
-        console.log(afterFilterFlag)
-        if (afterFilterFlag === true) {
-          const newState = filteredMoviesSaved.filter((item) => item._id !== movieId)
-          setSavedMovies(newState)
-          setFilteredMoviesSaved(newState)
-          localStorage.setItem("savedMovies", JSON.stringify(newState))
-        } else {
         const newState = savedMovies.filter((item) => item._id !== movieId)
         setSavedMovies(newState)
         localStorage.setItem("savedMovies", JSON.stringify(newState))
-      }
+      })
+      .catch((err) => {
+        console.log(`Ошибка: ${err}`)
+      })
+  }
+  function onDislikeButtonSaved(movieId) {
+    mainApi.deleteMovie(movieId)
+      .then(() => {
+        const newState = savedMovies.filter((item) => item._id !== movieId)
+        setSavedMovies(newState)
+        const newFilteredState = filteredMoviesSaved.filter((item) => item._id !== movieId)
+        setFilteredMoviesSaved(newFilteredState)
+        localStorage.setItem("savedMovies", JSON.stringify(newState))
       })
       .catch((err) => {
         console.log(`Ошибка: ${err}`)
@@ -391,7 +385,7 @@ function App() {
                 if (currentMovie) {
                   film.isSaved = true
                   film._id = currentMovie._id
-                } 
+                }
                 else {
                   film.isSaved = false
                   film._id = ''
@@ -423,17 +417,17 @@ function App() {
               preloader={preloader}
               filteredMovies={filteredMoviesSaved}
               showCard={showCard}
-              addMoviesEnable={addMoviesSavedEnable}
               handleAddMovies={handleAddMovies}
               nothingFound={nothingFoundSaved}
               onLikeButton={onLikeButton}
-              onDislikeButton={onDislikeButton}
+              onDislikeButton={onDislikeButtonSaved}
               savedMovies={savedMovies}
               currentUser={currentUser}
               onSavedPageFlag={onSavedPageFlag}
               setOnSavedPageFlag={setOnSavedPageFlag}
               path={'/saved-movies'}
               afterFilterFlag={afterFilterFlag}
+              handleGetMoviesSaved={handleGetMoviesSaved}
             />
             <ProtectedRoute
               component={Profile}
