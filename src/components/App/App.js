@@ -252,9 +252,9 @@ function App() {
     if (movies.length === 0) {
       Promise.all([moviesApi.getAllMovies(), mainApi.getMovies()])
         .then(([films, savedFilms]) => {
+          console.log(savedFilms)
           setMovies(films)
           setSavedMovies(savedFilms)
-          
           localStorage.setItem("movies", JSON.stringify(films));
           localStorage.setItem("savedMovies", JSON.stringify(savedFilms));
           return films
