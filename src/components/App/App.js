@@ -135,18 +135,6 @@ function App() {
       setNothingFound(false)
     }
   }, [showCard, filteredMovies])
-  // useEffect(() => {
-  //   if (showCard >= filteredMoviesSaved.length) {
-  //     setAddMoviesSavedEnable(true)
-  //   } else {
-  //     setAddMoviesSavedEnable(false)
-  //   }
-  //   if (filteredMoviesSaved.length === 0) {
-  //     setNothingFoundSaved(true)
-  //   } else if (filteredMoviesSaved.length > 0) {
-  //     setNothingFoundSaved(false)
-  //   }
-  // }, [showCard, filteredMoviesSaved])
 
   //// Functions
   // Movies
@@ -382,7 +370,8 @@ function App() {
                 if (currentMovie) {
                   film.isSaved = true
                   film._id = currentMovie._id
-                } else {
+                } 
+                else {
                   film.isSaved = false
                   film._id = ''
                 }
