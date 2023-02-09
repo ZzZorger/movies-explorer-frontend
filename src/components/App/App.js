@@ -44,7 +44,6 @@ function App() {
   const [savedMovies, setSavedMovies] = useState(JSON.parse(localStorage.getItem("savedMovies") || '[]'));
   const [onSavedPageFlag, setOnSavedPageFlag] = useState(false);
   const [afterFilterFlag, setAfterFilterFlag] = useState(false);
-  // console.log(movies, savedMovies)
   ////
   //// UseEffect
   // Проверка авторизации при загрузке страницы
@@ -178,7 +177,6 @@ function App() {
       setSearchErrorSaved(true);
     }
   }
-  // }
   // Фильтрация массива фильмов
   function filterMovies(name, isShorts, movies) {
     const filtered = movies.filter((movie) => {

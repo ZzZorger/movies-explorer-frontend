@@ -55,8 +55,8 @@ class Auth {
   }
 }
 const auth = new Auth({
-  // baseUrl: 'https://api.myseconddomainand.nomoredomains.club',
-  baseUrl: 'http://localhost:3001',
+  baseUrl: 'https://api.myseconddomainand.nomoredomains.club',
+  // baseUrl: 'http://localhost:3001',
   headers: {
     'Content-Type': 'application/json',
   }
