@@ -1,16 +1,36 @@
-import cardImage from '../../../images/initialCards/card1.jpg';
-
-export default function MoviesCard() {
+export default function MoviesCard({
+  movie,
+  onLikeButton,
+  onDislikeButton,
+  onSavedPageFlag
+}) {
+  const { nameRU, duration, trailerLink, image } = movie;
+  const durationCalc = `${Math.trunc(duration / 60)}ч ${duration % 60}м`;
+  function handleLikeButton(e) {
+    if (movie.isSaved) {
+      onDislikeButton(movie._id)
+    } else {
+      onLikeButton(movie)
+    }
+  }
+  function handleDeleteButton() {
+    onDislikeButton(movie._id)
+  }
   return (
     <article className="card">
-      <img className="card__img" alt="фрагмент фильма" src={cardImage} />
-      <h2 className="card__name">33 слова о дизайне</h2>
-      <button className="card__delete-button transition" type="button" aria-label="удалить карточку"/>
-      <label className="flag">
-        <input className="flag__checkbox" type="checkbox"/>
-        <span className="flag__span"></span>
-      </label>
-      <p className="card__sign">1ч42м</p>
+      <a className="card__link" href={trailerLink} alt="ссылка на трейлер фильма" target="_blank" rel="noreferrer">
+        <img className="card__img" alt="фрагмент фильма" src={!onSavedPageFlag ? `https://api.nomoreparties.co${image.url}` : `${movie.image}`} />
+      </a>
+      <h2 className="card__name">{nameRU}</h2>
+      {!onSavedPageFlag ?
+        <label className="flag">
+          <input className="flag__checkbox" type="checkbox" onChange={handleLikeButton} checked={movie.isSaved} />
+          <span className="flag__span"></span>
+        </label>
+        :
+        <button className="card__delete-button transition" type="button" aria-label="удалить карточку" onClick={handleDeleteButton} />
+      }
+      <p className="card__sign">{durationCalc}</p>
     </article>
   )
 }

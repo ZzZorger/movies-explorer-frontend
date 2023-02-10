@@ -6,6 +6,11 @@
   padding-bottom: 70px;
 }
 
+.register__main {
+  display: flex;
+  flex-direction: column;
+}
+
 .register__content {
   width: 396px;
 }
@@ -94,6 +99,20 @@
   cursor: pointer;
   width: 100%;
   border-radius: 3px;
+  margin-top: 10px;
+}
+
+.register__submit-error {
+  font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  color: #FF3055;
+  text-align: center;
+}
+
+.disabled-button {
+  cursor: default;
+  background-color: #A0A0A0;
 }
 
 .register__sign {
@@ -153,6 +172,10 @@
     font-size: 12px;
     padding-top: 15px;
     padding-bottom: 15px;
+  }
+
+  .register__submit-error {
+    font-size: 12px;
   }
 
   .register__sign {

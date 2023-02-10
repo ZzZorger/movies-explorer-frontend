@@ -9,7 +9,7 @@ export default function MenuPopup({ isOpen, onClose }) {
             <a className="menu-popup__link transition" href="/movies">Фильмы</a>
             <a className="menu-popup__link transition" href="/saved-movies">Сохранённые фильмы</a>
           </nav>
-          <button className="menu-popup__button transition" type="button" aria-label="перейти к аккаунту">Аккаунт</button>
+          <a className="menu-popup__button transition" aria-label="перейти к аккаунту" href="/profile">Аккаунт</a>
         </div>
       </div>
     </div>

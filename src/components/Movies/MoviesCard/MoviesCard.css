@@ -3,19 +3,23 @@
   border-radius: 10px;
   box-sizing: border-box;
   display: grid;
-  grid-template-columns: max-content 28px;
+  grid-template-columns: 240px 28px;
   grid-template-rows: 1fr 26px 41px;
   max-width: 270px;
   background: #FDFDFD;
   box-shadow: 0px 16px 24px 0 rgba(0, 0, 0, 0.05);
 }
 
+.card__link {
+  grid-column: 1/3;
+  grid-row: 1/2;
+  width: 270px;
+  height: 151px;
+}
+
 .card__img {
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
-  cursor: pointer;
-  grid-column: 1/3;
-  grid-row: 1/2;
   width: 270px;
   height: 151px;
 }
@@ -27,6 +31,10 @@
   font-size: 13px;
   padding-top: 14px;
   padding-left: 12px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding-bottom: 15px;
 }
 
 .flag {
@@ -57,12 +65,16 @@
 }
 
 .card__delete-button {
-  display: none;
+  /* display: none; */
+  padding: 0px;
+  margin: 0px;
   background: url("../../../images/cardDelete2.svg") no-repeat center;
   cursor: pointer;
   width: 8px;
   height: 8px;
   border: 0;
+  padding-top: 40px;
+  padding-left: 20px;
 }
 
 .card__delete-button-active {
@@ -124,9 +136,16 @@
   display: none;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 990px) {
   .card {
     max-width: 339px;
+    grid-template-columns: 300px 28px;
+    grid-template-rows: 1fr 26px 41px;
+  }
+
+  .card__link {
+    width: 339px;
+    height: 190px;
   }
 
   .card__img {
@@ -138,6 +157,11 @@
 @media (max-width: 360px) {
   .card {
     max-width: 300px;
+  }
+
+  .card__link {
+    width: 300px;
+    height: 168px;
   }
 
   .card__img {

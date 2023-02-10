@@ -1,23 +1,69 @@
 import SearchForm from './SearchForm/SearchForm.js';
 import MoviesCardList from './MoviesCardList/MoviesCardList.js';
-import HeaderMovies from '../Header/HeaderMovies/HeaderMovies.js';
 import Footer from '../Footer/Footer.js';
 import MenuPopup from './MenuPopup/MenuPopup.js';
+import Header from '../Header/Header.js';
+import { useState } from 'react';
 
-export default function Moovies({ onBurgerMenu, isBurgerMenuOpen, onClose }) {
+export default function Moovies({
+  // Переменные SearchForm
+  shortFilm,
+  searchError,
+  handleCheckboxChange,
+  handleSearchChange,
+  handleSubmitSearchForm,
+  search,
+  // Переменные MoviesCardList
+  preloader,
+  filteredMovies,
+  showCard,
+  addMoviesEnable,
+  handleAddMovies,
+  nothingFound,
+  onLikeButton,
+  onDislikeButton,
+  savedMovies,
+  onSavedPageFlag
+}) {
+  const [isBurgerMenuOpen, isBurgerMenuOpenSetter] = useState(false);
+  function handleBurgerMenuClick() {
+    isBurgerMenuOpenSetter(true);
+  }
+  function closeAllPopups() {
+    isBurgerMenuOpenSetter(false);
+  }
   return (
     <div className='movies-page'>
-      <HeaderMovies
-        onBurgerMenu={onBurgerMenu}
+      <Header
+        onPath={'movies'}
+        onBurgerMenu={handleBurgerMenuClick}
       />
       <main className='movies-page__main'>
-        <SearchForm />
-        <MoviesCardList />
+        <SearchForm
+          shortFilm={shortFilm}
+          searchError={searchError}
+          handleCheckboxChange={handleCheckboxChange}
+          handleSearchChange={handleSearchChange}
+          handleSubmitSearchForm={handleSubmitSearchForm}
+          search={search}
+        />
+        <MoviesCardList
+          isPreloader={preloader}
+          filteredMovies={filteredMovies}
+          showCard={showCard}
+          addMoviesEnable={addMoviesEnable}
+          handleAddMovies={handleAddMovies}
+          nothingFound={nothingFound}
+          onLikeButton={onLikeButton}
+          onDislikeButton={onDislikeButton}
+          savedMovies={savedMovies}
+          onSavedPageFlag={onSavedPageFlag}
+        />
       </main>
       <Footer />
-      <MenuPopup 
+      <MenuPopup
         isOpen={isBurgerMenuOpen}
-        onClose={onClose}
+        onClose={closeAllPopups}
       />
     </div>
   );
